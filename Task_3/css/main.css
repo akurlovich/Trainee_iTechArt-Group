@@ -1,2 +1,4 @@
-@import 'reset-styles';
-@import 'body.scss';
+@import 'reset-styles.css';
+@import 'body.css';
+@import 'header.css';
+@import 'main_title.css';
