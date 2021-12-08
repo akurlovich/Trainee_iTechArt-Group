@@ -1,0 +1,106 @@
+.main__services {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.container__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container__text {
+  font-size: 36px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #637f83;
+}
+
+.container__subtext {
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: center;
+  color: #959494;
+}
+
+.services__columns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f6f6f6;
+}
+
+.services__item {
+  width: 306px;
+  height: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 45px;
+}
+
+.services__item__icon {
+
+}
+
+.services__item__icon_size {
+  height: 63px;
+}
+
+.setvices__item__caption {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #637f83;
+}
+
+.setvices__item__text {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: center;
+  color: #959494;
+  text-align: center;
+}
+
+.setvices__item__button {
+  width: 70px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #637f83;
+}
