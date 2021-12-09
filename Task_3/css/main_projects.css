@@ -37,3 +37,18 @@
   width: 20px;
   height: 20px;
 }
+
+.projects__images {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.projects__images__item {
+
+}
+
+.projects__images__item-image {
+
+}
