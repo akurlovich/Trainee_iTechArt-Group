@@ -1,0 +1,39 @@
+.main__projects {
+  margin-top: 56px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects__line {
+  position: relative;
+  margin-top: 34px;
+  max-width: 1170px;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  opacity: 0.56;
+}
+
+.line-arrow__block {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.line-arrow__left,
+.line-arrow__right {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.line-arrow__left_size,
+.line-arrow__right_size {
+  width: 20px;
+  height: 20px;
+}
