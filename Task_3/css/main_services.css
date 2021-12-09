@@ -104,4 +104,11 @@
   color: #fff;
   border-radius: 5px;
   background-color: #637f83;
+  transition: all 0.5s ease;
+}
+
+.setvices__item__button:hover {
+  background: rgba(0,0,0,0);
+	color: #e4551d;
+	box-shadow: inset 0 0 0 3px #e4551d;
 }
