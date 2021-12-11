@@ -46,6 +46,7 @@
 }
 
 .services__item {
+  flex-shrink: 0;
   width: 306px;
   height: 375px;
   display: flex;
