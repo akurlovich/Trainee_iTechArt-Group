@@ -19,7 +19,7 @@
 }
 
 .title__text_style {
-  width: 483px;
+  max-width: 483px;
   text-align: center;
   font-family: 'PT Sans', sans-serif;
   font-size: 40px;
