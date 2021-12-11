@@ -42,6 +42,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: #f6f6f6;
 }
 
