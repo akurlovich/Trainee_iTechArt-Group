@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3 HTML/CSS</title>
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__logo">
+        <h1>Site Name</h1>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item">
+            <a class="navigation__item_link navigation__item_active" href="">home</a>
+            <img class="navigation__item_arrow" src="./images/svg/arrow-nav@3x.png" alt="">
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__item_link" href="#">about</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__item_link" href="#">services</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__item_link" href="#">project</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__item_link" href="#">blog</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__item_link" href="#">contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="hamburger-menu">
+        <input class="menu__toggle" id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          <li><a class="menu__item" href="#">about</a></li>
+          <li><a class="menu__item" href="#">services</a></li>
+          <li><a class="menu__item" href="#">project</a></li>
+          <li><a class="menu__item" href="#">blog</a></li>
+          <li><a class="menu__item" href="#">contact</a></li>
+        </ul>
+      </div>
+    </header>
+    <main class="main">
+      <section class="main__title">
+        <div class="title__text">
+          <span class="title__text_style">Lorem ipsum laro dolore sit amet vivamu</span>
+        </div>
+        <div class="title__subtext">
+          lorem ipsum laro sit amet dolore sit ame
+        </div>
+        <div class="title__icon">
+          <img class="title__icon_size" src="./images/svg/arrow@3x.png" alt="arrow down">
+        </div>
+      </section>
+      <section class="main__services">
+        <div class="container__title">
+          <h2 class="container__text">Lorem ipsum dolor sit amet</h2>
+          <h3 class="container__subtext">Donec odio uisque volutpat mattis eros uliam malesuada erat ut turpis</h3>
+        </div>
+        <div class="services__columns">
+          <div class="services__item">
+            <div class="services__item__icon">
+              <img class="services__item__icon_size" src="./images/services/invalid-name@3x.png" alt="">
+            </div>
+            <div class="setvices__item__caption">Nunc dignissim</div>
+            <div class="setvices__item__text">Praesent dapibus, neque id curs
+              us faucibus, tortor neque egestas augue, eu vulputate magn</div>
+            <button class="setvices__item__button">More</и>
+          </div>
+          <div class="services__item">
+            <div class="services__item__icon">
+              <img class="services__item__icon_size" src="./images/services/colba@3x.png" alt="">
+            </div>
+            <div class="setvices__item__caption">Aliquam tinci</div>
+            <div class="setvices__item__text">Donec consectetuer ligula v
+              tate sem tristique cursus. Nam nulla quam, gravida info</div>
+            <button class="setvices__item__button">More</button>
+          </div>
+          <div class="services__item">
+            <div class="services__item__icon">
+              <img class="services__item__icon_size" src="./images/services/roliki@3x.png" alt="">
+            </div>
+            <div class="setvices__item__caption">Vestibu auctor</div>
+            <div class="setvices__item__text">Jorbi rbi est est, blandit sit amet, 
+              sagittis vel, euismod vel, velit. Pellentesque egestas sem.</div>
+            <button class="setvices__item__button">More</button>
+          </div>
+          <div class="services__item">
+            <div class="services__item__icon">
+              <img class="services__item__icon_size" src="./images/services/rupor@3x.png" alt="">
+            </div>
+            <div class="setvices__item__caption">Civamus vesti</div>
+            <div class="setvices__item__text">Morbi est est, blandit sit amet, 
+              sagittis vel, euismod vel, velit. Pellentesque egestas sem.</div>
+            <button class="setvices__item__button">More</button>
+          </div>
+        </div>
+      </section>
+      <section class="main__projects">
+        <div class="container__title">
+          <h2 class="container__text">Cras ornare tristique elit</h2>
+          <h3 class="container__subtext">Donec odio uisque volutpat mattis eros uliam malesuada erat ut turpis</h3>
+        </div>
+        <div class="projects__line">
+          <div class="line-arrow__block">
+            <div class="line-arrow__left">
+              <img class="line-arrow__left_size" src="./images/projects/pr_arrow_left@3x.png" alt="">
+            </div>
+            <div class="line-arrow__right">
+              <img class="line-arrow__right_size" src="./images/projects/pr_arrow_right@3x.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="projects__images">
+          <div class="projects__images__item">
+            <img class="projects__images__item-image" src="./images/projects/pr1.png" alt="">
+          </div>
+          <div class="projects__images__item">
+            <img class="projects__images__item-image" src="./images/projects/pr2.png" alt="">
+          </div>
+          <div class="projects__images__item">
+            <img class="projects__images__item-image" src="./images/projects/pr3.png" alt="">
+          </div>
+          <div class="projects__images__item">
+            <img class="projects__images__item-image" src="./images/projects/pr4.png" alt="">
+          </div>
+        </div>
+        <button class="projects__button">View Portfolio</button>
+      </section>
+      <section class="main__blog">
+        <div class="projects__line projects__line_blog"></div>
+        <div class="blog__item">
+          <div class="blog__item__image">
+            <img class="blog__item__image_size" src="./images/blog/photo1@2x.png" alt="blog imagr">
+          </div>
+          <div class="blog__item__text">
+            <div class="blog__item__text__title">
+              <h4>Integer vitae libero</h4>
+            </div>
+            <div class="blog__item__text__discription">
+              <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt lorem ipsuk dolor <span class="text__discription_link">+ more</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="blog__item">
+          <div class="blog__item__image">
+            <img class="blog__item__image_size" src="./images/blog/photo2@2x.png" alt="blog imagr">
+          </div>
+          <div class="blog__item__text">
+            <div class="blog__item__text__title">
+              <h4>Vestibulum commodo</h4>
+            </div>
+            <div class="blog__item__text__discription">
+              <p>Lorem dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor <span class="text__discription_link">+ more</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="blog__item">
+          <div class="blog__item__image">
+            <img class="blog__item__image_size" src="./images/blog/photo3@2x.png" alt="blog imagr">
+          </div>
+          <div class="blog__item__text">
+            <div class="blog__item__text__title">
+              <h4>Fusce pellentesque</h4>
+            </div>
+            <div class="blog__item__text__discription">
+              <p>Cations t dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus <span class="text__discription_link">+ more</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="blog__item">
+          <div class="blog__item__image">
+            <img class="blog__item__image_size" src="./images/blog/photo4@2x.png" alt="blog imagr">
+          </div>
+          <div class="blog__item__text">
+            <div class="blog__item__text__title">
+              <h4>Donec quis dui dolor</h4>
+            </div>
+            <div class="blog__item__text__discription">
+              <p>Sumitris dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus <span class="text__discription_link">+ more</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="main__subscribe">
+        <div class="container__title">
+          <h2 class="container__text main__subscribe_color">Cras ornare tristique elit</h2>
+          <h3 class="container__subtext main__subscribe_color">Donec odio uisque volutpat mattis eros uliam malesuada erat ut turpis</h3>
+        </div>
+        <div class="projects__line"></div>
+        <div class="main__subscribe__block">
+          <div class="subscribe__block__item">
+            <div class="subscribe__block__item__title">
+              <div class="item__title__image">
+                <img class="item__title__image_size" src="./images/subscribe/mail@3x.png" alt="mail image">
+              </div>
+              <div class="item__title__block">
+                <div class="item__title__block__caption">
+                  <h4>Subscribe Our Newsletter</h4>
+                </div>
+                <div class="item__title__block__text">
+                  <p>via email on how to grow your business online</p>
+                </div>
+              </div>
+            </div>
+            <div class="subscribe__block__item__input">
+              <input class="input__field" type="text">
+              <input class="input__button" type="button" value="Sing up">
+            </div>
+          </div>
+          <div class="subscribe__block__item">
+            <div class="twitter__block">
+              <div class="twitter__image">
+                <img class="twitter__image_size" src="./images/subscribe/twitter@3x.png" alt="">
+              </div>
+              <div class="twitter__text">
+                <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis  euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat  <span class="twitter__text_link">@johndoe</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="main__follow">
+        <div class="follow__item">
+          <div class="follow__item__image">
+            <div class="title__icon">
+              <img class="follow__item__image_size" src="./images/subscribe/facebook@3x.png" alt="facebook">
+            </div>
+          </div>
+          <div class="follow__item__text">
+            <div class="follow__item__text__title">
+              <h4>Follow us on Facebook</h4>
+            </div>
+            <div class="follow__item__text__discription">
+              <p>Faucibus toroot menuts</p>
+            </div>
+          </div>
+        </div>
+        <div class="follow__item">
+          <div class="follow__item__image">
+            <div class="title__icon">
+              <img class="follow__item__image_size" src="./images/subscribe/google@3x.png" alt="google">
+            </div>
+          </div>
+          <div class="follow__item__text">
+            <div class="follow__item__text__title">
+              <h4>Follow us on Google +</h4>
+            </div>
+            <div class="follow__item__text__discription">
+              <p>Faucibus toroot menuts</p>
+            </div>
+          </div>
+        </div>
+        <div class="follow__item">
+          <div class="follow__item__image">
+            <div class="title__icon">
+              <img class="follow__item__image_size" src="./images/subscribe/linkedin@3x.png" alt="linkedin">
+            </div>
+          </div>
+          <div class="follow__item__text">
+            <div class="follow__item__text__title">
+              <h4>Follow us on LInkedIn</h4>
+            </div>
+            <div class="follow__item__text__discription">
+              <p>Faucibus toroot menuts</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">Designed by: www.alltemplateneeds.com / Images from: www.wallpaperswide.com / www.photorack.net Copyright(c) website name.</p>
+    </footer>
+  </div>  
+</body>
+</html>

@@ -1,0 +1,51 @@
+.main__follow {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 32px 15px 32px 15px;
+}
+
+.follow__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.follow__item__image {
+
+}
+
+.follow__item__image_size {
+  height: 30px;
+}
+
+.follow__item__text {
+
+}
+
+.follow__item__text__title {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #637f83;
+}
+
+.follow__item__text__discription {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b5c7c9;
+}
