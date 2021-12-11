@@ -21,6 +21,12 @@
   width: 100%;
 }
 
+@media (max-width: 639px) { 
+  .navigation {
+    display: none;
+  }
+}
+
 .navigation__list {
   display: flex;
   justify-content: space-between;
