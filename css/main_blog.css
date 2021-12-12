@@ -1,5 +1,5 @@
 .main__blog {
-  margin-top: 60px;
+  margin-top: 42px;
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -7,12 +7,12 @@
   align-items: center;
   flex-wrap: wrap;
   column-gap: 45px;
-  row-gap: 34px;
+  row-gap: 22px;
 
 }
 
 .projects__line_blog {
-  margin-bottom: 60px;
+  margin-bottom: 23px;
 }
 
 .blog__item {
