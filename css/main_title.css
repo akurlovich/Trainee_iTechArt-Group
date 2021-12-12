@@ -57,6 +57,12 @@
   height: 69px;
   border-radius: 50%;
   background-color: #e4551d;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.title__icon:hover {
+  transform: scale(1.1);
 }
 
 .title__icon_size {

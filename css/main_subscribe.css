@@ -103,6 +103,7 @@
   line-height: 1.44;
   letter-spacing: 0.36px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .twitter__block {
@@ -138,4 +139,5 @@
 
 .twitter__text_link {
   color: #fff;
+  cursor: pointer;
 }
