@@ -23,7 +23,8 @@
 }
 
 .follow__item__text {
-
+  width: 180px;
+  margin-right: 88px;
 }
 
 .follow__item__text__title {
@@ -48,4 +49,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #b5c7c9;
+}
+
+.title__icon_follow {
+  margin-bottom: 0;
 }

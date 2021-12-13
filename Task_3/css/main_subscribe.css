@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
-  padding-top: 48px;
-  padding-bottom: 50px;
+  margin-top: 47px;
+  padding-top: 38px;
+  padding-bottom: 34px;
   width: 100%;
   background-color: #637f83;
 }
@@ -15,7 +15,8 @@
 }
 
 .main__subscribe__block {
-  margin-top: 40px;
+  width: 100%;
+  margin-top: 27px;
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -102,6 +103,7 @@
   line-height: 1.44;
   letter-spacing: 0.36px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .twitter__block {
@@ -137,4 +139,5 @@
 
 .twitter__text_link {
   color: #fff;
+  cursor: pointer;
 }
