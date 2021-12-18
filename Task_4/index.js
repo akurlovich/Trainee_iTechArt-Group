@@ -6,3 +6,4 @@ narr.logName();
 console.log(boolType.isUnderfined('hi'));
 
 console.log('import module')
+console.log((boolType.isNAN(NaN)))
