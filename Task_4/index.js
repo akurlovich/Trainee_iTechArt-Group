@@ -1,9 +1,8 @@
-import Arrays from './module/arrays.js';
+import arrays from './module/arrays.js';
 import boolType from './module/boolType.js';
-const narr = new Arrays('Ivan');
-
-narr.logName();
-console.log(boolType.isUnderfined('hi'));
 
 console.log('import module')
-console.log((boolType.isNAN(NaN)))
+console.log((boolType.isNAN(1)));
+arrays.voidEach([1, 5, 8], (item) => {
+  return item * 2;
+});

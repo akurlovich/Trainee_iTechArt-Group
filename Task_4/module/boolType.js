@@ -4,7 +4,7 @@ export default {
   },
 
   isNumber(obj) {
-    return (parseInt(value) >= 0 || parseInt(value) <= 0);
+    return (parseInt(obj) >= 0 || parseInt(obj) <= 0);
   },
 
   isBoolean(obj) {
@@ -16,7 +16,7 @@ export default {
   },
 
   isObject(obj) {
-    return (typeof item === "object" && !Array.isArray(item) && item !== null);
+    return (typeof obj === "object" && !Array.isArray(obj) && obj !== null);
   },
 
   isNull(obj) {
