@@ -8,10 +8,20 @@ export default {
 
   first(arr) {
     if (arr.length === 0) return 'empty array';
-    if (typeof arr !== 'array') return 'not array'; 
+    if (!Array.isArray(arr)) return 'not array'; 
     return arr[0];
   },
 
+  last(arr) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
+    return arr[arr.length - 1];
+  },
 
-}
+  min(arr) {
+     if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
+     
+  }
+ }
 
