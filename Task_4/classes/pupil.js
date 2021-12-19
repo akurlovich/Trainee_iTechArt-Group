@@ -5,6 +5,15 @@ export default class Pupil extends User {
     super(firstName, lastName)
     this.marks = marks;
   }
+
+  isAnswerForLastQuestionKnown() {
+
+  };
+
+  answerQuestion() {
+    
+  }
+
 }
 
 const nnn = new Pupil('Ivan', 'Popov');
