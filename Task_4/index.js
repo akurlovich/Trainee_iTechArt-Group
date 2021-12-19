@@ -3,7 +3,8 @@ import boolType from './module/boolType.js';
 
 console.log('import module')
 console.log((boolType.isNAN(1)));
-console.log(arrays.first([2, 5])),
-console.log(arrays.last([3, 7]))
+console.log(arrays.min([9, 7, 6, -3]))
+console.log(arrays.max([9, 7, 6, -3]))
+
 
 
