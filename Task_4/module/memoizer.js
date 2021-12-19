@@ -12,3 +12,16 @@ export default function memoizer(fun) {
       }
   }
 }
+
+const funn = (a, b) => {
+  return a * b;
+};
+
+const tryMem = memoizer(funn);
+
+console.log(tryMem(2, 5));
+console.log(tryMem(3, 5));
+console.log(tryMem(2, 5));
+console.log(tryMem(3, 5));
+
+
