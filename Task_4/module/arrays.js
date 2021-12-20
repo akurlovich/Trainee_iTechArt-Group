@@ -6,6 +6,26 @@ export default {
     }
   },
 
+  arrMap(arr, mapper) {
+    return arr.map(mapper)
+  },
+
+  objReduce(arr, reduceFuncWithAccumulatorParameter) {
+    return arr.reduce(reduceFuncWithAccumulatorParameter)
+  },
+
+  objFind(arr, predicateToFindFirstMatchingElement) {
+    return arr.find(predicateToFindFirstMatchingElement)
+  },
+
+  arrFilter(arr, filteringPredicate) {
+    return arr.filter(filteringPredicate)
+  },
+
+  arrWhere(arr, matchingObject) {
+    return arr.includes(matchingObject)
+  },
+
   first(arr) {
     if (arr.length === 0) return 'empty array';
     if (!Array.isArray(arr)) return 'not array'; 
