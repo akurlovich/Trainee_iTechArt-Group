@@ -43,7 +43,17 @@ export default {
   },
 
   arrWhere(arr, matchingObject) {
-    return arr.includes(matchingObject)
+    const foundArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      for ( let key in matchingObject) {
+        if (key in arr[i]) {
+          if (matchingObject[key] === arr[i][key]) {
+            foundArr.push(arr[i])
+          }
+        }
+      }
+    };
+    return foundArr;
   },
 
   first(arr) {
