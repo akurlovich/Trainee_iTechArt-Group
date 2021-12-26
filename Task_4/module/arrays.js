@@ -2,24 +2,44 @@ import boolType from './boolType.js';
 export default {
   voidEach(arr, action) {
     for (let i = 0; i < arr.length; i ++) {
-      return action(i);
+      action(i);
     }
   },
 
   arrMap(arr, mapper) {
-    return arr.map(mapper)
+    const newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      newArr.push(mapper(arr[i]))
+    }
+    return newArr;
   },
 
   objReduce(arr, reduceFuncWithAccumulatorParameter) {
-    return arr.reduce(reduceFuncWithAccumulatorParameter)
+    let acc = arr[0];
+    for (let i = 0; i < arr.length; i++) {
+      reduceFuncWithAccumulatorParameter(arr[i], acc)
+    }
+    return acc;
   },
 
   objFind(arr, predicateToFindFirstMatchingElement) {
-    return arr.find(predicateToFindFirstMatchingElement)
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === predicateToFindFirstMatchingElement) {
+        let foundData = arr[i];
+        i = arr.length;
+        return foundData;
+      }
+    }
   },
 
   arrFilter(arr, filteringPredicate) {
-    return arr.filter(filteringPredicate)
+    let foundArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === filteringPredicate) {
+        foundArr.push(arr[i])
+      };
+    };
+    return foundArr;
   },
 
   arrWhere(arr, matchingObject) {
