@@ -3,7 +3,7 @@ export default {
     if (arr.length === 0) return 'empty array';
     if (!Array.isArray(arr)) return 'not array'; 
     for (let i = 0; i < arr.length; i ++) {
-      action(i);
+      action(arr[i]);
     }
   },
 
@@ -21,8 +21,8 @@ export default {
     if (arr.length === 0) return 'empty array';
     if (!Array.isArray(arr)) return 'not array'; 
     let acc = arr[0];
-    for (let i = 0; i < arr.length; i++) {
-      reduceFuncWithAccumulatorParameter(arr[i], acc)
+    for (let i = 1; i < arr.length; i++) {
+      acc = reduceFuncWithAccumulatorParameter(arr[i], acc)
     }
     return acc;
   },

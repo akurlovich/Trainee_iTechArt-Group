@@ -15,6 +15,6 @@ Pupil.prototype.isAnswerForLastQuestionKnown = function(boolean) {
 Pupil.prototype.answerQuestion = function(mark) {
   if (this.isAnswerForLastQuestionKnown) {
   this.marks.push(mark);
-  };
+  }
 };
 
