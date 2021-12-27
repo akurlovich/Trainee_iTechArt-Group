@@ -1,12 +1,15 @@
-import boolType from './boolType.js';
 export default {
   voidEach(arr, action) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
     for (let i = 0; i < arr.length; i ++) {
       action(i);
     }
   },
 
   arrMap(arr, mapper) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
     const newArr = [];
     for (let i = 0; i < arr.length; i++) {
       newArr.push(mapper(arr[i]))
@@ -15,6 +18,8 @@ export default {
   },
 
   objReduce(arr, reduceFuncWithAccumulatorParameter) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
     let acc = arr[0];
     for (let i = 0; i < arr.length; i++) {
       reduceFuncWithAccumulatorParameter(arr[i], acc)
@@ -23,6 +28,8 @@ export default {
   },
 
   objFind(arr, predicateToFindFirstMatchingElement) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === predicateToFindFirstMatchingElement) {
         let foundData = arr[i];
@@ -33,6 +40,8 @@ export default {
   },
 
   arrFilter(arr, filteringPredicate) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
     let foundArr = [];
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === filteringPredicate) {
@@ -43,6 +52,9 @@ export default {
   },
 
   arrWhere(arr, matchingObject) {
+    if (arr.length === 0) return 'empty array';
+    if (!Array.isArray(arr)) return 'not array'; 
+ 
     const foundArr = [];
     for (let i = 0; i < arr.length; i++) {
       for ( let key in matchingObject) {
