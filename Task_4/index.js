@@ -1,17 +1,11 @@
-import * as work from './module/index.js';
+import * as myModul from './module/index.js';
 
-import Chaining from './module/chaining.js';
+function sum(a, b, c) {
+  return a * b * c;
+};
+const trycarry = myModul.carry(sum);
 
-const chan = new Chaining([5, 84, 12, -3]);
-function action(item) {
-  console.log(item * 2)
-};
-function mapper(item) {
-  return item * item;
-};
-function reducerArr(item, acc) {
-  return acc += item;
-}
-// console.log(chan.array);
-// chan.arrMap(mapper).print();
-chan.objReducer(reducerArr)
+console.log(trycarry(3, 4, 5));
+console.log(trycarry(3, 4)(5));
+console.log(trycarry(3)(4)(5));
+
