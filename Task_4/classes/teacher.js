@@ -6,12 +6,12 @@ export default class Teacher extends User {
     this.lastSetMark = lastSetMark;
   }
   
-  askQuestion(Pupil) {
-    
+  askQuestion(pupil, boolean) {
+    pupil.answerQuestion(boolean);
   };
 
-  setMark(Pupil) {
-
-  }
+  setMark(pupil, mark) {
+    pupil.marks.push(mark);
+  };
   
 }

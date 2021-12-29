@@ -36,7 +36,8 @@ export default {
         i = arr.length;
         return foundData;
       }
-    }
+    };
+    return 'Element not found!';
   },
 
   arrFilter(arr, filteringPredicate) {
@@ -48,6 +49,7 @@ export default {
         foundArr.push(arr[i])
       };
     };
+    if (foundArr.length === 0) return 'Element not found!';
     return foundArr;
   },
 
