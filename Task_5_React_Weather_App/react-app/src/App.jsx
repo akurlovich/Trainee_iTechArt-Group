@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './components/search_bar.jsx';
-import Weather from './components/weather.jsx';
+import Weather from './components/Weather/weather.jsx';
 
 function App() {
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import WeatherItem from '../WeatherItem/weatherItem.jsx';
 import axios from 'axios';
 
 const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
@@ -10,7 +11,7 @@ function Weather() {
     
   const getWeather = async () => {
     const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&metric=true`);
-    console.log(res.data);    
+    console.log(res.data.DailyForecasts[0]);    
   };
 
   const showWeather = async () => {
@@ -26,6 +27,7 @@ function Weather() {
       >
         Click
       </button>
+      <WeatherItem/>
     </div>
   )
 };
