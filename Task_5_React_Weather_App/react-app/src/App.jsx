@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from './components/search_bar.jsx';
+import Weather from './components/weather.jsx';
 
 function App() {
   return (
@@ -9,9 +10,7 @@ function App() {
           Weather App
         </div>
         <SearchBar/>
-        <div className="weather">
-          weather 
-        </div>
+        <Weather/>
       </main>
     </div>
  );
