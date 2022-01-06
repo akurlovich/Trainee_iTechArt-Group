@@ -33,3 +33,12 @@
   align-items: center;
   gap: 5px;
 }
+
+.item__info__temp {
+  display: flex;
+
+}
+
+.item__info__minmax {
+  display: flex;
+}
