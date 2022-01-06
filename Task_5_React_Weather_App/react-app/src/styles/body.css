@@ -1,0 +1,12 @@
+.wrapper {
+  max-width: 640px;
+  width: 100%;
+  margin: 20px auto;
+  background-color: whitesmoke;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
