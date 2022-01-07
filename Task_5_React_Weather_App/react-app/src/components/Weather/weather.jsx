@@ -13,7 +13,7 @@ function Weather() {
     
   const getWeather = async () => {
     const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&metric=true`);
-    console.log(res.data.DailyForecasts[0]);    
+    console.log(res.data);    
   };
 
   const showWeather = async () => {
@@ -23,10 +23,10 @@ function Weather() {
 
   return (
     <div className={classes.weather}>
-      <div className={classes.weather__location}>
+      {/* <div className={classes.weather__location}>
         <div className={classes.location__item}>Minsk</div>
         <div className={classes.location__item}>Belarus</div>
-      </div>
+      </div> */}
       <button 
         className="show-weather"
         onClick={showWeather}
