@@ -10,7 +10,7 @@
   background-color: #6272c3;
   /* border: 2px solid; */
   /* border-image-source: linear-gradient(169.15deg, rgba(255, 255, 255, 0.4) 0%, rgba(238, 237, 237, 0.2) 96.79%); */
-  border-radius: 50px;
+  border-radius: 20px;
 }
 
 .card__container {
@@ -27,7 +27,7 @@
   background: radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
   box-shadow: inset -5px -5px 250px rgb(255 255 255 / 2%);
   backdrop-filter: blur(42px);
-  border-radius: 50px;
+  border-radius: 20px;
   border: 2px solid;
   border-image-source: linear-gradient(169.15deg, rgba(255, 255, 255, 0.4) 0%, rgba(238, 237, 237, 0.2) 96.79%);
   
@@ -40,12 +40,28 @@
   display: flex;
 }
 
-.card__block {
+.card__block_day {
   width: 100%;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  background: radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: inset -5px -5px 250px rgb(255 255 255 / 2%);
+  backdrop-filter: blur(42px);
+  border-radius: 20px;
+}
 
+.card__block_night {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: radial-gradient(100% 100% at 0% 0%, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: inset -5px -5px 250px rgb(255 255 255 / 2%);
+  backdrop-filter: blur(42px);
+  border-radius: 20px;
 }
 
 .card__image {
@@ -79,13 +95,17 @@
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 200px;
+  font-size: 180px;
   /* line-height: 120%; */
   letter-spacing: -0.05em;
   color: #FFFFFF;
 }
 
 .temp__value_small {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -125,6 +145,14 @@
   letter-spacing: -0.05em;
   color: #FFFFFF;
 
+}
+
+.temp__options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+  align-items: center;
 }
 
 .card__minmax {

@@ -6,13 +6,13 @@ import classes from './Weather.module.css';
 
 const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 const citySearch = 'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=minsk';
-const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/28580?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&metric=true";
+const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/28580?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&details=true&metric=true";
 
 function Weather() {
   const cityUI = '28580';
     
   const getWeather = async () => {
-    const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&metric=true`);
+    const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
     console.log(res.data);    
   };
 
