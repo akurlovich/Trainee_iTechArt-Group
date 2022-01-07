@@ -1,5 +1,6 @@
 import React from 'react';
 import WeatherItem from '../WeatherItem/weatherItem.jsx';
+import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
 
 const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
@@ -28,6 +29,7 @@ function Weather() {
         Click
       </button>
       <WeatherItem/>
+      <WeatherCard/>
     </div>
   )
 };
