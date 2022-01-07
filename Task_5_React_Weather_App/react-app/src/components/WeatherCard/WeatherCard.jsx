@@ -12,7 +12,29 @@ function WeatherCard() {
         <div className={classes.temp__value}>13</div>
         <div className={classes.temp__icon}>°C</div>
       </div>
-      <div className={classes.card__location}>Minsk, Belarus</div>
+      <div className={classes.card__minmax}>
+        <div className={classes.minmax__min}>
+          <div className={classes.temp__value_small}>Min:</div>
+            <div className={classes.card__temp}>
+              <div className={classes.temp__value_small}>13</div>
+              <div className={classes.temp__icon_small}>°C</div>
+            </div>
+          </div>
+        <div className={classes.minmax__max}>
+          <div className={classes.minmax__min}>
+            <div className={classes.temp__value_small}>Max:</div>
+              <div className={classes.card__temp}>
+                <div className={classes.temp__value_small}>13</div>
+                <div className={classes.temp__icon_small}>°C</div>
+              </div>
+          </div>
+ 
+        </div>
+      </div>
+    {/*<div className={classes.card__location}>
+        <div>Minsk</div>
+        <div>Belarus</div>
+      </div>*/}
     </div>
  
     </div>
