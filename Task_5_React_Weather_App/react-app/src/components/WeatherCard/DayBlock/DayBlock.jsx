@@ -36,15 +36,17 @@ export default function DayBlock() {
       </div>
       <div className={classes.temp__options}>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Wind</div>
+          <img className={classes.temp__image} src='/icons/Wind.png'>
+
+          </img>
           <div>15 km/h, W</div>
         </div>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Rain</div>
+          <img className={classes.temp__image} src='/icons/rain.png'></img>
           <div>10 mm</div>
         </div>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Snow</div>
+          <img className={classes.temp__image} src='icons/snow.png'></img>
           <div>0 mm</div>
         </div>
       </div>

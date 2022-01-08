@@ -33,16 +33,18 @@ export default function NightMedium() {
       </div>
       <div className={classes.temp__options}>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Wind</div>
-          <div className={classes.value_middle_small}>15 km/h, W</div>
+          <img className={classes.temp__image} src='/icons/Wind.png'>
+
+          </img>
+          <div>15 km/h, W</div>
         </div>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Rain</div>
-          <div className={classes.value_middle_small}>10 mm</div>
+          <img className={classes.temp__image} src='/icons/rain.png'></img>
+          <div>10 mm</div>
         </div>
         <div className={classes.temp__value_small}>
-          <div className={classes.temp__value_middle}>Snow</div>
-          <div className={classes.value_middle_small}>0 mm</div>
+          <img className={classes.temp__image} src='icons/snow.png'></img>
+          <div>0 mm</div>
         </div>
       </div>
     </div>

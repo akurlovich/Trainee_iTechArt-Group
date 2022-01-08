@@ -103,7 +103,7 @@
 
 .temp__value_small {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 5px;
   align-items: center;
   font-family: 'Inter', sans-serif;
@@ -113,6 +113,10 @@
   /* line-height: 120%; */
   letter-spacing: -0.05em;
   color: #FFFFFF;
+}
+
+.temp__image {
+  width: 80px;
 }
 
 .temp__value_middle {
@@ -151,8 +155,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 20px;
-  align-items: center;
+  gap: 0px;
+  align-items: flex-start;
 }
 
 .card__minmax {

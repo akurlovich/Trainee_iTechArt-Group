@@ -115,6 +115,10 @@
   color: #FFFFFF;
 }
 
+.temp__image {
+  width: 100px;
+}
+
 .temp__value_middle {
   font-family: 'Inter', sans-serif;
   font-style: normal;

@@ -103,13 +103,13 @@
 
 .temp__value_small {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 5px;
   align-items: center;
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 14px;
   /* line-height: 120%; */
   letter-spacing: -0.05em;
   color: #FFFFFF;
@@ -124,6 +124,10 @@
   letter-spacing: -0.05em;
   color: #FFFFFF;
 
+}
+
+.temp__image {
+  width: 40px;
 }
 
 .value_middle_small {
@@ -155,8 +159,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 10px;
-  align-items: center;
+  /* gap: 10px; */
+  align-items: flex-start;
 }
 
 .card__minmax {
@@ -189,6 +193,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: cornflowerblue;
 }
 
 .cardmedium__container {
@@ -199,7 +204,7 @@
 }
 
 .cardmedium__title {
-  padding: 5px;
+  padding: 10px;
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 700;
