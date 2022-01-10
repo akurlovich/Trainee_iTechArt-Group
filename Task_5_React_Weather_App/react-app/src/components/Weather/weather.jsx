@@ -20,6 +20,11 @@ function Weather() {
     await getWeather();
   };
 
+  const showIP = async () => {
+    const res = await (await axios.get('http://api.db-ip.com/v2/free/self'));
+    console.log(res.data);
+  }
+
 
   return (
     <div className={classes.weather}>
@@ -30,6 +35,12 @@ function Weather() {
       <button 
         className="show-weather"
         onClick={showWeather}
+      >
+        Click
+      </button>
+      <button 
+        className="show-weather"
+        onClick={showIP}
       >
         Click
       </button>

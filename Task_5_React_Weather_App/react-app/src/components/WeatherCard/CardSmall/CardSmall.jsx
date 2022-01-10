@@ -5,18 +5,19 @@ export default function CardSmall() {
   return (
     <div className={classes.smallCard__container}>
       <div className={classes.card__block_day}>
+        <div className={classes.smallCard__date}>
+          <div className={classes.date_day}>12</div>
+          <div className={classes.date_month}>Juniary</div>
+        </div>
         <div className={classes.card__image}>
           <img src="/icons/01-s.png" alt="weather icon"/>
-          <div className={classes.temp__value_middle}>
-          Sunny
-          </div>
         </div>
         <div className={classes.card__info}>
           <div className={classes.card__temp}>
             <div className={classes.temp__value}>13</div>
             <div className={classes.temp__icon}>°C</div>
           </div>
-          <div className={classes.card__minmax}>
+          {/* <div className={classes.card__minmax}>
           <div className={classes.minmax__min}>
             <div className={classes.temp__value_small}>Min:</div>
               <div className={classes.card__temp}>
@@ -33,7 +34,7 @@ export default function CardSmall() {
                 </div>
             </div>
           </div>
-          </div>
+          </div> */}
         </div>
         <div className={classes.temp__options}>
           <div className={classes.temp__value_small}>
