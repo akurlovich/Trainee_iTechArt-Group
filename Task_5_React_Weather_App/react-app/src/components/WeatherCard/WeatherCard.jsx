@@ -1,5 +1,6 @@
 import React from 'react';
 import CardMedium from './CardMedium/CardMedium';
+import CardSmall from './CardSmall/CardSmall';
 import DayBlock from './DayBlock/DayBlock';
 import NightBlock from './NightBlock/NightBlock';
 import classes from './WeatherCard.module.css';
@@ -23,6 +24,13 @@ function WeatherCard() {
       <CardMedium/>
       <CardMedium/>
       <CardMedium/>
+      <CardSmall/>
+      <CardSmall/>
+      <CardSmall/>
+      <CardSmall/>
+      <CardSmall/>
+      <CardSmall/>
+      <CardSmall/>
     </div>
  )
 };
