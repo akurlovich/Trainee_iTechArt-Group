@@ -12,7 +12,8 @@ const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1da
 function Weather() {
   const cityUI = '28580';
 
-  const city = useSelector(state => state.cities.cityArr);
+  const {cityArr: citys, temperature: temper} = useSelector(state => state.cities);
+  // const temper = useSelector(state => state.cities.temperature);
     
   const getWeather = async () => {
     const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
@@ -29,7 +30,8 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(city);
+    console.log(citys);
+    console.log(temper);
   }
 
 
@@ -57,6 +59,12 @@ function Weather() {
       >
         test
       </button>
+      {citys.length ? 
+        citys.map((item) => 
+          <div key={item.id}>{item.city}</div>
+        )
+        : null
+      }
       <WeatherCard/>
     </div>
   )

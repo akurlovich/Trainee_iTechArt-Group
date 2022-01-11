@@ -8,14 +8,14 @@ const citySlice = createSlice({
   },
   reducers: {
     addCity(state, action) {
-      console.log(state);
-      console.log(action);
-      state.city.push({
+      state.cityArr.push({
         id: new Date().toISOString(),
-        city: action.payload.city,
+        city: action.payload,
       })
     },
-    addTemperature(state, action) {},
+    addTemperature(state, action) {
+      state.temperature = action.payload;
+    },
   }
 });
 
