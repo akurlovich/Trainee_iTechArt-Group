@@ -31,3 +31,18 @@
   left: 10px;
 }
 
+.search__button {
+  width: 60px;
+  height: 24px;
+  background: linear-gradient(0deg, #F6F6F6, #F6F6F6), #FEFEFE;
+  border: 1px solid #E2E2E2;
+  box-sizing: border-box;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.search__button:active {
+  transform: scale(0.9);
+}
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import WeatherItem from '../WeatherItem/weatherItem.jsx';
 import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
@@ -10,6 +11,8 @@ const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1da
 
 function Weather() {
   const cityUI = '28580';
+
+  const city = useSelector(state => state.cities.cityArr);
     
   const getWeather = async () => {
     const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
@@ -23,6 +26,10 @@ function Weather() {
   const showIP = async () => {
     const res = await (await axios.get('http://api.db-ip.com/v2/free/self'));
     console.log(res.data);
+  };
+
+  const showCity = () => {
+    console.log(city);
   }
 
 
@@ -43,6 +50,12 @@ function Weather() {
         onClick={showIP}
       >
         Click
+      </button>
+      <button 
+        className="show-weather"
+        onClick={showCity}
+      >
+        test
       </button>
       <WeatherCard/>
     </div>
