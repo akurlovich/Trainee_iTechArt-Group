@@ -4,6 +4,7 @@ import WeatherItem from '../WeatherItem/weatherItem.jsx';
 import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
 import classes from './Weather.module.css';
+import Loader from '../UI/Loader/Loader.jsx';
 
 const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 const citySearch = 'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=minsk';
@@ -65,6 +66,7 @@ function Weather() {
         )
         : null
       }
+      <Loader/>
       <WeatherCard/>
     </div>
   )
