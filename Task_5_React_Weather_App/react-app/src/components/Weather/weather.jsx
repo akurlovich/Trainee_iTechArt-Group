@@ -1,6 +1,6 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-import WeatherItem from '../WeatherItem/weatherItem.jsx';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchIP} from '../../store/citySlice';
 import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
 import classes from './Weather.module.css';
@@ -13,9 +13,15 @@ const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1da
 function Weather() {
   const cityUI = '28580';
 
-  const {cityArr: citys, temperature: temper} = useSelector(state => state.cities);
+  const {cityArr: citys, temperature: temper, error: showError, status} = useSelector(state => state.cities);
   // const temper = useSelector(state => state.cities.temperature);
-    
+  
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchIP());
+  }, []);
+
   const getWeather = async () => {
     const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
     console.log(res.data);    
@@ -31,13 +37,16 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(citys);
-    console.log(temper);
+    console.log(showError);
+    // console.log(citys.city);
+    // console.log(temper);
   }
 
 
   return (
     <div className={classes.weather}>
+      {/* {status === 'loading' && <Loader/>} */}
+      {/* {showError && <div>{showError}</div>} */}
       {/* <div className={classes.weather__location}>
         <div className={classes.location__item}>Minsk</div>
         <div className={classes.location__item}>Belarus</div>

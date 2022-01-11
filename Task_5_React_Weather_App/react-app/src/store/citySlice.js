@@ -3,9 +3,18 @@ import axios from 'axios';
 
 export const fetchIP = createAsyncThunk(
   'CITY/fetchIP',
-  async function() {
-    const res = await axios.get('http://api.db-ip.com/v2/free/self');
-    return res.data;
+  async function(_, {rejectWithValue}) {
+    try {
+      const res = await axios.get('http://api.db-ip.com/v2/free/self');
+      if (res.status !== 200) {
+        throw new Error('City by IP not found!')
+      } 
+      return res.data;
+      // return [];
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+
   }
 )
 
@@ -37,7 +46,10 @@ const citySlice = createSlice({
       state.status = 'resolved';
       state.cityArr = action.payload;
     },
-    [fetchIP.rejected]: (state, action) => {},
+    [fetchIP.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
+    },
   }
 });
 
