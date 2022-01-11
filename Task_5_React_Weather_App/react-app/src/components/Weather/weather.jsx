@@ -66,7 +66,7 @@ function Weather() {
         )
         : null
       }
-      <Loader/>
+      {/* <Loader/> */}
       <WeatherCard/>
     </div>
   )
