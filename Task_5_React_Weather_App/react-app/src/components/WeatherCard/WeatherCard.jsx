@@ -7,7 +7,7 @@ import classes from './WeatherCard.module.css';
 function WeatherCard() {
   const {cityByIP, cityDate} = useSelector(state => state.cities);
   // let today = cityArr.EffectiveDate;
-  let dayDate = new Date(cityDate.EffectiveDate);
+  let dayDate = new Date(cityDate.Date);
   // let day2 = dayDate.toDateString();
   let day2 = dayDate.toDateString();
 

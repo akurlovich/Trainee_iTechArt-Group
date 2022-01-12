@@ -11,7 +11,7 @@ function Weather() {
 
   const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 
-  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp} = useSelector(state => state.cities);
+  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate} = useSelector(state => state.cities);
   // const temper = useSelector(state => state.cities.temperature);
   
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(citys);
+    console.log(cityTemp);
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));
@@ -51,7 +51,7 @@ function Weather() {
         <div className={classes.location__item}>Minsk</div>
         <div className={classes.location__item}>Belarus</div>
       </div> */}
-      <button 
+      {/* <button 
         className="show-weather"
         onClick={showWeather}
       >
@@ -62,7 +62,7 @@ function Weather() {
         onClick={showIP}
       >
         Click
-      </button>
+      </button> */}
       <button 
         className="show-weather"
         onClick={showCity}

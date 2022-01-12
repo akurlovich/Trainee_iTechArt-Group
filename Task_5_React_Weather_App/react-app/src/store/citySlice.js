@@ -57,7 +57,7 @@ const citySlice = createSlice({
     cityDay: {},
     cityNight: {},
     cityDate: {},
-    cityTemp: {},
+    cityTemp: {Minimum: {}, Maximum: {}},
     status: null,
     error: null,
   },
@@ -91,9 +91,9 @@ const citySlice = createSlice({
     [fetchCityUI.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.cityArr = action.payload;
-      state.cityTemp = action.payload.DailyForecasts[0].Temperature.Maximum;
-      // state.cityTemp = action.payload.DailyForecasts[0].Temperature;
-      state.cityDate = action.payload.Headline;
+      // state.cityTemp = action.payload.DailyForecasts[0].Temperature.Maximum;
+      state.cityTemp = action.payload.DailyForecasts[0].Temperature;
+      state.cityDate = action.payload.DailyForecasts[0];
       state.cityDay = action.payload.DailyForecasts[0].Day;
       state.cityNight = action.payload.DailyForecasts[0].Night;
       // state.temperature = '123654'

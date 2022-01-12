@@ -5,8 +5,8 @@ import classes from './DayBlock.module.css';
 export default function DayBlock() {
   const {cityDay, cityTemp} = useSelector(state => state.cities);
   // let temp = Math.ceil(cityTemp.Value).toString();
-  // let temp = cityTemp.Maximum.Value;
-  let temp = cityTemp.Value;
+  let temp = cityTemp.Maximum.Value;
+  // let temp = cityTemp.Value;
 
   return (
     <div className={classes.card__block_day}> 
