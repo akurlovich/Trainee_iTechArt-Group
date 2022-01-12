@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchIP} from '../../store/citySlice';
+import {addTemperature, fetchCityUI, fetchIP} from '../../store/citySlice';
 import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
 import classes from './Weather.module.css';
 import Loader from '../UI/Loader/Loader.jsx';
 
-const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
-const citySearch = 'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=minsk';
-const weatherSearch = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/28580?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&details=true&metric=true";
-
 function Weather() {
   const cityUI = '28580';
 
-  const {cityArr: citys, temperature: temper, error: showError, status} = useSelector(state => state.cities);
+  const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
+
+  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp} = useSelector(state => state.cities);
   // const temper = useSelector(state => state.cities.temperature);
   
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(fetchIP());
+    dispatch(fetchCityUI());
   }, []);
 
   const getWeather = async () => {
@@ -37,9 +36,10 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(showError);
-    // console.log(citys.city);
+    console.log(citys);
+    // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
+    // dispatch(addTemperature('10000'));
   }
 
 
@@ -76,6 +76,7 @@ function Weather() {
         : null
       }
       {/* <Loader/> */}
+      {status === 'loading' && <WeatherCard/>}
       <WeatherCard/>
     </div>
   )

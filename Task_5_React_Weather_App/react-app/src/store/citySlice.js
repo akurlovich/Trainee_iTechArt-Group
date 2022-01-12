@@ -1,11 +1,14 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getCityByIP, getCityUI, getWeather } from '../userAPI';
 
 export const fetchIP = createAsyncThunk(
   'CITY/fetchIP',
   async function(_, {rejectWithValue}) {
     try {
-      const res = await axios.get('http://api.db-ip.com/v2/free/self');
+      // const res = await axios.get('http://api.db-ip.com/v2/free/self');
+      const res = await getCityByIP();
+      // console.log('object', res)
       if (res.status !== 200) {
         throw new Error('City by IP not found!')
       } 
@@ -16,13 +19,45 @@ export const fetchIP = createAsyncThunk(
     }
 
   }
+);
+
+export const fetchCityUI = createAsyncThunk(
+  'CITY/fetchCityUI',
+  async function (_, {rejectWithValue, getState}) {
+    try {
+      // const city = getState().cities;
+      const resByIP = await getCityByIP();
+      if (resByIP.status !== 200) {
+        throw new Error('City by IP not found!')
+      };
+      // console.log(res.data);
+      const resCityUI = await getCityUI(resByIP.data.city);
+      if (resCityUI.status !== 200) {
+        throw new Error('City UI not found!')
+      } 
+      // console.log(res2.data[0].Key);
+      const resCityWeather = await getWeather(resCityUI.data[0].Key);
+      if (resCityWeather.status !== 200) {
+        throw new Error('Weather not found!')
+      } 
+      // console.log(resCityWeather.data);
+      // return resCityWeather.data;
+      return resCityWeather.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
 )
 
 const citySlice = createSlice({
   name: 'CITY',
   initialState: {
-    cityArr: [],
-    temperature: '-9',
+    cityByIP: {},
+    cityArr: {},
+    cityDay: {},
+    cityNight: {},
+    cityDate: {},
+    cityTemp: {},
     status: null,
     error: null,
   },
@@ -44,12 +79,24 @@ const citySlice = createSlice({
     },
     [fetchIP.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.cityArr = action.payload;
+      state.cityByIP = action.payload;
     },
     [fetchIP.rejected]: (state, action) => {
       state.status = 'rejected';
       state.error = action.payload;
     },
+    [fetchCityUI.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [fetchCityUI.fulfilled]: (state, action) => {
+      state.status = 'rejected';
+      state.cityArr = action.payload;
+      state.cityTemp = action.payload.DailyForecasts[0].Temperature.Maximum;
+      state.cityDate = action.payload.Headline;
+      state.cityDay = action.payload.DailyForecasts[0].Day;
+      state.cityNight = action.payload.DailyForecasts[0].Night;
+      // state.temperature = '123654'
+    }
   }
 });
 

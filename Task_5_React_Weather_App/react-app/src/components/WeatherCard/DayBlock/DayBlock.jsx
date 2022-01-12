@@ -1,18 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import classes from './DayBlock.module.css';
 
 export default function DayBlock() {
+  const {cityDay, cityTemp} = useSelector(state => state.cities);
+  let temp = Math.ceil(cityTemp.Value).toString();
+
   return (
-    <div className={classes.card__block_day}>    
+    <div className={classes.card__block_day}> 
       <div className={classes.card__image}>
-        <img src="/icons/01-s.png" alt="weather icon"/>
+        <img src={`/icons/0${cityDay.Icon}-s.png`} alt="weather icon"/>
         <div className={classes.temp__value_middle}>
-        Sunny
+        {/* {cityArr.DailyForecasts[0].Day.LongPhrase} */}
+        {cityDay.LongPhrase}
         </div>
       </div>
       <div className={classes.card__info}>
         <div className={classes.card__temp}>
-          <div className={classes.temp__value}>13</div>
+          <div className={classes.temp__value}>{temp}</div>
           <div className={classes.temp__icon}>°C</div>
         </div>
         <div className={classes.card__minmax}>
