@@ -31,7 +31,7 @@ function Weather() {
   };
 
   const showIP = async () => {
-    const res = await (await axios.get('http://api.db-ip.com/v2/free/self'));
+    const res = await axios.get('http://api.db-ip.com/v2/free/self');
     console.log(res.data);
   };
 
@@ -45,7 +45,7 @@ function Weather() {
 
   return (
     <div className={classes.weather}>
-      {/* {status === 'loading' && <Loader/>} */}
+      {status === 'loading' ? <Loader/> : null}
       {/* {showError && <div>{showError}</div>} */}
       {/* <div className={classes.weather__location}>
         <div className={classes.location__item}>Minsk</div>
@@ -76,7 +76,7 @@ function Weather() {
         : null
       }
       {/* <Loader/> */}
-      {status === 'loading' && <WeatherCard/>}
+      {/* {status === 'loading' && <WeatherCard/>} */}
       <WeatherCard/>
     </div>
   )

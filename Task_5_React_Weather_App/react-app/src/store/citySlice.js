@@ -89,13 +89,17 @@ const citySlice = createSlice({
       state.status = 'loading';
     },
     [fetchCityUI.fulfilled]: (state, action) => {
-      state.status = 'rejected';
+      state.status = 'resolved';
       state.cityArr = action.payload;
       state.cityTemp = action.payload.DailyForecasts[0].Temperature.Maximum;
+      // state.cityTemp = action.payload.DailyForecasts[0].Temperature;
       state.cityDate = action.payload.Headline;
       state.cityDay = action.payload.DailyForecasts[0].Day;
       state.cityNight = action.payload.DailyForecasts[0].Night;
       // state.temperature = '123654'
+    },
+    [fetchCityUI.rejected]: (state, action) => {
+      state.status = 'rejected';
     }
   }
 });
