@@ -5,6 +5,7 @@ import WeatherCard from '../WeatherCard/WeatherCard.jsx';
 import axios from 'axios';
 import classes from './Weather.module.css';
 import Loader from '../UI/Loader/Loader.jsx';
+import { fiveDay } from '../../store/weatherSlice';
 
 function Weather() {
   const cityUI = '28580';
@@ -12,6 +13,8 @@ function Weather() {
   const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 
   const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate} = useSelector(state => state.cities);
+
+  const {weatherArr} = useSelector(state => state.weather);
   // const temper = useSelector(state => state.cities.temperature);
   
   const dispatch = useDispatch();
@@ -19,10 +22,11 @@ function Weather() {
   useEffect(() => {
     dispatch(fetchIP());
     dispatch(fetchCityUI());
+    dispatch(fiveDay());
   }, []);
 
   const getWeather = async () => {
-    const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
+    const res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityUI}?apikey=${API_KEY}&details=true&metric=true`);
     console.log(res.data);    
   };
 
@@ -36,7 +40,7 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(citys);
+    console.log(weatherArr);
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));
@@ -51,13 +55,13 @@ function Weather() {
         <div className={classes.location__item}>Minsk</div>
         <div className={classes.location__item}>Belarus</div>
       </div> */}
-      {/* <button 
+      <button 
         className="show-weather"
         onClick={showWeather}
       >
         Click
       </button>
-      <button 
+      {/* <button 
         className="show-weather"
         onClick={showIP}
       >

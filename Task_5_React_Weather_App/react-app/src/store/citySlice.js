@@ -36,7 +36,7 @@ export const fetchCityUI = createAsyncThunk(
         throw new Error('City UI not found!')
       } 
       // console.log(res2.data[0].Key);
-      const resCityWeather = await getWeather(resCityUI.data[0].Key);
+      const resCityWeather = await getWeather(resCityUI.data[0].Key, 1);
       if (resCityWeather.status !== 200) {
         throw new Error('Weather not found!')
       } 
@@ -47,7 +47,35 @@ export const fetchCityUI = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-)
+);
+
+// export const fiveDay = createAsyncThunk(
+//   'CITY/fetchCityUI',
+//   async function (_, {rejectWithValue, getState}) {
+//     try {
+//       // const city = getState().cities;
+//       const resByIP = await getCityByIP();
+//       if (resByIP.status !== 200) {
+//         throw new Error('City by IP not found!')
+//       };
+//       // console.log(res.data);
+//       const resCityUI = await getCityUI(resByIP.data.city);
+//       if (resCityUI.status !== 200) {
+//         throw new Error('City UI not found!')
+//       } 
+//       // console.log(res2.data[0].Key);
+//       const resCityWeather = await getWeather(resCityUI.data[0].Key, 5);
+//       if (resCityWeather.status !== 200) {
+//         throw new Error('Weather not found!')
+//       } 
+//       // console.log(resCityWeather.data);
+//       // return resCityWeather.data;
+//       return resCityWeather.data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// )
 
 const citySlice = createSlice({
   name: 'CITY',

@@ -1,15 +1,21 @@
 import React from 'react'
 import classes from '../CardMedium.module.css';
 
-export default function DayMedium() {
+export default function DayMedium(props) {
+  // console.log(props.day);
+  console.log(props.temp);
+  const temp = Math.ceil((props.temp.Minimum.Value + props.temp.Maximum.Value) / 2).toString();
+
+  const icon = `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
+  
   return (
     <div className={classes.card__block_day}>    
       <div className={classes.card__image}>
-        <img src="/icons/01-s.png" alt="weather icon"/>
+        <img src={icon} alt="weather icon"/>
       </div>
       <div className={classes.card__info}>
         <div className={classes.card__temp}>
-          <div className={classes.temp__value}>13</div>
+          <div className={classes.temp__value}>{temp}</div>
           <div className={classes.temp__icon}>°C</div>
         </div>
         <div className={classes.card__minmax}>
