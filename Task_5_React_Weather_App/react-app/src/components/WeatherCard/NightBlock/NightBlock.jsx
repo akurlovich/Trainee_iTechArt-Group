@@ -5,10 +5,12 @@ import classes from '../DayBlock/DayBlock.module.css';
 export default function NightBlock() {
   const {cityNight} = useSelector(state => state.cities);
 
+  let icon = `/icons/${(+cityNight.Icon > 9) ? cityNight.Icon : '0'+cityNight.Icon}-s.png`;
+
   return (
     <div className={classes.card__block_night}>    
       <div className={classes.card__image}>
-        <img src={`/icons/0${cityNight.Icon}-s.png`}  alt="weather icon"/>
+        <img src={icon}  alt="weather icon"/>
         <div className={classes.temp__value_middle}>
           {cityNight.LongPhrase}
         </div>

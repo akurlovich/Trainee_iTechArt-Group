@@ -3,15 +3,16 @@ import { useSelector } from 'react-redux';
 import classes from './DayBlock.module.css';
 
 export default function DayBlock() {
-  const {cityDay, cityTemp} = useSelector(state => state.cities);
-  // let temp = Math.ceil(cityTemp.Value).toString();
-  let temp = cityTemp.Maximum.Value;
-  // let temp = cityTemp.Value;
+  const {cityDay, cityTemp, cityDayWind, cityDayRain, cityDaySnow} = useSelector(state => state.cities);
+  const tempMax = cityTemp.Maximum.Value;
+  const tempMin = cityTemp.Minimum.Value;
+  const temp = Math.ceil((tempMax + tempMin) / 2).toString();
+  const icon = `/icons/${(+cityDay.Icon > 9) ? cityDay.Icon : '0'+cityDay.Icon}-s.png`;
 
   return (
     <div className={classes.card__block_day}> 
       <div className={classes.card__image}>
-        <img src={`/icons/0${cityDay.Icon}-s.png`} alt="weather icon"/>
+        <img src={icon} alt="weather icon"/>
         <div className={classes.temp__value_middle}>
         {/* {cityArr.DailyForecasts[0].Day.LongPhrase} */}
         {cityDay.LongPhrase}
@@ -26,7 +27,7 @@ export default function DayBlock() {
         <div className={classes.minmax__min}>
           <div className={classes.temp__value_small}>Min:</div>
             <div className={classes.card__temp}>
-              <div className={classes.temp__value_small}>13</div>
+              <div className={classes.temp__value_small}>{tempMin}</div>
               <div className={classes.temp__icon_small}>°C</div>
             </div>
           </div>
@@ -34,7 +35,7 @@ export default function DayBlock() {
           <div className={classes.minmax__min}>
             <div className={classes.temp__value_small}>Max:</div>
               <div className={classes.card__temp}>
-                <div className={classes.temp__value_small}>13</div>
+                <div className={classes.temp__value_small}>{tempMax}</div>
                 <div className={classes.temp__icon_small}>°C</div>
               </div>
           </div>
@@ -46,15 +47,15 @@ export default function DayBlock() {
           <img className={classes.temp__image} src='/icons/Wind.png'>
 
           </img>
-          <div>15 km/h, W</div>
+          <div>{cityDayWind.Speed.Value} km/h, {cityDayWind.Direction.Localized}</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='/icons/rain.png'></img>
-          <div>10 mm</div>
+          <div>{cityDayRain.Value} mm</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>0 mm</div>
+          <div>{cityDaySnow.Value * 10} mm</div>
         </div>
       </div>
     </div>

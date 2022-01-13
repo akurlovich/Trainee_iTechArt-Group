@@ -36,7 +36,7 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(cityTemp);
+    console.log(citys);
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));

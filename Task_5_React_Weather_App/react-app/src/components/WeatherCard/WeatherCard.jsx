@@ -5,7 +5,7 @@ import NightBlock from './NightBlock/NightBlock';
 import classes from './WeatherCard.module.css';
 
 function WeatherCard() {
-  const {cityByIP, cityDate} = useSelector(state => state.cities);
+  const {cityByIP, cityDate, cityArr} = useSelector(state => state.cities);
   // let today = cityArr.EffectiveDate;
   let dayDate = new Date(cityDate.Date);
   // let day2 = dayDate.toDateString();
@@ -25,6 +25,7 @@ function WeatherCard() {
           {day2}
         </div>
         <DayBlock/> 
+        {/* {(Object.keys(cityArr).length !== 0) ? <DayBlock/> : null} */}
         <NightBlock/>
       </div>
       {/* <CardMedium/>
