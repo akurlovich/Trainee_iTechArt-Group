@@ -25,7 +25,7 @@ console.log(memTest(1, 2, 3, 5));
 
 // 3. Functions for arrays
 console.log('Functions for arrays');
-const array = [1, -5, 6, 87];
+const array = [1, -5, 6.3, 8, 87, ];
 const someFunc = (item) => {
    console.log(item * item);
  };
@@ -36,11 +36,8 @@ const someFunc3 = (item, acc) => {
   return item + acc;
 };
 const findFunc = (item) => {
-  if (item > 5) {
-    return true;
-  } else {
-    return false;
-  }
+  if (Number.isInteger(item) && (item % 2 === 0)) return true;
+  return false;
 }
 const arrObj = [
   {

@@ -47,13 +47,9 @@ export default {
       throw new Error("Is not array!")
     };
     for (let i = 0; i < arr.length; i++) {
-      if (predicateToFindFirstMatchingElement(arr[i])) {
-        let foundData = arr[i];
-        i = arr.length;
-        return foundData;
-      }
+      if (predicateToFindFirstMatchingElement(arr[i])) return arr[i];
     };
-    return 'Element not found!';
+    return;
   },
 
   arrFilter(arr, filteringPredicate) {
@@ -69,7 +65,7 @@ export default {
         foundArr.push(arr[i])
       };
     };
-    if (foundArr.length === 0) return false;
+    if (foundArr.length === 0) return;
     return foundArr;
   },
 
