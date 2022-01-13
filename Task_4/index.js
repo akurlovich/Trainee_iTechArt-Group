@@ -35,6 +35,13 @@ const someFunc2 = (item) => {
 const someFunc3 = (item, acc) => {
   return item + acc;
 };
+const findFunc = (item) => {
+  if (item > 5) {
+    return true;
+  } else {
+    return false;
+  }
+}
 const arrObj = [
   {
     name: 'ivsn',
@@ -49,8 +56,8 @@ const matchObj = {
 console.log(myModul.arrMethods.voidEach(array, someFunc));
 console.log(myModul.arrMethods.arrMap(array, someFunc2))
 console.log(myModul.arrMethods.objReduce(array, someFunc3))
-console.log(myModul.arrMethods.objFind(array, 8));
-console.log(myModul.arrMethods.arrFilter(array, 6));
+console.log(myModul.arrMethods.objFind(array, findFunc));
+console.log(myModul.arrMethods.arrFilter(array, findFunc));
 console.log(myModul.arrMethods.arrWhere(arrObj, matchObj));
 console.log(myModul.arrMethods.first(array));
 console.log(myModul.arrMethods.last(array));
