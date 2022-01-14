@@ -34,7 +34,7 @@ const weatherSlice = createSlice({
   name: 'WEATHER',
   initialState: {
     weatherArr: [],
-    warr: [],
+    threeDays: [],
     status: null,
     error: null,
   },
@@ -56,8 +56,8 @@ const weatherSlice = createSlice({
     [fiveDay.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.weatherArr = action.payload.DailyForecasts;
-      for (let i = 1; i <= 3; i++) {
-        state.warr.push(action.payload.DailyForecasts[i])
+      for (let i = 0; i <= 2; i++) {
+        state.threeDays.push(action.payload.DailyForecasts[i])
         // state.warr.push(i)
       }
     },
