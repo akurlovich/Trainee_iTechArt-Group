@@ -8,6 +8,9 @@ export default function DayMedium(props) {
   const tempMax = props.temp.Maximum.Value; 
   const temp = Math.ceil((tempMin + tempMax) / 2).toString();
   const windSpeed = props.day.Wind.Speed.Value;
+  const windDirection = props.day.Wind.Direction.Localized;
+  const rain = props.day.Rain.Value;
+  const snow = props.day.Snow.Value;
 
   const icon = `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
   
@@ -45,15 +48,15 @@ export default function DayMedium(props) {
           <img className={classes.temp__image} src='/icons/Wind.png'>
 
           </img>
-          <div>{windSpeed} km/h, W</div>
+          <div>{windSpeed} km/h, {windDirection}</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='/icons/rain.png'></img>
-          <div>10 mm</div>
+          <div>{rain} mm</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>0 mm</div>
+          <div>{Math.ceil(snow * 10)} mm</div>
         </div>
       </div>
     </div>

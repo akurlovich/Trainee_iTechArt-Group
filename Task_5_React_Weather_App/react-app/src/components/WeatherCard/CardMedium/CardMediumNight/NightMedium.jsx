@@ -3,7 +3,13 @@ import classes from '../CardMedium.module.css';
 
 export default function NightMedium(props) {
   // const temp = Math.ceil((tempMax + tempMin) / 2).toString();
-  const temp = Math.ceil((props.temp.Minimum.Value)).toString();
+  const tempMin = props.temp.Minimum.Value;
+  const tempMax = props.temp.Maximum.Value; 
+  const temp = Math.ceil((tempMin)).toString();
+  const windSpeed = props.night.Wind.Speed.Value;
+  const windDirection = props.night.Wind.Direction.Localized;
+  const rain = props.night.Rain.Value;
+  const snow = props.night.Snow.Value;
 
   const icon = `/icons/${(+props.night.Icon > 9) ? props.night.Icon : '0'+props.night.Icon}-s.png`;
 
@@ -21,7 +27,7 @@ export default function NightMedium(props) {
         <div className={classes.minmax__min}>
           <div className={classes.temp__value_small}>Min:</div>
             <div className={classes.card__temp}>
-              <div className={classes.temp__value_small}>13</div>
+              <div className={classes.temp__value_small}>{tempMin}</div>
               <div className={classes.temp__icon_small}>°C</div>
             </div>
           </div>
@@ -29,7 +35,7 @@ export default function NightMedium(props) {
           <div className={classes.minmax__min}>
             <div className={classes.temp__value_small}>Max:</div>
               <div className={classes.card__temp}>
-                <div className={classes.temp__value_small}>13</div>
+                <div className={classes.temp__value_small}>{tempMax}</div>
                 <div className={classes.temp__icon_small}>°C</div>
               </div>
           </div>
@@ -41,15 +47,15 @@ export default function NightMedium(props) {
           <img className={classes.temp__image} src='/icons/Wind.png'>
 
           </img>
-          <div>15 km/h, W</div>
+          <div>{windSpeed} km/h, {windDirection}</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='/icons/rain.png'></img>
-          <div>10 mm</div>
+          <div>{rain} mm</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>0 mm</div>
+          <div>{Math.ceil(snow * 10)} mm</div>
         </div>
       </div>
     </div>
