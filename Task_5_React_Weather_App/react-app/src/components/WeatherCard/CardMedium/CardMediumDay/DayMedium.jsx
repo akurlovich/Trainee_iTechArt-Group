@@ -3,8 +3,11 @@ import classes from '../CardMedium.module.css';
 
 export default function DayMedium(props) {
   // console.log(props.day);
-  console.log(props.temp);
-  const temp = Math.ceil((props.temp.Minimum.Value + props.temp.Maximum.Value) / 2).toString();
+  console.log(props.day);
+  const tempMin = props.temp.Minimum.Value;
+  const tempMax = props.temp.Maximum.Value; 
+  const temp = Math.ceil((tempMin + tempMax) / 2).toString();
+  const windSpeed = props.day.Wind.Speed.Value;
 
   const icon = `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
   
@@ -22,7 +25,7 @@ export default function DayMedium(props) {
         <div className={classes.minmax__min}>
           <div className={classes.temp__value_small}>Min:</div>
             <div className={classes.card__temp}>
-              <div className={classes.temp__value_small}>13</div>
+              <div className={classes.temp__value_small}>{tempMin}</div>
               <div className={classes.temp__icon_small}>°C</div>
             </div>
           </div>
@@ -30,7 +33,7 @@ export default function DayMedium(props) {
           <div className={classes.minmax__min}>
             <div className={classes.temp__value_small}>Max:</div>
               <div className={classes.card__temp}>
-                <div className={classes.temp__value_small}>13</div>
+                <div className={classes.temp__value_small}>{tempMax}</div>
                 <div className={classes.temp__icon_small}>°C</div>
               </div>
           </div>
@@ -42,7 +45,7 @@ export default function DayMedium(props) {
           <img className={classes.temp__image} src='/icons/Wind.png'>
 
           </img>
-          <div>15 km/h, W</div>
+          <div>{windSpeed} km/h, W</div>
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='/icons/rain.png'></img>
