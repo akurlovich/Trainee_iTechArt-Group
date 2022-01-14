@@ -7,7 +7,7 @@ import classes from './WeatherCard.module.css';
 
 function WeatherCard() {
   const {cityByIP, cityDate, cityArr} = useSelector(state => state.cities);
-  const {weatherArr} = useSelector(state => state.weather);
+  const {weatherArr, warr} = useSelector(state => state.weather);
   // let today = cityArr.EffectiveDate;
   const dayDate = new Date(cityDate.Date).toDateString();
   // let day2 = dayDate.toDateString();
@@ -31,8 +31,8 @@ function WeatherCard() {
         {/* <DayBlock/>  */}
         {/* {(Object.keys(cityArr).length !== 0) ? <DayBlock/> : null} */}
         {/* <NightBlock/> */}
-        {weatherArr.length ? 
-          weatherArr.map((item) => 
+        {warr.length ? 
+          warr.map((item) => 
             <CardMedium 
             key={item.EpochDate}
             item={item}

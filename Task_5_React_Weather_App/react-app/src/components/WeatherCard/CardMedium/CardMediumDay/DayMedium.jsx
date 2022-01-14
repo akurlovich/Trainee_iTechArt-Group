@@ -3,7 +3,7 @@ import classes from '../CardMedium.module.css';
 
 export default function DayMedium(props) {
   // console.log(props.day);
-  console.log(props.day);
+  // console.log(props.day);
   const tempMin = props.temp.Minimum.Value;
   const tempMax = props.temp.Maximum.Value; 
   const temp = Math.ceil((tempMin + tempMax) / 2).toString();

@@ -14,7 +14,7 @@ function Weather() {
 
   const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate} = useSelector(state => state.cities);
 
-  const {weatherArr} = useSelector(state => state.weather);
+  const {weatherArr, warr} = useSelector(state => state.weather);
   // const temper = useSelector(state => state.cities.temperature);
   
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(weatherArr);
+    console.log(warr);
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
 
 export const fiveDay = createAsyncThunk(
-  'CITY/fetchCityUI',
+  'CITY/fiveDay',
   async function (_, {rejectWithValue, getState}) {
     try {
       // const city = getState().cities;
@@ -34,6 +34,7 @@ const weatherSlice = createSlice({
   name: 'WEATHER',
   initialState: {
     weatherArr: [],
+    warr: [],
     status: null,
     error: null,
   },
@@ -55,17 +56,10 @@ const weatherSlice = createSlice({
     [fiveDay.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.weatherArr = action.payload.DailyForecasts;
-      // state.cityArr = action.payload;
-      // state.cityTemp = action.payload.DailyForecasts[0].Temperature;
-      // state.cityDate = action.payload.DailyForecasts[0];
-      // state.cityDay = action.payload.DailyForecasts[0].Day;
-      // state.cityDayWind = action.payload.DailyForecasts[0].Day.Wind;
-      // state.cityDayRain = action.payload.DailyForecasts[0].Day.Rain; 
-      // state.cityDaySnow = action.payload.DailyForecasts[0].Day.Snow;
-      // state.cityNight = action.payload.DailyForecasts[0].Night;
-      // state.cityNightWind = action.payload.DailyForecasts[0].Night.Wind;
-      // state.cityNightRain = action.payload.DailyForecasts[0].Night.Rain; 
-      // state.cityNightSnow = action.payload.DailyForecasts[0].Night.Snow;
+      for (let i = 1; i <= 3; i++) {
+        state.warr.push(action.payload.DailyForecasts[i])
+        // state.warr.push(i)
+      }
     },
     [fiveDay.rejected]: (state, action) => {
       state.status = 'rejected';
