@@ -179,3 +179,28 @@
   line-height: 120%;
   color: #FFFFFF;
 }
+
+.card__buttons {
+  display: flex;
+  gap: 40px;
+}
+
+.card__btn {
+  padding: 5px;
+  border: 2px solid antiquewhite;
+  border-radius: 5px;
+  color: antiquewhite;
+  background-color: transparent;
+  font-weight: 900;
+  font-size: 16px;
+  transition: all 0.5s ease;
+}
+
+.card__btn:hover {
+  color: #6272c3;
+  background-color: antiquewhite;
+}
+
+.card__btn:active {
+  transform: scale(0.8);
+}

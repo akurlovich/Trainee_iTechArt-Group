@@ -49,33 +49,6 @@ export const fetchCityUI = createAsyncThunk(
   }
 );
 
-// export const fiveDay = createAsyncThunk(
-//   'CITY/fetchCityUI',
-//   async function (_, {rejectWithValue, getState}) {
-//     try {
-//       // const city = getState().cities;
-//       const resByIP = await getCityByIP();
-//       if (resByIP.status !== 200) {
-//         throw new Error('City by IP not found!')
-//       };
-//       // console.log(res.data);
-//       const resCityUI = await getCityUI(resByIP.data.city);
-//       if (resCityUI.status !== 200) {
-//         throw new Error('City UI not found!')
-//       } 
-//       // console.log(res2.data[0].Key);
-//       const resCityWeather = await getWeather(resCityUI.data[0].Key, 5);
-//       if (resCityWeather.status !== 200) {
-//         throw new Error('Weather not found!')
-//       } 
-//       // console.log(resCityWeather.data);
-//       // return resCityWeather.data;
-//       return resCityWeather.data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// )
 
 const citySlice = createSlice({
   name: 'CITY',
@@ -114,6 +87,9 @@ const citySlice = createSlice({
     addTemperature(state, action) {
       state.temperature = action.payload;
     },
+    addNewCity(state, action) {
+      state.cityByIP = action.payload;
+    }
   },
   extraReducers: {
     [fetchIP.pending]: (state) => {
@@ -151,6 +127,6 @@ const citySlice = createSlice({
   }
 });
 
-export const {addCity, addTemperature} = citySlice.actions;
+export const {addCity, addTemperature, addNewCity} = citySlice.actions;
 
 export default citySlice.reducer;

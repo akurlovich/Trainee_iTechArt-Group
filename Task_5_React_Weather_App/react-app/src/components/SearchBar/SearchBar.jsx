@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addCity, addTemperature} from '../../store/citySlice';
+import {addCity, addTemperature, addNewCity} from '../../store/citySlice';
 import axios from 'axios';
 import logo from '../../assets/search-icon.svg';
 import './search-bar.css';
@@ -16,6 +16,8 @@ function SearchBar() {
   
   const handlerSearch = (event) => {
     event.preventDefault();
+    dispatch(addNewCity({city: 'Gomel'}));
+    setValue('')
     // const res = await axios.get('http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=min');
     // const city = res.data;
     // console.log(city);
@@ -27,10 +29,16 @@ function SearchBar() {
 
   const show = async (event) => {
     setValue(event);
-    const res = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=${event}`);
-    const city = res.data;
+    // const res = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=${event}`);
+    // const city = res.data;
+    const city = ["Brest"];
     setCities(city);
     console.log(city);
+  }
+
+  const setFoundValue = (value) => {
+    setValue(value);
+    setCities([]);
   }
 
   return (
@@ -47,16 +55,18 @@ function SearchBar() {
           onChange={event => show(event.target.value)}
         />
         <img className="input__icon" src={logo} alt="search icon" />
-        <div className="search__result">
-          {cities.length && 
-            cities.map((item) => 
+        {cities.length > 0 ? 
+          <div className="search__result">
+            {cities.map((item) => 
               <SearchResult
                 key={item.Key}
                 item={item}
+                foundValue={setFoundValue}
               />
-            )
-          }
-        </div>
+            )}
+          </div>
+          : null
+        }
       </div>
       <input 
         className='search__button'

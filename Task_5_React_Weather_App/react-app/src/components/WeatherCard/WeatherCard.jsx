@@ -12,25 +12,31 @@ function WeatherCard() {
   const dayDate = new Date(cityDate.Date).toDateString();
   // let day2 = dayDate.toDateString();
   // let day2 = dayDate.toDateString();
-
+  
   return (
     <div className={classes.card__wrapper}>
       <div className={classes.card__container}>
         <div className={classes.card__title}>
           <div className={classes.card__location}>
-            <div>{cityByIP.city}</div>
+            {/* <div>{cityByIP.city}</div> */}
+            <div>Brest</div>
             <div>{cityByIP.countryName}</div>
           </div>
         </div>
-        {!threeDays.length ? 
-          <div className={classes.temp__value_small}>
-            {dayDate}
+          {!threeDays.length ? 
+            <div className={classes.temp__value_small}>
+              {dayDate}
+            </div>
+          : null
+          }
+          <div className={classes.card__buttons}>
+            <button className={classes.card__btn}>For 3 days</button>
+            <button className={classes.card__btn}>For 7 days</button>
           </div>
-        : null
-        }
-        {/* <DayBlock/>  */}
-        {/* {(Object.keys(cityArr).length !== 0) ? <DayBlock/> : null} */}
-        {/* <NightBlock/> */}
+          {/* <DayBlock/>  */}
+          {(Object.keys(cityArr).length !== 0) ? <DayBlock/> : null}
+          {(Object.keys(cityArr).length !== 0) ? <NightBlock/> : null}
+          {/* <NightBlock/> */}
       </div>
         {threeDays.length ? 
           threeDays.map((item) => 
@@ -40,15 +46,6 @@ function WeatherCard() {
             />)
           : null
         }
-      {/* <CardMedium/>
-      <CardMedium/>
-      <CardSmall/>
-      <CardSmall/>
-      <CardSmall/>
-      <CardSmall/>
-      <CardSmall/>
-      <CardSmall/>
-      <CardSmall/> */}
     </div>
  )
 };
