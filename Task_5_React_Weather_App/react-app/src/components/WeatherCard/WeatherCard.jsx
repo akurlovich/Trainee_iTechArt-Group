@@ -35,8 +35,8 @@ function WeatherCard() {
         {threeDays.length ? 
           threeDays.map((item) => 
             <CardMedium 
-            key={item.EpochDate}
-            item={item}
+              key={item.EpochDate}
+              item={item}
             />)
           : null
         }

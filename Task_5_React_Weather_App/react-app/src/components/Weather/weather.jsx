@@ -8,6 +8,7 @@ import Loader from '../UI/Loader/Loader.jsx';
 import { fiveDay } from '../../store/weatherSlice';
 
 function Weather() {
+  
   const cityUI = '28580';
 
   const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
@@ -20,9 +21,9 @@ function Weather() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(fetchIP());
-    dispatch(fetchCityUI());
-    dispatch(fiveDay());
+    // dispatch(fetchIP());
+    // dispatch(fetchCityUI());
+    // dispatch(fiveDay());
   }, []);
 
   const getWeather = async () => {
@@ -44,7 +45,20 @@ function Weather() {
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));
-  }
+  };
+   const showName = async () => {
+    try{
+      const continents = await axios.get('http://dataservice.accuweather.com/locations/v1/regions?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR');
+      console.log(continents.data);
+      const countries = await axios.get('http://dataservice.accuweather.com/locations/v1/countries/eur?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR');
+      //http://dataservice.accuweather.com/locations/v1/cities/by/search?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=minsk 
+      console.log(countries.data);
+      const ser = await axios.get('http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=min');
+      console.log(ser.data);
+    }catch(err){
+      console.error(err);
+    }
+   }
 
 
   return (
@@ -61,12 +75,12 @@ function Weather() {
       >
         Click
       </button>
-      {/* <button 
+      <button 
         className="show-weather"
-        onClick={showIP}
+        onClick={showName}
       >
-        Click
-      </button> */}
+        name
+      </button>
       <button 
         className="show-weather"
         onClick={showCity}
