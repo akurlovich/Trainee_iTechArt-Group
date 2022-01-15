@@ -20,6 +20,9 @@
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding-left: 30px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .input__icon {
@@ -40,6 +43,9 @@
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.5s ease;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .search__button:active {
