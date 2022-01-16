@@ -55,7 +55,7 @@ export default function DayBlock() {
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>{cityDaySnow.Value * 10} mm</div>
+          <div>{Math.ceil(cityDaySnow.Value * 10)} mm</div>
         </div>
       </div>
     </div>

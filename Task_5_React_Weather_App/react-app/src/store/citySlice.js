@@ -36,7 +36,7 @@ export const fetchCityUI = createAsyncThunk(
         throw new Error('City UI not found!')
       } 
       // console.log(res2.data[0].Key);
-      const resCityWeather = await getWeather(resCityUI.data[0].Key, 1);
+      const resCityWeather = await getWeather(resCityUI.data[0].Key, 5);
       if (resCityWeather.status !== 200) {
         throw new Error('Weather not found!')
       } 
@@ -53,6 +53,10 @@ export const fetchCityUI = createAsyncThunk(
 const citySlice = createSlice({
   name: 'CITY',
   initialState: {
+    cityShow: false,
+    cityShow1Day: false,
+    cityShow3Day: false,
+    cityShow5Day: false,
     cityByIP: {},
     cityArr: {},
     cityDay: {},
@@ -74,6 +78,8 @@ const citySlice = createSlice({
     },
     cityNightRain: {},
     cityNightSnow: {},
+    weatherArr: [],
+    threeDays: [],
     status: null,
     error: null,
   },
@@ -84,11 +90,21 @@ const citySlice = createSlice({
         city: action.payload,
       })
     },
-    addTemperature(state, action) {
-      state.temperature = action.payload;
-    },
     addNewCity(state, action) {
       state.cityByIP = action.payload;
+      state.cityShow = true;
+      state.cityShow3Day = false;
+      state.cityShow5Day = false;
+    },
+    addShow3Day(state, action) {
+      state.cityShow1Day = false;
+      state.cityShow3Day = true;
+      state.cityShow5Day = false;
+    },
+    addShow5Day(state, action) {
+      state.cityShow1Day = false;
+      state.cityShow3Day = false;
+      state.cityShow5Day = true;
     }
   },
   extraReducers: {
@@ -99,15 +115,21 @@ const citySlice = createSlice({
     [fetchIP.fulfilled]: (state, action) => {
       state.status = 'resolved';
       state.cityByIP = action.payload;
+      state.cityShow = true;
     },
     [fetchIP.rejected]: (state, action) => {
       state.status = 'rejected';
       state.error = action.payload;
+      state.cityShow = false;
     },
+
+
     [fetchCityUI.pending]: (state, action) => {
       state.status = 'loading';
     },
     [fetchCityUI.fulfilled]: (state, action) => {
+      state.cityShow = true;
+      state.cityShow1Day = true;
       state.status = 'resolved';
       state.cityArr = action.payload;
       state.cityTemp = action.payload.DailyForecasts[0].Temperature;
@@ -120,13 +142,19 @@ const citySlice = createSlice({
       state.cityNightWind = action.payload.DailyForecasts[0].Night.Wind;
       state.cityNightRain = action.payload.DailyForecasts[0].Night.Rain; 
       state.cityNightSnow = action.payload.DailyForecasts[0].Night.Snow;
+      state.weatherArr = action.payload.DailyForecasts;
+      for (let i = 0; i <= 2; i++) {
+        state.threeDays.push(action.payload.DailyForecasts[i])
+        // state.warr.push(i)
+      }
     },
     [fetchCityUI.rejected]: (state, action) => {
       state.status = 'rejected';
+      state.cityShow = false;
     }
   }
 });
 
-export const {addCity, addTemperature, addNewCity} = citySlice.actions;
+export const {addCity, addTemperature, addNewCity, addShow3Day, addShow5Day} = citySlice.actions;
 
 export default citySlice.reducer;

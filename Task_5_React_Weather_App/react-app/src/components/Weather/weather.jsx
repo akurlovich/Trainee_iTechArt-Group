@@ -13,16 +13,16 @@ function Weather() {
 
   const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 
-  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate} = useSelector(state => state.cities);
+  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate, cityShow, weatherArr, threeDays} = useSelector(state => state.cities);
 
-  const {weatherArr, threeDays} = useSelector(state => state.weather);
+  // const {weatherArr, threeDays} = useSelector(state => state.weather);
   // const temper = useSelector(state => state.cities.temperature);
   
   const dispatch = useDispatch();
   
   useEffect(() => {
-    // dispatch(fetchIP());
-    // dispatch(fetchCityUI());
+    dispatch(fetchIP());
+    dispatch(fetchCityUI());
     // dispatch(fiveDay());
   }, []);
 
@@ -41,7 +41,7 @@ function Weather() {
   };
 
   const showCity = () => {
-    console.log(cityByIP);
+    console.log(citys);
     // console.log(citys.DailyForecasts[0].Day);
     // console.log(temper);
     // dispatch(addTemperature('10000'));
@@ -87,15 +87,15 @@ function Weather() {
       >
         test
       </button>
-      {citys.length ? 
+      {/* {citys.length ? 
         citys.map((item) => 
           <div key={item.id}>{item.city}</div>
         )
         : null
-      }
+      } */}
       {/* <Loader/> */}
       {/* {status === 'loading' && <WeatherCard/>} */}
-      <WeatherCard/>
+      {cityShow && <WeatherCard/>}
     </div>
   )
 };

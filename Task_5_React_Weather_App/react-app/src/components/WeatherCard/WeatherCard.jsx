@@ -1,50 +1,73 @@
 import React from 'react';
 import DayBlock from './DayBlock/DayBlock';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import NightBlock from './NightBlock/NightBlock';
 import CardMedium from '../WeatherCard/CardMedium/CardMedium';
+import { addShow3Day, addShow5Day } from '../../store/citySlice';
 import classes from './WeatherCard.module.css';
+import CardSmall from './CardSmall/CardSmall';
 
 function WeatherCard() {
-  const {cityByIP, cityDate, cityArr} = useSelector(state => state.cities);
-  const {weatherArr, threeDays} = useSelector(state => state.weather);
+  const {cityByIP, cityDate, cityArr, weatherArr, threeDays, cityShow, cityShow1Day, cityShow3Day, cityShow5Day} = useSelector(state => state.cities);
+
+  const dispatch = useDispatch();
+  // const {weatherArr, threeDays} = useSelector(state => state.weather);
   // let today = cityArr.EffectiveDate;
   const dayDate = new Date(cityDate.Date).toDateString();
   // let day2 = dayDate.toDateString();
   // let day2 = dayDate.toDateString();
-  
+
+  const show3Day = () => {
+    dispatch(addShow3Day());
+  };
+
+  const show5Day = () => {
+    dispatch(addShow5Day());
+  };
+
   return (
     <div className={classes.card__wrapper}>
       <div className={classes.card__container}>
         <div className={classes.card__title}>
           <div className={classes.card__location}>
-            {/* <div>{cityByIP.city}</div> */}
-            <div>Brest</div>
+            <div>{cityByIP.city}</div>
+            {/* <div>Brest</div> */}
             <div>{cityByIP.countryName}</div>
           </div>
         </div>
-          {!threeDays.length ? 
+          {cityShow1Day && 
             <div className={classes.temp__value_small}>
               {dayDate}
             </div>
-          : null
           }
           <div className={classes.card__buttons}>
-            <button className={classes.card__btn}>For 3 days</button>
-            <button className={classes.card__btn}>For 7 days</button>
+            <button
+              className={classes.card__btn}
+              onClick={show3Day}
+            >For 3 days</button>
+            <button
+              className={classes.card__btn}
+              onClick={show5Day}
+            >For 7 days</button>
           </div>
           {/* <DayBlock/>  */}
-          {(Object.keys(cityArr).length !== 0) ? <DayBlock/> : null}
-          {(Object.keys(cityArr).length !== 0) ? <NightBlock/> : null}
+          {cityShow1Day && <DayBlock/>}
+          {cityShow1Day && <NightBlock/>}
           {/* <NightBlock/> */}
       </div>
-        {threeDays.length ? 
+        {cityShow3Day && 
           threeDays.map((item) => 
             <CardMedium 
               key={item.EpochDate}
               item={item}
             />)
-          : null
+        }
+        {cityShow5Day &&
+          weatherArr.map((item) => 
+            <CardSmall 
+              key={item.EpochDate}
+              item={item}
+            />)
         }
     </div>
  )

@@ -55,7 +55,7 @@ export default function NightBlock() {
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>{cityNightSnow.Value * 10} мм</div>
+          <div>{Math.ceil(cityNightSnow.Value * 10)} мм</div>
         </div>
       </div>
     </div>
