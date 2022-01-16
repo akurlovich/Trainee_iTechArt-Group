@@ -23,7 +23,7 @@ export const fetchIP = createAsyncThunk(
 
 export const fetchCityUI = createAsyncThunk(
   'CITY/fetchCityUI',
-  async function (_, {rejectWithValue, getState}) {
+  async function (cityKey, {rejectWithValue, getState}) {
     try {
       // const city = getState().cities;
       const resByIP = await getCityByIP();
@@ -36,7 +36,11 @@ export const fetchCityUI = createAsyncThunk(
         throw new Error('City UI not found!')
       } 
       // console.log(res2.data[0].Key);
-      const resCityWeather = await getWeather(resCityUI.data[0].Key, 5);
+      let keyForCity = resCityUI.data[0].Key;
+      if (cityKey) {
+        keyForCity = cityKey;
+      };
+      const resCityWeather = await getWeather(keyForCity, 5);
       if (resCityWeather.status !== 200) {
         throw new Error('Weather not found!')
       } 

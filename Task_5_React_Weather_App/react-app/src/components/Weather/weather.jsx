@@ -69,7 +69,7 @@ function Weather() {
         <div className={classes.location__item}>Minsk</div>
         <div className={classes.location__item}>Belarus</div>
       </div> */}
-      <button 
+      {/* <button 
         className="show-weather"
         onClick={showWeather}
       >
@@ -86,7 +86,7 @@ function Weather() {
         onClick={showCity}
       >
         test
-      </button>
+      </button> */}
       {/* {citys.length ? 
         citys.map((item) => 
           <div key={item.id}>{item.city}</div>

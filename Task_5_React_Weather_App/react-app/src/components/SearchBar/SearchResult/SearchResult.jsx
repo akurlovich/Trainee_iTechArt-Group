@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import { addNewCity } from '../../../store/citySlice';
+import { addNewCity, fetchCityUI } from '../../../store/citySlice';
 // import {} 
 import '../search-bar.css';
 
@@ -11,7 +11,11 @@ export default function SearchResult({item, foundValue}) {
   const setFound = () => {
     const data = `${item.LocalizedName}, ${item.Country.LocalizedName}`;
     foundValue(data);
-    // dispatch(addNewCity(item.LocalizedName));
+    dispatch(fetchCityUI(item.Key));
+    dispatch(addNewCity({
+      city: item.LocalizedName,
+      countryName: item.Country.LocalizedName,
+    }));
   }
   return (
     <div

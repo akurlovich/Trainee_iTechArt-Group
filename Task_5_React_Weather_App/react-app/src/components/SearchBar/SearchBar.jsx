@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addCity, addTemperature, addNewCity} from '../../store/citySlice';
+import { fetchCityUI, addNewCity} from '../../store/citySlice';
 import axios from 'axios';
 import logo from '../../assets/search-icon.svg';
 import './search-bar.css';
@@ -16,28 +16,28 @@ function SearchBar() {
   
   const handlerSearch = (event) => {
     event.preventDefault();
-    dispatch(addNewCity({city: 'Gomel'}));
-    setValue('')
-    // const res = await axios.get('http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=min');
-    // const city = res.data;
-    // console.log(city);
-    // console.log(value);
-    // dispatch(addCity(value));
-    // dispatch(addTemperature('10000'));
-    // setValue('');
+    // dispatch(addNewCity({city: 'Gomel'}));
+    dispatch(fetchCityUI(cities[0].Key));
+    dispatch(addNewCity({
+      city: cities[0].LocalizedName,
+      countryName: cities[0].Country.LocalizedName,
+    }));
+    console.log(cities[0].Key)
+    setValue('');
+    setCities([]);
   };
 
   const show = async (event) => {
     setValue(event);
-    // const res = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=${event}`);
-    // const city = res.data;
-    const city = ["Brest"];
+    const res = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=${event}`);
+    const city = res.data;
+    // const city = ["Brest"];
     setCities(city);
-    console.log(city);
+    // console.log(city[0].Key);
   }
 
   const setFoundValue = (value) => {
-    setValue(value);
+    setValue('');
     setCities([]);
   }
 

@@ -56,16 +56,16 @@ function WeatherCard() {
           {/* <NightBlock/> */}
       </div>
         {cityShow3Day && 
-          threeDays.map((item) => 
+          threeDays.map((item, index) => 
             <CardMedium 
-              key={item.EpochDate}
+              key={item.EpochDate + index}
               item={item}
             />)
         }
         {cityShow5Day &&
-          weatherArr.map((item) => 
+          weatherArr.map((item, index) => 
             <CardSmall 
-              key={item.EpochDate}
+              key={item.EpochDate + index}
               item={item}
             />)
         }
