@@ -14,7 +14,7 @@ function Weather() {
 
   const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
 
-  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate, cityShow, weatherArr, threeDays} = useSelector(state => state.cities);
+  const {cityArr: citys, temperature: temper, error: showError, status, cityByIP, cityDay, cityTemp, cityDate, cityShow, weatherArr, threeDays, popUpShow} = useSelector(state => state.cities);
 
   // const {weatherArr, threeDays} = useSelector(state => state.weather);
   // const temper = useSelector(state => state.cities.temperature);
@@ -64,7 +64,7 @@ function Weather() {
 
   return (
     <div className={classes.weather}>
-      <PopUp/>
+      {popUpShow && <PopUp/>}
       {status === 'loading' ? <Loader/> : null}
       {/* {showError && <div>{showError}</div>} */}
       {/* <div className={classes.weather__location}>

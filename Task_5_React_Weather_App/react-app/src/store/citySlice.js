@@ -66,6 +66,7 @@ const citySlice = createSlice({
     cityShow1Day: false,
     cityShow3Day: false,
     cityShow5Day: false,
+    popUpShow: false,
     cityByIP: {},
     cityArr: {},
     cityDay: {},
@@ -114,6 +115,9 @@ const citySlice = createSlice({
       state.cityShow1Day = false;
       state.cityShow3Day = false;
       state.cityShow5Day = true;
+    },
+    addPopUpShow(state, action) {
+      state.popUpShow = action.payload;
     }
   },
   extraReducers: {
@@ -165,6 +169,12 @@ const citySlice = createSlice({
   }
 });
 
-export const {addCity, addTemperature, addNewCity, addShow3Day, addShow5Day} = citySlice.actions;
+export const {
+  addCity,
+  addNewCity,
+  addShow3Day,
+  addShow5Day,
+  addPopUpShow,
+} = citySlice.actions;
 
 export default citySlice.reducer;

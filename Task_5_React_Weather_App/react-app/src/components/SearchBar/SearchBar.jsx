@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import { fetchCityUI, addNewCity} from '../../store/citySlice';
+import { fetchCityUI, addNewCity, addPopUpShow} from '../../store/citySlice';
 import axios from 'axios';
 import logo from '../../assets/search-icon.svg';
 import './search-bar.css';
@@ -17,12 +17,16 @@ function SearchBar() {
   const handlerSearch = (event) => {
     event.preventDefault();
     // dispatch(addNewCity({city: 'Gomel'}));
-    dispatch(fetchCityUI(cities[0].Key));
-    dispatch(addNewCity({
-      city: cities[0].LocalizedName,
-      countryName: cities[0].Country.LocalizedName,
-    }));
-    console.log(cities[0].Key)
+    if (cities[0]) {
+      dispatch(fetchCityUI(cities[0].Key));
+      dispatch(addNewCity({
+        city: cities[0].LocalizedName,
+        countryName: cities[0].Country.LocalizedName,
+      }));
+    } else {
+      dispatch(addPopUpShow(true));
+    }
+    // console.log(cities[0].Key)
     setValue('');
     setCities([]);
   };
