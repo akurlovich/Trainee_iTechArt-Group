@@ -110,6 +110,11 @@ const citySlice = createSlice({
       state.cityShow3Day = false;
       state.cityShow5Day = false;
     },
+    addShow1Day(state, action) {
+      state.cityShow1Day = true;
+      state.cityShow3Day = false;
+      state.cityShow5Day = false;
+    },
     addShow3Day(state, action) {
       state.cityShow1Day = false;
       state.cityShow3Day = true;
@@ -176,6 +181,7 @@ const citySlice = createSlice({
 export const {
   addCity,
   addNewCity,
+  addShow1Day,
   addShow3Day,
   addShow5Day,
   addPopUpShow,

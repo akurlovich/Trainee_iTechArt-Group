@@ -3,7 +3,7 @@ import DayBlock from './DayBlock/DayBlock';
 import { useSelector, useDispatch } from 'react-redux';
 import NightBlock from './NightBlock/NightBlock';
 import CardMedium from '../WeatherCard/CardMedium/CardMedium';
-import { addShow3Day, addShow5Day } from '../../store/citySlice';
+import { addShow1Day, addShow3Day, addShow5Day } from '../../store/citySlice';
 import classes from './WeatherCard.module.css';
 import CardSmall from './CardSmall/CardSmall';
 
@@ -25,6 +25,10 @@ function WeatherCard() {
     dispatch(addShow5Day());
   };
 
+  const show1Day = () => {
+    dispatch(addShow1Day());
+  }
+
   return (
     <div className={classes.card__wrapper}>
       <div className={classes.card__container}>
@@ -43,7 +47,7 @@ function WeatherCard() {
           <div className={classes.card__buttons}>
             <button
               className={classes.card__btn}
-              onClick={show3Day}
+              onClick={show1Day}
             >Today</button>
             <button
               className={classes.card__btn}
