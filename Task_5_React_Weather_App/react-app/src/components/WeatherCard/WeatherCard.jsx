@@ -44,6 +44,10 @@ function WeatherCard() {
             <button
               className={classes.card__btn}
               onClick={show3Day}
+            >Today</button>
+            <button
+              className={classes.card__btn}
+              onClick={show3Day}
             >For 3 days</button>
             <button
               className={classes.card__btn}

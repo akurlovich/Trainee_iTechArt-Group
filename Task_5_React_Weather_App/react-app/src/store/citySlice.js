@@ -30,16 +30,21 @@ export const fetchCityUI = createAsyncThunk(
       if (resByIP.status !== 200) {
         throw new Error('City by IP not found!')
       };
-      // console.log(res.data);
+      // console.log(resByIP.data);
       const resCityUI = await getCityUI(resByIP.data.city);
       if (resCityUI.status !== 200) {
         throw new Error('City UI not found!')
       } 
-      // console.log(res2.data[0].Key);
-      let keyForCity = resCityUI.data[0].Key;
+      // console.log(resCityUI);
+      let keyForCity = '28580';
+      if (resCityUI.data[0]) {
+        keyForCity = resCityUI.data[0].Key
+      };
+      // console.log('543', keyForCity);
       if (cityKey) {
         keyForCity = cityKey;
       };
+      // console.log('544', keyForCity);
       const resCityWeather = await getWeather(keyForCity, 5);
       if (resCityWeather.status !== 200) {
         throw new Error('Weather not found!')
@@ -155,6 +160,7 @@ const citySlice = createSlice({
     [fetchCityUI.rejected]: (state, action) => {
       state.status = 'rejected';
       state.cityShow = false;
+      state.error = action.payload;
     }
   }
 });

@@ -6,6 +6,7 @@ import axios from 'axios';
 import classes from './Weather.module.css';
 import Loader from '../UI/Loader/Loader.jsx';
 import { fiveDay } from '../../store/weatherSlice';
+import PopUp from '../UI/PopUp/PopUp';
 
 function Weather() {
   
@@ -21,8 +22,8 @@ function Weather() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(fetchIP());
-    dispatch(fetchCityUI());
+    // dispatch(fetchIP());
+    // dispatch(fetchCityUI());
     // dispatch(fiveDay());
   }, []);
 
@@ -63,6 +64,7 @@ function Weather() {
 
   return (
     <div className={classes.weather}>
+      <PopUp/>
       {status === 'loading' ? <Loader/> : null}
       {/* {showError && <div>{showError}</div>} */}
       {/* <div className={classes.weather__location}>
