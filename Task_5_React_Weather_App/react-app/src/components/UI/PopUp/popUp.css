@@ -21,6 +21,9 @@
   align-items: center;
   background-color: aliceblue;
   border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .popup__title {

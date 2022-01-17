@@ -24,7 +24,10 @@ function SearchBar() {
         countryName: cities[0].Country.LocalizedName,
       }));
     } else {
-      dispatch(addPopUpShow(true));
+      dispatch(addPopUpShow({
+        value: true,
+        city: value,
+      }));
     }
     // console.log(cities[0].Key)
     setValue('');

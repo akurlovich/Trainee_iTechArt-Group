@@ -64,7 +64,7 @@ function Weather() {
 
   return (
     <div className={classes.weather}>
-      {popUpShow && <PopUp/>}
+      {popUpShow.value && <PopUp/>}
       {status === 'loading' ? <Loader/> : null}
       {/* {showError && <div>{showError}</div>} */}
       {/* <div className={classes.weather__location}>

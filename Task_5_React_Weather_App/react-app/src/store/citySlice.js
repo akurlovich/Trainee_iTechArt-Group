@@ -66,7 +66,11 @@ const citySlice = createSlice({
     cityShow1Day: false,
     cityShow3Day: false,
     cityShow5Day: false,
-    popUpShow: false,
+    popUpShow: {
+      value: false,
+      city: '',
+    },
+    // popUpCity: '',
     cityByIP: {},
     cityArr: {},
     cityDay: {},
