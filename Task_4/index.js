@@ -36,8 +36,7 @@ const someFunc3 = (item, acc) => {
   return item + acc;
 };
 const findFunc = (item) => {
-  if (Number.isInteger(item) && (item % 2 === 0)) return true;
-  return false;
+  return (Number.isInteger(item) && (item % 2 === 0));
 }
 const arrObj = [
   {
