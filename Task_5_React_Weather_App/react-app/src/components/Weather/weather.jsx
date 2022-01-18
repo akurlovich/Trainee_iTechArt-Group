@@ -13,8 +13,8 @@ function Weather() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    // dispatch(fetchIP());
-    // dispatch(fetchCityUI());
+    dispatch(fetchIP());
+    dispatch(fetchCityUI());
   }, []);
 
   return (
