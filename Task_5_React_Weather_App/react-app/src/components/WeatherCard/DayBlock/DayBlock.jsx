@@ -14,7 +14,6 @@ export default function DayBlock() {
       <div className={classes.card__image}>
         <img src={icon} alt="weather icon"/>
         <div className={classes.temp__value_middle}>
-        {/* {cityArr.DailyForecasts[0].Day.LongPhrase} */}
         {cityDay.LongPhrase}
         </div>
       </div>

@@ -4,7 +4,6 @@ import DayMedium from './CardMediumDay/DayMedium';
 import NightMedium from './CardMediumNight/NightMedium';
 
 export default function CardMedium(props) {
-  // console.log(props.item)
   const dayDate = new Date(props.item.Date).toDateString();
   return (
     <div className={classes.cardmedium__wrapper}>

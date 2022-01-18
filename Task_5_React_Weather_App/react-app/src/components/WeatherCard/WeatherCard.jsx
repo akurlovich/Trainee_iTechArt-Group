@@ -8,14 +8,10 @@ import classes from './WeatherCard.module.css';
 import CardSmall from './CardSmall/CardSmall';
 
 function WeatherCard() {
-  const {cityByIP, cityDate, cityArr, weatherArr, threeDays, cityShow, cityShow1Day, cityShow3Day, cityShow5Day} = useSelector(state => state.cities);
+  const {cityByIP, cityDate, weatherArr, threeDays, cityShow1Day, cityShow3Day, cityShow5Day} = useSelector(state => state.cities);
 
   const dispatch = useDispatch();
-  // const {weatherArr, threeDays} = useSelector(state => state.weather);
-  // let today = cityArr.EffectiveDate;
   const dayDate = new Date(cityDate.Date).toDateString();
-  // let day2 = dayDate.toDateString();
-  // let day2 = dayDate.toDateString();
 
   const show3Day = () => {
     dispatch(addShow3Day());
@@ -35,7 +31,6 @@ function WeatherCard() {
         <div className={classes.card__title}>
           <div className={classes.card__location}>
             <div>{cityByIP.city}</div>
-            {/* <div>Brest</div> */}
             <div>{cityByIP.countryName}</div>
           </div>
         </div>
@@ -58,10 +53,8 @@ function WeatherCard() {
               onClick={show5Day}
             >For 7 days</button>
           </div>
-          {/* <DayBlock/>  */}
           {cityShow1Day && <DayBlock/>}
           {cityShow1Day && <NightBlock/>}
-          {/* <NightBlock/> */}
       </div>
         {cityShow3Day && 
           threeDays.map((item, index) => 

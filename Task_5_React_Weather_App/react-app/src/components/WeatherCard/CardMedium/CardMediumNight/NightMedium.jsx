@@ -2,7 +2,6 @@ import React from 'react'
 import classes from '../CardMedium.module.css';
 
 export default function NightMedium(props) {
-  // const temp = Math.ceil((tempMax + tempMin) / 2).toString();
   const tempMin = props.temp.Minimum.Value;
   const tempMax = props.temp.Maximum.Value; 
   const temp = Math.ceil((tempMin)).toString();
