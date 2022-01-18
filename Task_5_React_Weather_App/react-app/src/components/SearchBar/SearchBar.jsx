@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { fetchCityUI, addNewCity, addPopUpShow} from '../../store/citySlice';
-import axios from 'axios';
 import logo from '../../assets/search-icon.svg';
 import './search-bar.css';
 import SearchResult from './SearchResult/SearchResult';
+import { getSearchCity } from '../../userAPI';
 
 function SearchBar() {
 
@@ -16,7 +16,6 @@ function SearchBar() {
   
   const handlerSearch = (event) => {
     event.preventDefault();
-    // dispatch(addNewCity({city: 'Gomel'}));
     if (cities[0]) {
       dispatch(fetchCityUI(cities[0].Key));
       dispatch(addNewCity({
@@ -29,19 +28,20 @@ function SearchBar() {
         city: value,
       }));
     }
-    // console.log(cities[0].Key)
     setValue('');
     setCities([]);
   };
 
   const show = async (event) => {
     setValue(event);
-    const res = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR&q=${event}`);
-    const city = res.data;
-    // const city = ["Brest"];
-    setCities(city);
-    // console.log(city[0].Key);
-  }
+    try {
+      const res = await getSearchCity(event);
+      const city = res.data;
+      setCities(city);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const setFoundValue = (value) => {
     setValue('');

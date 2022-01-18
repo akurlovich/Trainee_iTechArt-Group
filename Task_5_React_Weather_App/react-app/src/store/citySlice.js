@@ -1,19 +1,15 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
 
 export const fetchIP = createAsyncThunk(
   'CITY/fetchIP',
   async function(_, {rejectWithValue}) {
     try {
-      // const res = await axios.get('http://api.db-ip.com/v2/free/self');
       const res = await getCityByIP();
-      // console.log('object', res)
       if (res.status !== 200) {
         throw new Error('City by IP not found!')
       } 
       return res.data;
-      // return [];
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -25,32 +21,25 @@ export const fetchCityUI = createAsyncThunk(
   'CITY/fetchCityUI',
   async function (cityKey, {rejectWithValue, getState}) {
     try {
-      // const city = getState().cities;
       const resByIP = await getCityByIP();
       if (resByIP.status !== 200) {
         throw new Error('City by IP not found!')
       };
-      // console.log(resByIP.data);
       const resCityUI = await getCityUI(resByIP.data.city);
       if (resCityUI.status !== 200) {
         throw new Error('City UI not found!')
       } 
-      // console.log(resCityUI);
       let keyForCity = '28580';
       if (resCityUI.data[0]) {
         keyForCity = resCityUI.data[0].Key
       };
-      // console.log('543', keyForCity);
       if (cityKey) {
         keyForCity = cityKey;
       };
-      // console.log('544', keyForCity);
       const resCityWeather = await getWeather(keyForCity, 5);
       if (resCityWeather.status !== 200) {
         throw new Error('Weather not found!')
       } 
-      // console.log(resCityWeather.data);
-      // return resCityWeather.data;
       return resCityWeather.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -70,7 +59,6 @@ const citySlice = createSlice({
       value: false,
       city: '',
     },
-    // popUpCity: '',
     cityByIP: {},
     cityArr: {},
     cityDay: {},
@@ -167,7 +155,6 @@ const citySlice = createSlice({
       state.weatherArr = action.payload.DailyForecasts;
       for (let i = 0; i <= 2; i++) {
         state.threeDays.push(action.payload.DailyForecasts[i])
-        // state.warr.push(i)
       }
     },
     [fetchCityUI.rejected]: (state, action) => {
