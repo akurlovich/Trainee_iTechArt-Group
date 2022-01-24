@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMemo } from 'react';
 import classes from '../CardMedium.module.css';
 
 export default function NightMedium(props) {
