@@ -4,12 +4,18 @@ import classes from '../CardMedium.module.css';
 export default function NightMedium(props) {
   const tempMin = props.temp.Minimum.Value;
   const tempMax = props.temp.Maximum.Value; 
-  const temp = Math.ceil((tempMin)).toString();
+  const temp = useMemo(() => {
+    return Math.ceil((tempMin)).toString();
+  }, [props.temp]);
   const windSpeed = props.night.Wind.Speed.Value;
   const windDirection = props.night.Wind.Direction.Localized;
   const rain = props.night.Rain.Value;
-  const snowValue = Math.ceil(props.night.Snow.Value * 10);
-  const icon = `/icons/${(+props.night.Icon > 9) ? props.night.Icon : '0'+props.night.Icon}-s.png`;
+  const snowValue = useMemo(() => {
+    return Math.ceil(props.night.Snow.Value * 10);
+  }, [props.night]);
+  const icon = useMemo(() => {
+    return `/icons/${(+props.night.Icon > 9) ? props.night.Icon : '0'+props.night.Icon}-s.png`;
+  }, [props.night]);
   return (
     <div className={classes.card__block_night}>    
       <div className={classes.card__image}>

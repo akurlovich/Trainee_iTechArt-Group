@@ -1,15 +1,22 @@
 import React from 'react'
+import { useMemo } from 'react';
 import classes from '../CardMedium.module.css';
 
 export default function DayMedium(props) {
   const tempMin = props.temp.Minimum.Value;
   const tempMax = props.temp.Maximum.Value; 
-  const temp = Math.ceil((tempMin + tempMax) / 2).toString();
+  const temp = useMemo(() => {
+    return Math.ceil((tempMin + tempMax) / 2).toString();
+  }, [props.temp]);
   const windSpeed = props.day.Wind.Speed.Value;
   const windDirection = props.day.Wind.Direction.Localized;
   const rain = props.day.Rain.Value;
-  const snowValue = Math.ceil(props.day.Snow.Value * 10);
-  const icon = `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
+  const snowValue = useMemo(() => {
+    return Math.ceil(props.day.Snow.Value * 10);
+  }, [props.day]);
+  const icon = useMemo(() => {
+    return `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
+  }, [props.day]);
   return (
     <div className={classes.card__block_day}>    
       <div className={classes.card__image}>

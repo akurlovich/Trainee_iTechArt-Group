@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import classes from '../DayBlock/DayBlock.module.css';
 
@@ -6,9 +7,15 @@ export default function NightBlock() {
   const {cityNight, cityTemp, cityNightWind, cityNightRain, cityNightSnow} = useSelector(state => state.cities);
   const tempMax = cityTemp.Maximum.Value;
   const tempMin = cityTemp.Minimum.Value;
-  const temp = Math.ceil(tempMin).toString();
-  const icon = `/icons/${(+cityNight.Icon > 9) ? cityNight.Icon : '0'+cityNight.Icon}-s.png`;
-  const snowValue = Math.ceil(cityNightSnow.Value * 10);
+  const temp = useMemo(() => {
+    return Math.ceil(tempMin).toString();
+  }, [cityTemp]);
+  const icon = useMemo(() => {
+    return `/icons/${(+cityNight.Icon > 9) ? cityNight.Icon : '0'+cityNight.Icon}-s.png`;
+  }, [cityNight]);
+  const snowValue = useMemo(() => {
+    return Math.ceil(cityNightSnow.Value * 10);
+  }, [cityNightSnow]);
   return (
     <div className={classes.card__block_night}>    
       <div className={classes.card__image}>

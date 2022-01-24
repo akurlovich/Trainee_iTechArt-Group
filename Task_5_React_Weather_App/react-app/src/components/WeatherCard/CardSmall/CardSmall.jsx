@@ -1,16 +1,26 @@
 import React from 'react'
+import { useMemo } from 'react';
 import classes from './CardSmall.module.css';
 
 export default function CardSmall({item}) {
-  const dayDate = new Date(item.Date).toDateString();
-  const icon = `/icons/${(+item.Day.Icon > 9) ? item.Day.Icon : '0'+item.Day.Icon}-s.png`;
+  const dayDate = useMemo(() => {
+    return new Date(item.Date).toDateString();
+  }, [item.Date]);
+  const icon = useMemo(() => {
+    return `/icons/${(+item.Day.Icon > 9) ? item.Day.Icon : '0'+item.Day.Icon}-s.png`;
+  }, [item.Day]);
   const tempMin = item.Temperature.Minimum.Value;
   const tempMax = item.Temperature.Maximum.Value; 
-  const temp = Math.ceil((tempMin + tempMax) / 2).toString();
+  const temp = useMemo(() => {
+    return Math.ceil((tempMin + tempMax) / 2).toString();
+  }, [item.Temperature]);
   const windSpeed = item.Day.Wind.Speed.Value;
   const windDirection = item.Day.Wind.Direction.Localized;
   const rain = item.Day.Rain.Value;
-  const snowValue = Math.ceil(item.Day.Snow.Value * 10);
+  const snowValue = useMemo(() => {
+    return Math.ceil(item.Day.Snow.Value * 10);
+  }, [item.Day]);
+  
   return (
     <div className={classes.smallCard__container}>
       <div className={classes.card__block_day}>
@@ -28,12 +38,12 @@ export default function CardSmall({item}) {
         </div>
         <div className={classes.temp__options}>
           <div className={classes.temp__value_small}>
-            <img className={classes.temp__image} src='/icons/Wind.png'>
+            <img className={classes.temp__image} src='icons/Wind.png'>
             </img>
             <div>{Math.ceil(windSpeed)} km/h, {windDirection}</div>
           </div>
           <div className={classes.temp__value_small}>
-            <img className={classes.temp__image} src='/icons/rain.png'></img>
+            <img className={classes.temp__image} src='icons/rain.png'></img>
             <div>{rain} mm</div>
           </div>
           <div className={classes.temp__value_small}>
