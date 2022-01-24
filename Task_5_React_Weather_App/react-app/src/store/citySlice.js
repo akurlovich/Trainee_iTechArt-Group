@@ -61,7 +61,6 @@ const citySlice = createSlice({
       city: '',
     },
     cityByIP: {},
-    cityArr: {},
     cityDay: {},
     cityNight: {},
     cityDate: {},
@@ -87,12 +86,6 @@ const citySlice = createSlice({
     error: null,
   },
   reducers: {
-    addCity(state, action) {
-      state.cityArr.push({
-        id: new Date().toISOString(),
-        city: action.payload,
-      })
-    },
     addNewCity(state, action) {
       state.cityByIP = action.payload;
       state.cityShow = true;
@@ -140,7 +133,6 @@ const citySlice = createSlice({
       state.cityShow = true;
       state.cityShow1Day = true;
       state.status = RESOLVED;
-      state.cityArr = action.payload;
       state.cityTemp = action.payload.DailyForecasts[0].Temperature;
       state.cityDate = action.payload.DailyForecasts[0];
       state.cityDay = action.payload.DailyForecasts[0].Day;
