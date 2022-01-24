@@ -7,16 +7,12 @@ import Loader from '../UI/Loader/Loader.jsx';
 import PopUp from '../UI/PopUp/PopUp';
 
 function Weather() {
-
   const { status, cityShow, popUpShow } = useSelector(state => state.cities);
-
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(fetchIP());
     dispatch(fetchCityUI());
   }, []);
-
   return (
     <div className={classes.weather}>
       {popUpShow.value && <PopUp/>}

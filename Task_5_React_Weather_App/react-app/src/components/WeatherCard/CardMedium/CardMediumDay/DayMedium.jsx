@@ -9,9 +9,7 @@ export default function DayMedium(props) {
   const windDirection = props.day.Wind.Direction.Localized;
   const rain = props.day.Rain.Value;
   const snowValue = Math.ceil(props.day.Snow.Value * 10);
-
   const icon = `/icons/${(+props.day.Icon > 9) ? props.day.Icon : '0'+props.day.Icon}-s.png`;
-  
   return (
     <div className={classes.card__block_day}>    
       <div className={classes.card__image}>

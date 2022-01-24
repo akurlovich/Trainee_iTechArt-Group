@@ -16,7 +16,6 @@ export const fetchIP = createAsyncThunk(
 
   }
 );
-
 export const fetchCityUI = createAsyncThunk(
   'CITY/fetchCityUI',
   async function (cityKey, {rejectWithValue, getState}) {
@@ -46,8 +45,6 @@ export const fetchCityUI = createAsyncThunk(
     }
   }
 );
-
-
 const citySlice = createSlice({
   name: 'CITY',
   initialState: {
@@ -132,8 +129,6 @@ const citySlice = createSlice({
       state.error = action.payload;
       state.cityShow = false;
     },
-
-
     [fetchCityUI.pending]: (state, action) => {
       state.status = 'loading';
     },
@@ -164,7 +159,6 @@ const citySlice = createSlice({
     }
   }
 });
-
 export const {
   addCity,
   addNewCity,

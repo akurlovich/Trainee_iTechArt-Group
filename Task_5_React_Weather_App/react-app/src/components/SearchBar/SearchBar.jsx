@@ -7,13 +7,9 @@ import SearchResult from './SearchResult/SearchResult';
 import { getSearchCity } from '../../userAPI';
 
 function SearchBar() {
-
   const [value, setValue] = useState('');
   const [cities, setCities] = useState([])
-
   const dispatch = useDispatch();
-
-  
   const handlerSearch = (event) => {
     event.preventDefault();
     if (cities[0]) {
@@ -31,7 +27,6 @@ function SearchBar() {
     setValue('');
     setCities([]);
   };
-
   const show = async (event) => {
     setValue(event);
     try {
@@ -42,12 +37,10 @@ function SearchBar() {
       console.log(error.message);
     }
   };
-
   const setFoundValue = (value) => {
     setValue('');
     setCities([]);
   }
-
   return (
     <form
       className='search__form'

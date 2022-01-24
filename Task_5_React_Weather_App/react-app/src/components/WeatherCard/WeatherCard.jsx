@@ -9,22 +9,17 @@ import CardSmall from './CardSmall/CardSmall';
 
 function WeatherCard() {
   const {cityByIP, cityDate, weatherArr, threeDays, cityShow1Day, cityShow3Day, cityShow5Day} = useSelector(state => state.cities);
-
   const dispatch = useDispatch();
   const dayDate = new Date(cityDate.Date).toDateString();
-
   const show3Day = () => {
     dispatch(addShow3Day());
   };
-
   const show5Day = () => {
     dispatch(addShow5Day());
   };
-
   const show1Day = () => {
     dispatch(addShow1Day());
   }
-
   return (
     <div className={classes.card__wrapper}>
       <div className={classes.card__container}>

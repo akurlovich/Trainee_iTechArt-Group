@@ -11,7 +11,6 @@ export default function CardSmall({item}) {
   const windDirection = item.Day.Wind.Direction.Localized;
   const rain = item.Day.Rain.Value;
   const snowValue = Math.ceil(item.Day.Snow.Value * 10);
-
   return (
     <div className={classes.smallCard__container}>
       <div className={classes.card__block_day}>

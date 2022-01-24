@@ -5,16 +5,13 @@ import './popUp.css';
 
 export default function PopUp() {
   const dispatch = useDispatch();
-
   const {popUpShow} = useSelector(state => state.cities);
-
   const closePopUp = () => {
     dispatch(addPopUpShow({
       value: false,
       city: '',
     }))
   }
-
   return (
     <div className='popup__wrapper'>
       <div className="popup__container">

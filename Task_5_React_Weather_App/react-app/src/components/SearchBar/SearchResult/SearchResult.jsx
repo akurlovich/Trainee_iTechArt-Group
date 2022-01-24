@@ -5,7 +5,6 @@ import '../search-bar.css';
 
 export default function SearchResult({item, foundValue}) {
   const dispatch = useDispatch();
-
   const setFound = () => {
     const data = `${item.LocalizedName}, ${item.Country.LocalizedName}`;
     foundValue(data);
