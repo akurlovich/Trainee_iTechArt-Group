@@ -1,6 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
 
+const LOADING = 'loading';
+const RESOLVED = 'resolved';
+const REJECTED = 'rejected';
+
 export const fiveDay = createAsyncThunk(
   'CITY/fiveDay',
   async function (_, {rejectWithValue, getState}) {
@@ -35,17 +39,17 @@ const weatherSlice = createSlice({
   },
   extraReducers: {
     [fiveDay.pending]: (state, action) => {
-      state.status = 'loading';
+      state.status = LOADING;
     },
     [fiveDay.fulfilled]: (state, action) => {
-      state.status = 'resolved';
+      state.status = RESOLVED;
       state.weatherArr = action.payload.DailyForecasts;
       for (let i = 0; i <= 2; i++) {
         state.threeDays.push(action.payload.DailyForecasts[i])
       }
     },
     [fiveDay.rejected]: (state, action) => {
-      state.status = 'rejected';
+      state.status = REJECTED;
     }
   }
 });

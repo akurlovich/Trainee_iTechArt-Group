@@ -6,6 +6,8 @@ import classes from './Weather.module.css';
 import Loader from '../UI/Loader/Loader.jsx';
 import PopUp from '../UI/PopUp/PopUp';
 
+const LOADING = 'loading';
+
 function Weather() {
   const { status, cityShow, popUpShow } = useSelector(state => state.cities);
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ function Weather() {
   return (
     <div className={classes.weather}>
       {popUpShow.value && <PopUp/>}
-      {status === 'loading' ? <Loader/> : null}
+      {status === LOADING ? <Loader/> : null}
       {cityShow && <WeatherCard/>}
     </div>
   )

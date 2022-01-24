@@ -1,6 +1,11 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
 
+const LOADING = 'loading';
+const RESOLVED = 'resolved';
+const REJECTED = 'rejected';
+const DEFAULT_CITY = '28580';
+
 export const fetchIP = createAsyncThunk(
   'CITY/fetchIP',
   async function(_, {rejectWithValue}) {
@@ -13,7 +18,6 @@ export const fetchIP = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-
   }
 );
 export const fetchCityUI = createAsyncThunk(
@@ -28,7 +32,7 @@ export const fetchCityUI = createAsyncThunk(
       if (resCityUI.status !== 200) {
         throw new Error('City UI not found!')
       } 
-      let keyForCity = '28580';
+      let keyForCity = DEFAULT_CITY;
       if (resCityUI.data[0]) {
         keyForCity = resCityUI.data[0].Key
       };
@@ -116,26 +120,26 @@ const citySlice = createSlice({
   },
   extraReducers: {
     [fetchIP.pending]: (state) => {
-      state.status = 'loading';
+      state.status = LOADING;
       state.error = null;
     },
     [fetchIP.fulfilled]: (state, action) => {
-      state.status = 'resolved';
+      state.status = RESOLVED;
       state.cityByIP = action.payload;
       state.cityShow = true;
     },
     [fetchIP.rejected]: (state, action) => {
-      state.status = 'rejected';
+      state.status = REJECTED;
       state.error = action.payload;
       state.cityShow = false;
     },
     [fetchCityUI.pending]: (state, action) => {
-      state.status = 'loading';
+      state.status = LOADING;
     },
     [fetchCityUI.fulfilled]: (state, action) => {
       state.cityShow = true;
       state.cityShow1Day = true;
-      state.status = 'resolved';
+      state.status = RESOLVED;
       state.cityArr = action.payload;
       state.cityTemp = action.payload.DailyForecasts[0].Temperature;
       state.cityDate = action.payload.DailyForecasts[0];
@@ -153,7 +157,7 @@ const citySlice = createSlice({
       }
     },
     [fetchCityUI.rejected]: (state, action) => {
-      state.status = 'rejected';
+      state.status = REJECTED;
       state.cityShow = false;
       state.error = action.payload;
     }
