@@ -144,9 +144,11 @@ const citySlice = createSlice({
       state.cityNightRain = action.payload.DailyForecasts[0].Night.Rain; 
       state.cityNightSnow = action.payload.DailyForecasts[0].Night.Snow;
       state.weatherArr = action.payload.DailyForecasts;
-      for (let i = 0; i <= 2; i++) {
-        state.threeDays.push(action.payload.DailyForecasts[i])
-      }
+      state.threeDays = [
+        action.payload.DailyForecasts[0],
+        action.payload.DailyForecasts[1],
+        action.payload.DailyForecasts[2]
+      ];
     },
     [fetchCityUI.rejected]: (state, action) => {
       state.status = REJECTED;
