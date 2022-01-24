@@ -8,6 +8,7 @@ export default function DayBlock() {
   const tempMin = cityTemp.Minimum.Value;
   const temp = Math.ceil((tempMax + tempMin) / 2).toString();
   const icon = `/icons/${(+cityDay.Icon > 9) ? cityDay.Icon : '0'+cityDay.Icon}-s.png`;
+  const snowValue = Math.ceil(cityDaySnow.Value * 10);
 
   return (
     <div className={classes.card__block_day}> 
@@ -54,7 +55,7 @@ export default function DayBlock() {
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>{Math.ceil(cityDaySnow.Value * 10)} mm</div>
+          <div>{snowValue} mm</div>
         </div>
       </div>
     </div>

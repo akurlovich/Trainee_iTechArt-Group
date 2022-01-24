@@ -8,6 +8,7 @@ export default function NightBlock() {
   const tempMin = cityTemp.Minimum.Value;
   const temp = Math.ceil(tempMin).toString();
   const icon = `/icons/${(+cityNight.Icon > 9) ? cityNight.Icon : '0'+cityNight.Icon}-s.png`;
+  const snowValue = Math.ceil(cityNightSnow.Value * 10);
 
   return (
     <div className={classes.card__block_night}>    
@@ -55,7 +56,7 @@ export default function NightBlock() {
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>{Math.ceil(cityNightSnow.Value * 10)} мм</div>
+          <div>{snowValue} мм</div>
         </div>
       </div>
     </div>

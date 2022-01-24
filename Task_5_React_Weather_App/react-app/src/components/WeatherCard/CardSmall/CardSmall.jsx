@@ -10,7 +10,7 @@ export default function CardSmall({item}) {
   const windSpeed = item.Day.Wind.Speed.Value;
   const windDirection = item.Day.Wind.Direction.Localized;
   const rain = item.Day.Rain.Value;
-  const snow = item.Day.Snow.Value;
+  const snowValue = Math.ceil(item.Day.Snow.Value * 10);
 
   return (
     <div className={classes.smallCard__container}>
@@ -39,7 +39,7 @@ export default function CardSmall({item}) {
           </div>
           <div className={classes.temp__value_small}>
             <img className={classes.temp__image} src='icons/snow.png'></img>
-            <div>{Math.ceil(snow * 10)} mm</div>
+            <div>{snowValue} mm</div>
           </div>
         </div>
       </div>

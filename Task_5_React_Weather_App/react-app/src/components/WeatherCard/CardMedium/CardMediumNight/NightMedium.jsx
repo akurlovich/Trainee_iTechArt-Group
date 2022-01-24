@@ -8,7 +8,7 @@ export default function NightMedium(props) {
   const windSpeed = props.night.Wind.Speed.Value;
   const windDirection = props.night.Wind.Direction.Localized;
   const rain = props.night.Rain.Value;
-  const snow = props.night.Snow.Value;
+  const snowValue = Math.ceil(props.night.Snow.Value * 10);
 
   const icon = `/icons/${(+props.night.Icon > 9) ? props.night.Icon : '0'+props.night.Icon}-s.png`;
 
@@ -54,7 +54,7 @@ export default function NightMedium(props) {
         </div>
         <div className={classes.temp__value_small}>
           <img className={classes.temp__image} src='icons/snow.png'></img>
-          <div>{Math.ceil(snow * 10)} mm</div>
+          <div>{snowValue} mm</div>
         </div>
       </div>
     </div>
