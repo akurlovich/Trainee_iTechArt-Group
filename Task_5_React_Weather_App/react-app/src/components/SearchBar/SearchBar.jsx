@@ -3,8 +3,9 @@ import {useDispatch} from 'react-redux';
 import { fetchCityUI, addNewCity, addPopUpShow} from '../../store/citySlice';
 import logo from '../../assets/search-icon.svg';
 import './search-bar.css';
-import SearchResult from './SearchResult/SearchResult';
+import { SearchResult } from './SearchResult/SearchResult';
 import { getSearchCity } from '../../userAPI';
+import { useCallback } from 'react';
 
 function SearchBar() {
   const [value, setValue] = useState('');
@@ -37,10 +38,10 @@ function SearchBar() {
       console.log(error.message);
     }
   };
-  const setFoundValue = (value) => {
+  const setFoundValue = useCallback((value) => {
     setValue('');
     setCities([]);
-  }
+  }, []);
   return (
     <form
       className='search__form'

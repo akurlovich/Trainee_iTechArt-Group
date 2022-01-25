@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import { addNewCity, fetchCityUI } from '../../../store/citySlice';
 import '../search-bar.css';
 
-export default function SearchResult({item, foundValue}) {
+function SearchResultInner({item, foundValue}) {
   const dispatch = useDispatch();
   const setFound = () => {
     const data = `${item.LocalizedName}, ${item.Country.LocalizedName}`;
@@ -26,5 +26,7 @@ export default function SearchResult({item, foundValue}) {
         {item.Country.LocalizedName}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export const SearchResult = React.memo(SearchResultInner);
