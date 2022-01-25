@@ -2,7 +2,7 @@ import React from 'react'
 import { useMemo } from 'react';
 import classes from '../CardMedium.module.css';
 
-export default function NightMedium(props) {
+function NightMediumInner(props) {
   const tempMin = props.temp.Minimum.Value;
   const tempMax = props.temp.Maximum.Value; 
   const temp = useMemo(() => {
@@ -63,4 +63,6 @@ export default function NightMedium(props) {
       </div>
     </div>
   )
-}
+};
+
+export const NightMedium = React.memo(NightMediumInner);

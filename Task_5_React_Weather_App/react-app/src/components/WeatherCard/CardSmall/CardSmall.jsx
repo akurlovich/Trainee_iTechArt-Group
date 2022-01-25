@@ -2,7 +2,7 @@ import React from 'react'
 import { useMemo } from 'react';
 import classes from './CardSmall.module.css';
 
-export default function CardSmall({item}) {
+function CardSmallInner({item}) {
   const dayDate = useMemo(() => {
     return new Date(item.Date).toDateString();
   }, [item.Date]);
@@ -54,4 +54,6 @@ export default function CardSmall({item}) {
       </div>
     </div>
   )
-}
+};
+
+export const CardSmall = React.memo(CardSmallInner);

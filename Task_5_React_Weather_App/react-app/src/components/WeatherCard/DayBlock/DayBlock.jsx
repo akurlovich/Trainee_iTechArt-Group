@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import classes from './DayBlock.module.css';
 
-export default function DayBlock() {
+function DayBlockInner() {
   const {cityDay, cityTemp, cityDayWind, cityDayRain, cityDaySnow} = useSelector(state => state.cities);
   const tempMax = cityTemp.Maximum.Value;
   const tempMin = cityTemp.Minimum.Value;
@@ -65,4 +65,6 @@ export default function DayBlock() {
       </div>
     </div>
   )
-}
+};
+
+export const DayBlock = React.memo(DayBlockInner);

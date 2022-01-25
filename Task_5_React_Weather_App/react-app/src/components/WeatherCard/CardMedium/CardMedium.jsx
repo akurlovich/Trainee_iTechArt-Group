@@ -1,9 +1,9 @@
 import React from 'react'
 import classes from './CardMedium.module.css';
-import DayMedium from './CardMediumDay/DayMedium';
-import NightMedium from './CardMediumNight/NightMedium';
+import { DayMedium } from './CardMediumDay/DayMedium';
+import { NightMedium } from './CardMediumNight/NightMedium';
 
-export default function CardMedium(props) {
+function CardMediumInner(props) {
   const dayDate = new Date(props.item.Date).toDateString();
   return (
     <div className={classes.cardmedium__wrapper}>
@@ -16,4 +16,6 @@ export default function CardMedium(props) {
       </div>
     </div>
   )
-}
+};
+
+export const CardMedium = React.memo(CardMediumInner);

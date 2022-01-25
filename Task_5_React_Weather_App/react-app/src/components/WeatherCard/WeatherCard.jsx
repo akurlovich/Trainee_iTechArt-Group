@@ -1,13 +1,13 @@
 import React from 'react';
-import DayBlock from './DayBlock/DayBlock';
+import { DayBlock } from './DayBlock/DayBlock';
 import { useSelector, useDispatch } from 'react-redux';
-import NightBlock from './NightBlock/NightBlock';
-import CardMedium from '../WeatherCard/CardMedium/CardMedium';
+import { NightBlock } from './NightBlock/NightBlock';
+import { CardMedium } from '../WeatherCard/CardMedium/CardMedium';
 import { addShow1Day, addShow3Day, addShow5Day } from '../../store/citySlice';
 import classes from './WeatherCard.module.css';
-import CardSmall from './CardSmall/CardSmall';
+import { CardSmall } from './CardSmall/CardSmall';
 
-function WeatherCard() {
+function WeatherCardInner() {
   const {cityByIP, cityDate, weatherArr, threeDays, cityShow1Day, cityShow3Day, cityShow5Day} = useSelector(state => state.cities);
   const dispatch = useDispatch();
   const dayDate = new Date(cityDate.Date).toDateString();
@@ -69,4 +69,4 @@ function WeatherCard() {
  )
 };
 
-export default WeatherCard;
+export const WeatherCard = React.memo(WeatherCardInner);

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addPopUpShow } from '../../../store/citySlice';
 import './popUp.css';
 
-export default function PopUp() {
+function PopUpInner() {
   const dispatch = useDispatch();
   const {popUpShow} = useSelector(state => state.cities);
   const closePopUp = () => {
@@ -27,4 +27,6 @@ export default function PopUp() {
       </div>
     </div>
   )
-}
+};
+
+export const PopUp = React.memo(PopUpInner)
