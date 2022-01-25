@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './components/SearchBar/SearchBar';
+import { SearchBar } from './components/SearchBar/SearchBar';
 import Weather from './components/Weather/weather.jsx';
 
 function App() {

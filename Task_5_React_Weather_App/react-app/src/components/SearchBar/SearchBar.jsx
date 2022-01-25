@@ -7,7 +7,7 @@ import { SearchResult } from './SearchResult/SearchResult';
 import { getSearchCity } from '../../userAPI';
 import { useCallback } from 'react';
 
-function SearchBar() {
+function SearchBarInner() {
   const [value, setValue] = useState('');
   const [cities, setCities] = useState([])
   const dispatch = useDispatch();
@@ -78,4 +78,4 @@ function SearchBar() {
   )
 }
 
-export default SearchBar;
+export const SearchBar = React.memo(SearchBarInner);
