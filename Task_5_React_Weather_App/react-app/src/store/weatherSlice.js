@@ -1,9 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
-
-const LOADING = 'loading';
-const RESOLVED = 'resolved';
-const REJECTED = 'rejected';
+import { LOADING, RESOLVED, REJECTED } from '../constants/user';
 
 export const fiveDay = createAsyncThunk(
   'CITY/fiveDay',

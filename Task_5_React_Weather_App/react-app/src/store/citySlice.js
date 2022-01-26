@@ -1,10 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getCityByIP, getCityUI, getWeather } from '../userAPI';
-
-const LOADING = 'loading';
-const RESOLVED = 'resolved';
-const REJECTED = 'rejected';
-const DEFAULT_CITY = '28580';
+import { LOADING, RESOLVED, REJECTED, DEFAULT_CITY } from '../constants/user';
 
 export const fetchIP = createAsyncThunk(
   'CITY/fetchIP',
@@ -133,21 +129,21 @@ const citySlice = createSlice({
       state.cityShow = true;
       state.cityShow1Day = true;
       state.status = RESOLVED;
-      state.cityTemp = action.payload.DailyForecasts[0].Temperature;
       state.cityDate = action.payload.DailyForecasts[0];
-      state.cityDay = action.payload.DailyForecasts[0].Day;
-      state.cityDayWind = action.payload.DailyForecasts[0].Day.Wind;
-      state.cityDayRain = action.payload.DailyForecasts[0].Day.Rain; 
-      state.cityDaySnow = action.payload.DailyForecasts[0].Day.Snow;
-      state.cityNight = action.payload.DailyForecasts[0].Night;
-      state.cityNightWind = action.payload.DailyForecasts[0].Night.Wind;
-      state.cityNightRain = action.payload.DailyForecasts[0].Night.Rain; 
-      state.cityNightSnow = action.payload.DailyForecasts[0].Night.Snow;
+      state.cityTemp = state.cityDate.Temperature;
+      state.cityDay = state.cityDate.Day;
+      state.cityDayWind = state.cityDate.Day.Wind;
+      state.cityDayRain = state.cityDate.Day.Rain; 
+      state.cityDaySnow = state.cityDate.Day.Snow;
+      state.cityNight = state.cityDate.Night;
+      state.cityNightWind = state.cityDate.Night.Wind;
+      state.cityNightRain = state.cityDate.Night.Rain; 
+      state.cityNightSnow = state.cityDate.Night.Snow;
       state.weatherArr = action.payload.DailyForecasts;
       state.threeDays = [
-        action.payload.DailyForecasts[0],
-        action.payload.DailyForecasts[1],
-        action.payload.DailyForecasts[2]
+        state.weatherArr[0],
+        state.weatherArr[1],
+        state.weatherArr[2]
       ];
     },
     [fetchCityUI.rejected]: (state, action) => {

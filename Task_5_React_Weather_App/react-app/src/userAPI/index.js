@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-const API_KEY = 'COTk1PPFKxAfDAcm0YhYhDaTjhtn73GR';
-const GET_CITY_BY_ID_URL = 'http://api.db-ip.com/v2/free/self';
-const BASE_URL = 'http://dataservice.accuweather.com';
+import { API_KEY, GET_CITY_BY_ID_URL, BASE_URL } from '../constants/url'
 
 export const getCityByIP = async () => {
   return await axios.get(GET_CITY_BY_ID_URL)
