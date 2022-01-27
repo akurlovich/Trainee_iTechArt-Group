@@ -1,0 +1,47 @@
+.header {
+  &__wrapper {
+    width: 100%;
+    font-size: 30px;
+    // color: red;
+    flex: 0 0 auto;
+  }
+  &__container {
+
+  }
+}
+
+.navigation {
+
+  &__list {
+    background-color: rgb(202, 191, 202);
+    width: 100%;
+    padding: 10px 15% 10px 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__item {
+
+  }
+
+  &__menu {
+    display: flex;
+    gap: 20px;
+
+    &_item {
+
+    }
+  }
+
+  &__user {
+    display: flex;
+    gap: 20px;
+
+    &_item {
+      border: 1px solid grey;
+      border-radius: 10px;
+      padding: 5px;
+    }
+  }
+}
