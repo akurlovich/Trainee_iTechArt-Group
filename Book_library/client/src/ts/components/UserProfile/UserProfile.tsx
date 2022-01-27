@@ -3,7 +3,9 @@ import './UserProfile.scss';
 
 const UserProfileInner: FC = () => {
   return (
-    <div></div>
+    <div className='profile'>
+      Profile
+    </div>
   );
 };
 
