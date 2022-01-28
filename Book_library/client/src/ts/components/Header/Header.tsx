@@ -18,10 +18,10 @@ const HeaderInner: FC = () => {
               <li className="navigation__item">
                 <ul className="navigation__menu">
                   <li className="navigation__menu_item">
-                    <Link to="/">All books</Link>
+                    <Link to="/">Home</Link>
                   </li>
                   <li className="navigation__menu_item">
-                    One book
+                    <Link to='/addbook'>Add book</Link>
                   </li>
                   <li className="navigation__menu_item">
                     About
