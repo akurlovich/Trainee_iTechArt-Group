@@ -31,4 +31,20 @@ router.post('/register', async (req: Request, res: Response) => {
   }
 });
 
+router.post('/login', async (req: Request, res: Response) => {
+  try {
+    const user = await User.findOne({email: req.body.email});
+    if (!user) {
+      return res.status(400).json('Wrong data!');
+    }
+    const validate = await bcrypt.compare(req.body.password, user.password);
+    if (!validate) {
+      return res.status(400).json('Wrong data!');
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+});
+
 export default router;
