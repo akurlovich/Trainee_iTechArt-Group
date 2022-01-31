@@ -5,6 +5,8 @@ const AddBookInner: FC = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [year, setYear] = useState('');
+  const [amount, setAmount] = useState(1);
+  const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
   const [imageSrc, setImageSrc] = useState('');
 
@@ -16,6 +18,13 @@ const AddBookInner: FC = () => {
   }
   const yearHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setYear(event.target.value);
+  }
+  const amountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(+event.target.value);
+  }
+  const genreHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(event.target.value);
+    setGenre(event.target.value);
   }
   const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
@@ -64,6 +73,30 @@ const AddBookInner: FC = () => {
             value={year}
             className='inputs__item__name' type="text" name="inputs__item__name"/>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Year of publication:</label>
+        </div>
+        <div className="inputs__item">
+          <input
+            onChange={amountHandler}
+            value={amount}
+            className='inputs__item__name' type="number" name="inputs__item__name"/>
+          <label className='inputs__item__label' htmlFor="inputs__item__name">Amount:</label>
+        </div>
+        <div className="inputs__item">
+          <select
+            onChange={genreHandler}
+            value={genre}
+            className='inputs__item__name'
+            name="inputs__item__name">
+            <option value=""></option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Deteсtive">Deteсtive</option>
+            <option value="Dramma">Dramma</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="History">History</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Thrillers">Thrillers</option>
+          </select>
+          <label className='inputs__item__label' htmlFor="inputs__item__name">Genre:</label>
         </div>
         <div className="inputs__item">
           <textarea
