@@ -26,18 +26,24 @@ const BookSchema: Schema = new Schema<IBook>({
     type: String,
     required: true,
   },
-  comments: [{
-    type: String,
-    default: ''
-  }],
   amount: {
     type: Number,
     required: true,
   },
-  usersID: [{
+  usersBookingID: [{
     type: Schema.Types.ObjectId,
     default: []
   }],
+  usersComments: [{
+    userID: [{
+      type: Schema.Types.ObjectId,
+      default: [],
+    }],
+    comments: [{
+      type: String,
+      default: [],
+    }]
+  }]
 },
 { timestamps: true },
 );

@@ -5,5 +5,9 @@ export interface IUser extends Document {
   password: string,
   profileImage: string,
   moderator: boolean,
-  booksID: Array<Schema.Types.ObjectId>,
+  booksBookingID: Array<Schema.Types.ObjectId>,
+  booksComments: Array<{
+    bookID: Array<Schema.Types.ObjectId>,
+    comments: string[],
+  }>
 }

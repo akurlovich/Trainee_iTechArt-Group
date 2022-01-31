@@ -19,9 +19,19 @@ const UserSchema: Schema = new Schema<IUser>({
     type: Boolean,
     default: false,
   },
-  booksID: [{
+  booksBookingID: [{
     type: Schema.Types.ObjectId,
     default: [],
+  }],
+  booksComments: [{
+    bookID: [{
+      type: Schema.Types.ObjectId,
+      default: [],
+    }],
+    comments: [{
+      type: String,
+      default: [],
+    }]
   }]
 },
 { timestamps: true },

@@ -7,7 +7,10 @@ export interface IBook extends Document {
   genre: string,
   description: string,
   coverImage: string,
-  comments: string[],
   amount: number,
-  usersID: Array<Schema.Types.ObjectId>,
+  usersBookingID: Array<Schema.Types.ObjectId>,
+  usersComments: Array<{
+    userID: Array<Schema.Types.ObjectId>,
+    comments: string[],
+  }>
 };
