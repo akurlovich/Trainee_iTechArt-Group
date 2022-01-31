@@ -1,6 +1,7 @@
 import { Router, Response, Request } from 'express';
 import User from '../schemas/User';
 import { IUser } from '../types/IUser';
+import bcrypt from 'bcrypt';
 
 const router = Router();
 
@@ -16,9 +17,11 @@ router.get('/', async (_, res: Response) => {
 
 router.post('/register', async (req: Request, res: Response) => {
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPass = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPass,
     });
     const user: IUser = await newUser.save();
     console.log(user.email)
