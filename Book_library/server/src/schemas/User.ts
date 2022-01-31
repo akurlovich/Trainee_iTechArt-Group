@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "../types/modelsType";
+import { IUser } from "../types/IUser";
 
 const UserSchema: Schema = new Schema<IUser>({
   email: {
@@ -15,9 +15,9 @@ const UserSchema: Schema = new Schema<IUser>({
     type: String,
     default: '',
   },
-  role : {
-    type: String,
-    default: 'customer'
+  moderator : {
+    type: Boolean,
+    default: false,
   },
   booksID: [{
     type: Schema.Types.ObjectId,

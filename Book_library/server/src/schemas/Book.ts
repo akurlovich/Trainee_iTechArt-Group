@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
+import { IBook } from "../types/IBook";
 
-const BookSchema: Schema = new Schema({
+const BookSchema: Schema = new Schema<IBook>({
   title: {
     type: String,
     required: true,
@@ -25,20 +26,20 @@ const BookSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  comments: {
-    type: Array,
-    required: true, 
-  },
+  comments: [{
+    type: String,
+    default: ''
+  }],
   amount: {
     type: Number,
     required: true,
   },
-  usersID: {
-    type: Array,
+  usersID: [{
+    type: Schema.Types.ObjectId,
     default: []
-  },
+  }],
 },
 { timestamps: true },
 );
 
-export default model('Book', BookSchema);
+export default model<IBook>('Book', BookSchema);
