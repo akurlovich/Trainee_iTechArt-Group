@@ -9,35 +9,35 @@ class UserController {
       res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
       return res.json(userData)
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   };
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       
     } catch (error) {
-      
+      next(error);
     }
   };
   async logout(req: Request, res: Response, next: NextFunction) {
     try {
       
     } catch (error) {
-      
+      next(error);
     }
   };
   async refresh(req: Request, res: Response, next: NextFunction) {
     try {
       
     } catch (error) {
-      
+      next(error);
     }
   };
-  async getUsers(req: Request, res: Response) {
+  async getUsers(req: Request, res: Response, next: NextFunction) {
     try {
       res.json(['123'])
     } catch (error) {
-      
+      next(error);
     }
   };
 
