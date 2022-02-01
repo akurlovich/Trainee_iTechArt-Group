@@ -10,7 +10,7 @@ class TokenService {
       accessToken,
       refreshToken,
     }
-  }
+  };
   async saveToken(userID: string, refreshToken: string) {
     const tokenData = await TokenModel.findOne({user: userID});
     if (tokenData) {
@@ -19,7 +19,9 @@ class TokenService {
     }
     const token = await TokenModel.create({user: userID, refreshToken});
     return token;
-
+  };
+  async removeToken(refreshToken: string) {
+    return await TokenModel.deleteOne({refreshToken});
   }
 }
 

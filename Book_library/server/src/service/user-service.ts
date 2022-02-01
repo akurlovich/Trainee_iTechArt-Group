@@ -37,6 +37,9 @@ class UserService {
       ...tokens,
       user: userDto
     }
+  };
+  async logout(refreshToken: string) {
+    return await tokenService.removeToken(refreshToken);
   }
 }
 
