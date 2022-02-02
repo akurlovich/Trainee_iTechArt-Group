@@ -7,6 +7,7 @@ const UserRegistrationInner: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirPassword, setConfirPassword] = useState('');
+  const [buttonSubmit, setButtonSubmit] = useState(true);
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   }
@@ -24,20 +25,29 @@ const UserRegistrationInner: FC = () => {
           <FormInput
             placeholder='Email address'
             name='email'
-            type='text'
+            type='email'
+            errorMessage='Not valid email!'
             setData={setEmail}
+            required={true}
+            // pattern='^[A-Za-z0-9]{3,16}$'
           />
           <FormInput
             placeholder='Password'
             name='password'
             type='password'
+            errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
             setData={setPassword}
+            required={true}
+            pattern='^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,20}$'
           />
           <FormInput
             placeholder='Confirm password'
             name='confirm'
             type='password'
+            errorMessage="Password don'n match"
             setData={setConfirPassword}
+            required={true}
+            pattern={password}
           />
           {/* <div className="registration__form__inputs-block">
             <div className="registration__form__input">
@@ -61,9 +71,10 @@ const UserRegistrationInner: FC = () => {
           </div> */}
           <div className="registration__form__button">
             <input
-              className="registration__form__button_send"
+              className={!buttonSubmit ? "registration__form__button_send" : "registration__form__button_send active"}
               type="submit"
               value="Sing in"
+              // disabled={true}
             />
           </div>
         </form>

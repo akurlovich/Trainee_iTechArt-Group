@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useState, FocusEvent } from 'react';
 import './forminput.scss';''
 
 interface IFormInput {
   placeholder?: string,
   name?: string,
   type?: string,
+  errorMessage?: string,
+  required?: boolean,
+  pattern?: string,
   setData: (event: string) => void,
 }
 
@@ -12,9 +15,18 @@ const FormInputInner: FC<IFormInput> = ({
   placeholder = '',
   name = '',
   type = 'text',
+  errorMessage = '',
+  required = false,
+  pattern,
   setData
 }) => {
-  console.log(placeholder);
+  const [focused, setFocused] = useState(false);
+  const handlerBlur = () => {
+    setFocused(true);
+  };
+  const handlerFocus = (event: FocusEvent<HTMLInputElement>) => {
+    name === 'confirm' && setFocused(true)
+  }
   return (
     <div className="form-input">
       {/* <label className='form-input__label' htmlFor="">{placeholder}</label> */}
@@ -24,8 +36,13 @@ const FormInputInner: FC<IFormInput> = ({
         placeholder={placeholder}
         name={name}
         type={type}
+        pattern={pattern}
+        required={required}
+        onBlur={handlerBlur}
+        onFocus={handlerFocus}
+        datatype={focused.toString()}
       />
-      <span>{errorMessage}</span>
+      <div className='form-input__error'>{errorMessage}</div>
     </div>
   );
 };
