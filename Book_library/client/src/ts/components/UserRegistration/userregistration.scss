@@ -1,3 +1,59 @@
-.userregistration {
-  font-size: 60px;
+.registration {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+
+  &__container {
+    max-width: 948px;
+    width: 100%;
+    min-height: 600px;
+    background: #FFFFFF;
+    border-radius: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 72px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    &__button {
+
+      &_send {
+        width: 526px;
+        height: 74px;
+        background: #B0D8DA;
+        border-radius: 25px;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 45px;
+        color: #FFFFFF;
+        cursor: pointer;
+
+        &.active {
+          background: #6edf12;
+        }
+      }
+    }
+  }
 }
