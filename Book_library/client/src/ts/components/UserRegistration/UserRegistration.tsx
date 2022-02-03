@@ -22,7 +22,7 @@ const UserRegistrationInner: FC = () => {
   }
   useEffect(() => {
     validFormData();
-  }, [password, confirPassword]);
+  }, [password, confirPassword, email]);
 
   return (
     <div className='registration'>

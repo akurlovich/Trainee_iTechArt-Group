@@ -34,7 +34,7 @@ const HeaderInner: FC = () => {
                     <Link to='/profile'>Profile</Link>
                   </li>
                   <li className='navigation__user_item'>
-                    Log in
+                    <Link to='/login'>Log in</Link>
                   </li>
                   <li className='navigation__user_item'>
                     <Link to='/registration'>Sing in</Link> 
