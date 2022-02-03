@@ -23,61 +23,65 @@ const UserRegistrationInner: FC = () => {
   useEffect(() => {
     validFormData();
   }, [password, confirPassword]);
-  
 
   return (
     <div className='registration'>
-      <div className="registration__container">
-        <div className="registration__title">
-          Create Account
-        </div>
-        <form
-          onSubmit={handlerChange}
-          className="registration__form"
-          >
-          <FormInput
-            placeholder='Email address'
-            name='email'
-            type='text'
-            errorMessage='Not valid email!'
-            setData={setEmail}
-            required={true}
-            pattern='^\S+@\S+\.\S+$'
-          />
-          <FormInput
-            placeholder='Password'
-            name='password'
-            type='password'
-            errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
-            setData={setPassword}
-            required={true}
-            pattern='^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,20}$'
-          />
-          <FormInput
-            placeholder='Confirm password'
-            name='confirm'
-            type='password'
-            errorMessage="Password don'n match"
-            setData={setConfirPassword}
-            required={true}
-            pattern={password}
-          />
-          <div className="registration__form__button">
-            <input
-              className={buttonSubmit ? "registration__form__button_send active" : "registration__form__button_send"}
-              type="submit"
-              value="Sing in"
+      <div className="registration__block">
+        <div className="registration__container">
+          <div className="registration__title">
+            Create Account
+          </div>
+          <form
+            onSubmit={handlerChange}
+            className="registration__form"
+            >
+            <FormInput
+              label='Email address'
+              name='email'
+              type='text'
+              errorMessage='Not valid email!'
+              setData={setEmail}
+              required={true}
+              pattern='^\S+@\S+\.\S+$'
             />
-          </div>
-        </form>
-        <div className="registration__login-link">
-          <div className="registration__login-link__text">
-            Already have an account?
-          </div>
-          <div className="registration__login-link__link">
-            <Link to='/login'>Login</Link> 
+            <FormInput
+              label='Password'
+              name='password'
+              type='password'
+              errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
+              setData={setPassword}
+              required={true}
+              pattern='^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,20}$'
+            />
+            <FormInput
+              label='Confirm password'
+              name='confirm'
+              type='password'
+              errorMessage="Password don'n match"
+              setData={setConfirPassword}
+              required={true}
+              pattern={password}
+            />
+            <div className="registration__form__button">
+              <input
+                className={buttonSubmit ? "registration__form__button_send active" : "registration__form__button_send"}
+                type="submit"
+                value="Sing in"
+              />
+            </div>
+          </form>
+          <div className="registration__login-link">
+            <div className="registration__login-link__text">
+              Already have an account?
+            </div>
+            <div className="registration__login-link__link">
+              <Link to='/login'>Login</Link> 
+            </div>
           </div>
         </div>
+        <img className='registration__book one' src="./assets/book-1.png" alt="book" />
+        <img className='registration__book two' src="./assets/book-2.png" alt="book" />
+        <img className='registration__book three' src="./assets/book-3.png" alt="book" />
       </div>
     </div>
   );

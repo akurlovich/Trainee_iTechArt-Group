@@ -2,7 +2,7 @@ import React, { FC, useState, FocusEvent } from 'react';
 import './forminput.scss';''
 
 interface IFormInput {
-  placeholder?: string,
+  label?: string,
   name?: string,
   type?: string,
   errorMessage?: string,
@@ -12,7 +12,7 @@ interface IFormInput {
 }
 
 const FormInputInner: FC<IFormInput> = ({
-  placeholder = '',
+  label = '',
   name = '',
   type = 'text',
   errorMessage = '',
@@ -29,11 +29,10 @@ const FormInputInner: FC<IFormInput> = ({
   }
   return (
     <div className="form-input">
-      {/* <label className='form-input__label' htmlFor="">{placeholder}</label> */}
       <input
         onChange={e => setData(e.target.value)}
         className='form-input__text'
-        placeholder={placeholder}
+        placeholder=' '
         name={name}
         type={type}
         pattern={pattern}
@@ -42,6 +41,7 @@ const FormInputInner: FC<IFormInput> = ({
         onFocus={handlerFocus}
         datatype={focused.toString()}
       />
+      <label className='form-input__label' htmlFor="">{label}</label>
       <div className='form-input__error'>{errorMessage}</div>
     </div>
   );
