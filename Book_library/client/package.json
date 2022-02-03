@@ -36,13 +36,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
+    "@types/mongoose": "^5.11.97",
     "@types/react-redux": "^7.1.22",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.25.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "cross-env": "^7.0.3",
+    "mongoose": "^6.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1"
   }
 }

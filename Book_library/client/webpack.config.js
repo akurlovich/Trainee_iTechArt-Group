@@ -30,6 +30,7 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
+      favicon: "./assets/favicon.ico",
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
       minify: {
