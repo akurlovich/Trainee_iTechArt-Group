@@ -1,13 +1,8 @@
-import { Document, Schema } from "mongoose";
-
-export interface IUser extends Document {
+export interface IUser {
+  id: string,
   email: string,
   password: string,
   profileImage: string,
   moderator: boolean,
-  booksBookingID: Array<Schema.Types.ObjectId>,
-  booksComments: Array<{
-    bookID: Array<Schema.Types.ObjectId>,
-    comments: string[],
-  }>
+  
 }

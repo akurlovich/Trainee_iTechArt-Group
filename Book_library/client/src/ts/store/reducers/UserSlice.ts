@@ -18,21 +18,7 @@ export const userSlice = createSlice({
   name: 'USER',
   initialState,
   reducers: {
-    // increment(state, action: PayloadAction<number>) {
-    //   state.count += action.payload;
-    // }
-    // usersFatching(state) {
-    //   state.isLoading = true;
-    // },
-    // usersFatchingSuccess(state, action: PayloadAction<IUser[]>) {
-    //   state.isLoading = false;
-    //   state.error = '';
-    //   state.users = action.payload;
-    // },
-    // usersFatchingError(state, action: PayloadAction<string>) {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
+    
   },
   extraReducers: {
     [fetchUsers.pending.type]: (state) => {
