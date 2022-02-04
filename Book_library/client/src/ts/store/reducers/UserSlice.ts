@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../types/IUser";
-import { fetchUsers } from "./ActionCreators";
+import { fetchUsers, registerUser } from "./ActionCreators";
 
 interface IUserState {
   users: IUser[],
   isLoading: boolean,
+  isAuth: boolean,
   error: string,
 }
 
 const initialState: IUserState = {
   users: [],
   isLoading: true,
+  isAuth: true,
   error: '',
 }
 
@@ -33,6 +35,9 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [registerUser.pending.type]: (state) => {
+      state.isLoading = true;
+    }
   }
 })
 

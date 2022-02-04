@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import AuthService from "../../services/AuthService";
 import { IUser } from "../../types/IUser";
 import { AppDispatch } from "../store";
 import { userSlice } from "./UserSlice";
@@ -25,7 +26,27 @@ export const fetchUsers = createAsyncThunk(
       return thunkAPI.rejectWithValue('Don"t get users')
     }
   }
-)
+);
+
+interface IUserReg {
+  email: string,
+  password: string,
+}
+
+export const registerUser = createAsyncThunk(
+  'USER/regUsers',
+  async (data: IUserReg, {rejectWithValue}) => {
+    try {
+      const { email, password } = data;
+      const response = await AuthService.registration(email, password);
+      localStorage.setItem('token', response.data.refreshToken);
+      return response.data;
+      
+    } catch (error) {
+      return rejectWithValue('Don"t get users')
+    }
+  }
+);
 
 
 
