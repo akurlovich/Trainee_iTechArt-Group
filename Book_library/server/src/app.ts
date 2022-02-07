@@ -7,12 +7,16 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import router from './router/index';
 import errorMiddleware from './middlewares/error-middleware';
+import CLIENT_URL from './common/config';
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000',
+}));
 app.use('/api', router);
 app.use(errorMiddleware);
 

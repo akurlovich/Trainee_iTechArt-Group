@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../types/IUser";
-import { fetchUsers, registerUser } from "./ActionCreators";
+import { fetchUsers } from "./ActionCreators";
 
 interface IUserState {
   users: IUser[],
@@ -35,9 +35,6 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [registerUser.pending.type]: (state) => {
-      state.isLoading = true;
-    }
   }
 })
 

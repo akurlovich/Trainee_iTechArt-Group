@@ -13,10 +13,10 @@ import { UserProfile } from './ts/components/UserProfile/UserProfile';
 import { UserRegistration } from './ts/components/UserRegistration/UserRegistration';
 import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
 import { fetchUsers } from './ts/store/reducers/ActionCreators';
-import { userSlice } from './ts/store/reducers/UserSlice';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
+  const { user } = useAppSelector(state => state.authReducer);
   // const { increment } = userSlice.actions;
   const dispatch = useAppDispatch();
   useEffect(() => {

@@ -33,20 +33,20 @@ interface IUserReg {
   password: string,
 }
 
-export const registerUser = createAsyncThunk(
-  'USER/regUsers',
-  async (data: IUserReg, {rejectWithValue}) => {
-    try {
-      const { email, password } = data;
-      const response = await AuthService.registration(email, password);
-      localStorage.setItem('token', response.data.refreshToken);
-      return response.data;
+// export const registerUser = createAsyncThunk(
+//   'USER/regUsers',
+//   async (data: IUserReg, {rejectWithValue}) => {
+//     try {
+//       const { email, password } = data;
+//       const response = await AuthService.registration(email, password);
+//       localStorage.setItem('token', response.data.refreshToken);
+//       return response.data;
       
-    } catch (error) {
-      return rejectWithValue('Don"t get users')
-    }
-  }
-);
+//     } catch (error) {
+//       return rejectWithValue('Don"t get users')
+//     }
+//   }
+// );
 
 
 
