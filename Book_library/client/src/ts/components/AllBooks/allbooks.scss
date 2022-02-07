@@ -1,4 +1,9 @@
 .allbooks {
   width: 100%;
   font-size: 40px;
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+  }
 }

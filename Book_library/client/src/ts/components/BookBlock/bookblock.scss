@@ -1,0 +1,37 @@
+.bookblock {
+  max-width: 510px;
+  width: 100%;
+  height: 310px;
+  margin-top: 40px;
+
+  &__container {
+    display: flex;
+  }
+
+  &__cover {
+    display: flex;
+    width: 210px;
+    height: 300px;
+    transform: rotate(-8deg);
+
+    &_block {
+      width: 200px;
+      height: 300px;
+    }
+
+    &_image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    &_line {
+      width: 10px;
+      height: 300px;
+      background: rgb(209,170,157);
+      background: radial-gradient(10deg, rgba(209,170,157,1) 0%, rgba(204,204,204,1) 100%);
+      box-shadow: -3px 0px 18px 2px rgba(34, 60, 80, 0.14);
+      border-radius: 2px;
+    }
+  }
+}

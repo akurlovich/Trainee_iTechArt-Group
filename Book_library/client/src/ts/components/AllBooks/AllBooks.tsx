@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
+import { BookBlock } from '../BookBlock/BookBlock';
 import './allbooks.scss';
 
 const AllBooksInner: FC = () => {
   return (
     <div className='allbooks'>
-      All Books
+      <div className="allbooks__container">
+        <BookBlock/>
+        <BookBlock/>
+        <BookBlock/>
+      </div>
     </div>
   );
 };
