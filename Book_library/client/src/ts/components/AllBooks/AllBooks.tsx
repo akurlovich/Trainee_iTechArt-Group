@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { BookBlock } from '../BookBlock/BookBlock';
+import { Checkbox } from '../UI/Checkbox/Checkbox';
 import { SearchBar } from '../UI/SearchBar/SearchBar';
 import './allbooks.scss';
 
 const AllBooksInner: FC = () => {
   return (
     <div className='allbooks'>
+      <Checkbox/>
       <div className="allbooks__title">
         Most popular:
       </div>
