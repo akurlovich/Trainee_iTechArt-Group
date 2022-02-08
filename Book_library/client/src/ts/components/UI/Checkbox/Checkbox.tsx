@@ -8,8 +8,8 @@ interface ICheckboxProps {
 const CheckboxInner: FC<ICheckboxProps> = ({field}) => {
   return (
     <div className="checkbox">
-      <input className='checkbox__input' type="checkbox" name="checkbox__input" id="checkbox__input" />
-      <label className='checkbox__label' htmlFor="checkbox__input">{field}</label>
+      <input className='checkbox__input' type="checkbox" name="checkbox__input" id={field} />
+      <label className='checkbox__label' htmlFor={field}>{field}</label>
       <img className='checkbox__image' src="./assets/check-solid.svg" alt="check icon" />
     </div>
   )

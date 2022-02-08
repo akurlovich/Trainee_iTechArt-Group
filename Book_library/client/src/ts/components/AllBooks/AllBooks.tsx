@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import { BookBlock } from '../BookBlock/BookBlock';
-import { Checkbox } from '../UI/Checkbox/Checkbox';
-import { SearchBar } from '../UI/SearchBar/SearchBar';
+import { FindBooks } from '../FindBooks/FindBooks';
 import './allbooks.scss';
 
 const AllBooksInner: FC = () => {
   return (
     <div className='allbooks'>
-      <Checkbox field='Genre'/>
       <div className="allbooks__title">
         Most popular:
       </div>
@@ -17,8 +15,8 @@ const AllBooksInner: FC = () => {
         <BookBlock bgColor='#733F55'/>
       </div>
       <div className="allbooks__search-bar">
-        <SearchBar/>
       </div>
+      <FindBooks/>
     </div>
   );
 };
