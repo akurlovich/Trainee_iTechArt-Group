@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
 import './bookitem.scss';
 
 const BookItemInner: FC = () => {
@@ -7,11 +8,11 @@ const BookItemInner: FC = () => {
       <div className="bookitem__container">
         <div className="bookitem__main">
           <div className="bookitem__main__cover">
-            <img src="./assets/book-1.png" alt="book cover" />
+            <img className='bookitem__main__cover__image' src="./assets/book-1.png" alt="book cover" />
           </div>
           <div className="bookitem__info">
             <div className="bookitem__title">
-              Harry
+              You dont know JS
             </div>
             <div className="bookitem__detaile">
               <div className="bookitem__author">
@@ -28,34 +29,16 @@ const BookItemInner: FC = () => {
               Pariatur delectus numquam cum quia harum laboriosam nesciunt inventore nostrum atque? Ipsam repudiandae odit, aut obcaecati adipisci ducimus eum quam consequuntur rerum inventore harum molestiae asperiores impedit, perspiciatis ad minima!
             </div>
             <div className="bookitem__buttons">
-              <div className="bookitem__buttons_booking">
+              <div className="bookitem__button booking">
                 Booking
               </div>
-              <div className="bookitem__buttons_issue">
+              <div className="bookitem__button issue">
                 Issue
               </div>
             </div>
           </div>
         </div>
-        <div className="bookitem__comments">
-          <div className="bookitem__comment__blok">
-            <div className="bookitem__comment__user">
-              Ivan
-            </div>
-            <div className="bookitem__comment__text">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem exercitationem id, iusto eos quam atque possimus soluta, sunt veniam perspiciatis harum iste ullam illum hic vero eum error pariatur corrupti.
-            </div>
-          </div>
-          <div className="bookitem__comment__add">
-            <div className="bookitem__comment__add__title">
-              Leave comment:
-            </div>
-            <textarea className="bookitem__comment__input" />
-            <div className="bookitem__comment__button">
-              Leave
-            </div>
-          </div>
-        </div>
+        <CommentsBlock/>
       </div>
     </div>
   );

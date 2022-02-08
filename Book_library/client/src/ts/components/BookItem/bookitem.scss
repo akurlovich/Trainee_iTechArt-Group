@@ -1,4 +1,95 @@
 .bookitem {
   width: 100%;
+  padding: 20px 40px 20px 40px;
+  font-family: 'Poppins', sans-serif;
+  
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__main {
+    display: flex;
+
+    &__cover {
+      width: 560px;
+      &__image {
+        width: 560px;
+        height: 100%;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px 0 40px;
+  }
+
+  &__title {
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  &__detaile {
+    display: flex;
+    gap: 30px;
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  &__description {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 260px;
+    height: 74px;
+    background: #97e0e4;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #FFFFFF;
+    align-self: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #97e0e4;
+      background: transparent;
+      border: 2px solid  #97e0e4;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.booking {
+      background: #a8e497;
+
+      &:hover {
+        color: #a8e497;
+        background: transparent;
+        border: 2px solid  #a8e497;
+      }
+    }
+  }
+
   
 }
