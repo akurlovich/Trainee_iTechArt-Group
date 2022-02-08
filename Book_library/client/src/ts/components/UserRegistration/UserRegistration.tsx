@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { registerUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
 import './userregistration.scss';
 
@@ -8,8 +10,12 @@ const UserRegistrationInner: FC = () => {
   const [password, setPassword] = useState('');
   const [confirPassword, setConfirPassword] = useState('');
   const [buttonSubmit, setButtonSubmit] = useState(false);
+  const dispatch = useAppDispatch();
+  const {user} = useAppSelector(state => state.authReducer);
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(registerUser({email, password}));
+    // console.log(user);
   };
   const validFormData = () => {
     const emailValid = /^\S+@\S+\.\S+$/.test(email);

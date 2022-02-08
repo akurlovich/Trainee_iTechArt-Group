@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import { AddBook } from './ts/components/AddBook/AddBook';
 import { AllBooks } from './ts/components/AllBooks/AllBooks';
@@ -10,15 +11,29 @@ import { PageNotFound } from './ts/components/PageNotFound/PageNotFound';
 import { UserLogin } from './ts/components/UserLogin/UserLogin';
 import { UserProfile } from './ts/components/UserProfile/UserProfile';
 import { UserRegistration } from './ts/components/UserRegistration/UserRegistration';
+import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
+import { fetchUsers } from './ts/store/reducers/ActionCreators';
+import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
 
 const App: FC = () => {
+  const { users, isLoading, error } = useAppSelector(state => state.userReducer);
+  const { user } = useAppSelector(state => state.authReducer);
+  // const { increment } = userSlice.actions;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchUsers())
+  }, []);
+
+  const checkUserAuth = () => {
+    dispatch(checkAuth());
+  }
+  
+
   return (
     <div className='wrapper'>
-      {/* <Header/>
-      <div className="container">
-        <AllBooks/>
-      </div> */}
-      {/* <Footer/> */}
+      {isLoading && <h1 style={{fontSize: '200px'}}>loading</h1>}
+      <button onClick={() => console.log(users, error)}>click</button>
+      <button onClick={checkUserAuth}>auth</button>
       <Routes>
         <Route path='/' element={<LayoutRouter/>}>
           <Route index element={<AllBooks/>}/>

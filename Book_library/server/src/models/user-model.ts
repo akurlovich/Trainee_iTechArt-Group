@@ -15,24 +15,11 @@ const UserSchema: Schema = new Schema<IUser>({
     type: String,
     default: '',
   },
-  moderator : {
-    type: Boolean,
-    default: false,
-  },
-  booksBookingID: [{
+  role: [{
     type: Schema.Types.ObjectId,
+    ref: 'Role',
     default: [],
   }],
-  booksComments: [{
-    bookID: [{
-      type: Schema.Types.ObjectId,
-      default: [],
-    }],
-    comments: [{
-      type: String,
-      default: [],
-    }]
-  }]
 },
 { timestamps: true },
 );

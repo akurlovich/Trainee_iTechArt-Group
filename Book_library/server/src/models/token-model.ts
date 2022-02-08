@@ -10,6 +10,7 @@ const TokenSchema: Schema = new Schema<IToken>({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true },
+);
 
 export default model<IToken>('Token', TokenSchema);
