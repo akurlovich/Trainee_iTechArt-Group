@@ -15,8 +15,8 @@
     z-index: 10;
 
     &:checked {
-      background-color: rgba($color: #06f20d, $alpha: 0.2);
-      border: 1px solid #525252;
+      // background-color: rgba($color: #06f20d, $alpha: 0.2);
+      border: 1px solid #3f5e2a;
     }
 
     &:checked ~ .checkbox__image {

@@ -1,5 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { API_URL } from "../../../constants/http";
 import AuthService from "../../../services/AuthService";
+import { IAuthResponse } from "../../../types/IAuthResponse";
 
 interface IUserReg {
   email: string,
@@ -28,7 +31,7 @@ export const loginUser = createAsyncThunk(
     try {
       const { email, password } = data;
       const response = await AuthService.login(email, password);
-      localStorage.setItem('token', response.data.refreshToken);
+      localStorage.setItem('token', response.data.accessToken);
       return response.data;
       
     } catch (error) {
@@ -51,3 +54,17 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const checkAuth = createAsyncThunk(
+  'AUTH/logoutUser',
+  async (_, {rejectWithValue}) => {
+    try {
+      const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
+      localStorage.setItem('token', response.data.accessToken);
+      console.log('auth', response);
+      return;
+      
+    } catch (error) {
+      return rejectWithValue(`Auth went wrong!`)
+    }
+  }
+);

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../../types/IUser";
-import { registerUser } from "./AuthActionCreatores";
+import { checkAuth, registerUser } from "./AuthActionCreatores";
 
 interface IAuthState {
   user: IUser,
@@ -38,6 +38,14 @@ export const authSlice = createSlice({
       state.isAuth = false;
       state.error = action.payload;
     },
+    [checkAuth.pending.type]: (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload;
+    },
+    [checkAuth.pending.type]: (state, action) => {
+      state.isAuth = true;
+      state.error = action.payload;
+    }
   }
 });
 

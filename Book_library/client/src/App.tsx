@@ -13,6 +13,7 @@ import { UserProfile } from './ts/components/UserProfile/UserProfile';
 import { UserRegistration } from './ts/components/UserRegistration/UserRegistration';
 import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
 import { fetchUsers } from './ts/store/reducers/ActionCreators';
+import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -22,12 +23,17 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(fetchUsers())
   }, []);
+
+  const checkUserAuth = () => {
+    dispatch(checkAuth());
+  }
   
 
   return (
     <div className='wrapper'>
       {isLoading && <h1 style={{fontSize: '200px'}}>loading</h1>}
       <button onClick={() => console.log(users, error)}>click</button>
+      <button onClick={checkUserAuth}>auth</button>
       <Routes>
         <Route path='/' element={<LayoutRouter/>}>
           <Route index element={<AllBooks/>}/>

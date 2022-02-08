@@ -7,7 +7,7 @@ import './allbooks.scss';
 const AllBooksInner: FC = () => {
   return (
     <div className='allbooks'>
-      <Checkbox/>
+      <Checkbox field='Genre'/>
       <div className="allbooks__title">
         Most popular:
       </div>

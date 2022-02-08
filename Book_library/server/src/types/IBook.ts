@@ -1,16 +1,12 @@
+import { Binary } from "mongodb";
 import { Document, Schema } from "mongoose";
 
 export interface IBook extends Document {
   title: string,
   author: string,
-  year: string,
-  genre: string,
+  year: number,
+  genre: Array<Schema.Types.ObjectId>,
   description: string,
-  coverImage: string,
+  coverImage: string | Binary,
   amount: number,
-  usersBookingID: Array<Schema.Types.ObjectId>,
-  usersComments: Array<{
-    userID: Array<Schema.Types.ObjectId>,
-    comments: string[],
-  }>
 };
