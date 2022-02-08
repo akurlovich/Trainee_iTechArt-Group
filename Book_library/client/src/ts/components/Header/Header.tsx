@@ -24,6 +24,9 @@ const HeaderInner: FC = () => {
                     <Link to='/addbook'>Add book</Link>
                   </li>
                   <li className='navigation__menu_item'>
+                    <Link to='/book'>Book</Link>
+                  </li>
+                  <li className='navigation__menu_item'>
                     About
                   </li>
                 </ul>
