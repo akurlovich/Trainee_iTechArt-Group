@@ -1,0 +1,75 @@
+.userbooking {
+  
+  &__book {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  &__cover {
+    width: 170px;
+    height: 250px;
+
+    &_image {
+      width: 170px;
+      height: 100%;
+    }
+  }
+  
+  &__title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+
+  }
+
+  &__author {
+
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 260px;
+    height: 74px;
+    background: #97e0e4;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+    align-self: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #97e0e4;
+      background: transparent;
+      border: 2px solid  #97e0e4;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.booking {
+      background: #a8e497;
+
+      &:hover {
+        color: #a8e497;
+        background: transparent;
+        border: 2px solid  #a8e497;
+      }
+    }
+  }
+}

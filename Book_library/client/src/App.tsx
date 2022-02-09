@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import { AddBook } from './ts/components/AddBook/AddBook';
 import { AllBooks } from './ts/components/AllBooks/AllBooks';
-import { Booking } from './ts/components/Booking/Booking';
+import { UserBooking } from './ts/components/UserBooking/UserBooking';
 import { BookItem } from './ts/components/BookItem/BookItem';
 import { Footer } from './ts/components/Footer/Footer';
 import { Header } from './ts/components/Header/Header';
@@ -41,9 +41,10 @@ const App: FC = () => {
           <Route path='login' element={<UserLogin/>}/>
           <Route path='registration' element={<UserRegistration/>}/>
           <Route path='profile' element={<UserProfile/>}/>
-          <Route path='booking' element={<Booking/>}/>
+          {/* <Route path='booking' element={<Booking/>}/> */}
           <Route path='addbook' element={<AddBook/>}/>
           <Route path='book' element={<BookItem/>}/>
+          <Route path='confirm_booking' element={<UserBooking/>}/>
           <Route path='*' element={<PageNotFound/>}/>
         </Route>
       </Routes>
