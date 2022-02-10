@@ -10,7 +10,7 @@ const UserProfileInner: FC = () => {
           <div className="profile__title">User information</div>
           <div className="profile__info__block">
             <img className="profile__info__avatar" src="./assets/book-1.png" alt="user avatar" />
-            <div className="profile__info__avatar_button">Change image</div>
+            <button className="profile__info__avatar_button">Change image</button>
           </div>
           <div className="profile__info__email">
             <div className="profile__info__email_title">User email:</div>
@@ -27,6 +27,9 @@ const UserProfileInner: FC = () => {
         </div>
         <div className="profile__books">
           <div className="profile__title">Booked books:</div>
+          <BookCard/>
+          <BookCard/>
+          <BookCard/>
           <BookCard/>
         </div>
         <div className="profile__books">
