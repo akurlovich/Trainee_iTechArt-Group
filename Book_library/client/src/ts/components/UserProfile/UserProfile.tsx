@@ -1,15 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import base64 from '../../services/Base64';
 import { BookCard } from '../BookCard/BookCard';
 import './UserProfile.scss';
 
 const UserProfileInner: FC = () => {
+  const [imageSrc, setImageSrc] = useState('./assets/book-1.png');
+  const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file: File = (event.target.files as FileList)[0];
+    const urlImage = await base64(file);
+    if (urlImage) {
+      setImageSrc(urlImage as string)
+    }
+  }
   return (
     <div className='profile'>
       <div className="profile__container">
         <div className="profile__info">
           <div className="profile__title">User information</div>
           <div className="profile__info__block">
-            <img className="profile__info__avatar" src="./assets/book-1.png" alt="user avatar" />
+            <img className="profile__info__avatar" src={imageSrc} alt="user avatar" />
+            <input
+              onChange={imageHandler}
+              className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />
+            <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
             <button className="profile__info__avatar_button">Change image</button>
           </div>
           <div className="profile__info__email">

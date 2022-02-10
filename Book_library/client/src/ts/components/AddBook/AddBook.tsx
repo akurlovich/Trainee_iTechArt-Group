@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import base64 from '../../services/Base64';
 import './addbook.scss';
 
 const AddBookInner: FC = () => {
@@ -33,12 +34,12 @@ const AddBookInner: FC = () => {
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
 
-    const base64 = (files: File) =>
-    new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-      let reader = new FileReader();
-      reader.readAsDataURL(files);
-      reader.onload = () => resolve(reader.result);
-    });
+    // const base64 = (files: File) =>
+    // new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(files);
+    //   reader.onload = () => resolve(reader.result);
+    // });
     const urlImage = await base64(file);
     if (urlImage) {
       setImageSrc(urlImage as string)
