@@ -95,7 +95,7 @@ const AddBookInner: FC = () => {
             <option value="Fantasy">Fantasy</option>
             <option value="History">History</option>
             <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Thrillers">Thrillers</option>
+            <option value="Thriller">Thrillers</option>
           </select>
           <label className='inputs__item__label' htmlFor="inputs__item__name">Genre:</label>
         </div>
