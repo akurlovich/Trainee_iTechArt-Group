@@ -35,8 +35,8 @@ class RoleController {
 
   async getAllRoles(req: Request, res: Response, next: NextFunction) {
     try {
-      const genres = await roleService.getAllRoles();
-      return res.json(genres);
+      const roles = await roleService.getAllRoles();
+      return res.json(roles);
     } catch (error) {
       console.log(error);
       next(error);

@@ -5,6 +5,7 @@ import authMiddleware from '../middlewares/auth-middleware';
 import bookController from '../controllers/book-controller';
 import genreController from '../controllers/genre-controller';
 import roleController from '../controllers/role-controller';
+import bookedController from '../controllers/booked-controller';
 
 const router = Router();
 
@@ -31,5 +32,10 @@ router.get('/role', roleController.getRole);
 router.get('/role/:id', roleController.getRoleByID);
 router.get('/roles', roleController.getAllRoles);
 router.post('/roles', roleController.addRole);
+
+router.get('/booked', bookedController.getBooked);
+router.get('/booked/:id', bookedController.getBookedByID);
+router.get('/bookeds', bookedController.getAllBookeds);
+router.post('/bookeds', bookedController.addBooked);
 
 export default router;
