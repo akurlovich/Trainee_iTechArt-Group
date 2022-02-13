@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
+import { checkAuth, loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
 import './userlogin.scss';
 
@@ -7,8 +9,13 @@ const UserLoginInner: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonSubmit, setButtonSubmit] = useState(false);
+  const dispatch = useAppDispatch();
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(loginUser({email, password}));
+    dispatch(checkAuth());
+    setEmail('');
+    setPassword('');
   };
   const validFormData = () => {
     if (email.length && password.length) {

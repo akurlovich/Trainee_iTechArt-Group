@@ -1,8 +1,6 @@
 export interface IUser {
-  id: string,
-  email: string,
-  password: string,
-  profileImage: string,
-  moderator: boolean,
-  
+  email: string;
+  id: string;
+  profileImage: string;
+  role: string[];
 }

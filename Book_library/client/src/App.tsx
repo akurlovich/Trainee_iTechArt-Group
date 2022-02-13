@@ -15,26 +15,40 @@ import { UserRegistration } from './ts/components/UserRegistration/UserRegistrat
 import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
 import { fetchUsers } from './ts/store/reducers/ActionCreators';
 import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
+import UserService from './ts/services/UserService';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
-  const { user } = useAppSelector(state => state.authReducer);
+  const { user, isAuth } = useAppSelector(state => state.authReducer);
   // const { increment } = userSlice.actions;
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchUsers());
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuth());
+    }
   }, []);
 
-  const checkUserAuth = () => {
-    dispatch(checkAuth());
+  // const checkUserAuth = () => {
+  //   dispatch(checkAuth());
+  // };
+
+  const getUsers = async () => {
+    try {
+      const response = await UserService.fetchUsers();
+      console.log('users', response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
   
 
   return (
     <div className='wrapper'>
       {isLoading && <h1 style={{fontSize: '200px'}}>loading</h1>}
+      <h1 style={{fontSize: '200px'}}>{isAuth ? 'авторизован' : 'войдите'}</h1>
       <button onClick={() => console.log(users, error)}>click</button>
-      <button onClick={checkUserAuth}>auth</button>
+      <button onClick={getUsers}>USERS</button>
       <Routes>
         <Route path='/' element={<LayoutRouter/>}>
           <Route index element={<AllBooks/>}/>

@@ -31,8 +31,9 @@ export const loginUser = createAsyncThunk(
     try {
       const { email, password } = data;
       const response = await AuthService.login(email, password);
+      console.log(response)
       localStorage.setItem('token', response.data.accessToken);
-      return response.data;
+      return response.data.user;
       
     } catch (error) {
       return rejectWithValue(`User with email ${data.email} not found!`)
@@ -55,13 +56,13 @@ export const logoutUser = createAsyncThunk(
 );
 
 export const checkAuth = createAsyncThunk(
-  'AUTH/logoutUser',
+  'AUTH/chechAuth',
   async (_, {rejectWithValue}) => {
     try {
       const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
       localStorage.setItem('token', response.data.accessToken);
       console.log('auth', response);
-      return;
+      return response.data.user;
       
     } catch (error) {
       return rejectWithValue(`Auth went wrong!`)
