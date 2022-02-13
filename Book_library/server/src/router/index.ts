@@ -16,8 +16,8 @@ router.post('/registration',
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
-// router.get('/users', authMiddleware, userController.getUsers);
-router.get('/users', userController.getUsers);
+router.get('/users', authMiddleware, userController.getUsers);
+// router.get('/users', userController.getUsers);
 
 router.get('/books', bookController.getAllBooks);
 router.get('/books/:id', bookController.getBookByID);

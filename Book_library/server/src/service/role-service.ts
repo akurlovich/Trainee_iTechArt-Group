@@ -8,8 +8,7 @@ class RoleService {
   };
 
   async getRole(value: string) {
-    const role = await roleModel.findOne({value});
-    return role;
+    return await roleModel.findOne({value});
   };
 
   async getRoleByID(id: string) {

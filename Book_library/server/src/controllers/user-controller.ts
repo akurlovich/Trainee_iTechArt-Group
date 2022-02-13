@@ -7,8 +7,9 @@ class UserController {
   async registration(req: Request, res: Response, next: NextFunction) {
     try {
       const errors = validationResult(req);
+      // console.log("errors", errors);
       if (!errors.isEmpty()) {
-        return next(ApiError.BadRequest('Bad validation!', (errors.array() as unknown as string[])))
+        return next(ApiError.BadRequest('Bad validation!', errors.array()))
       }
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
