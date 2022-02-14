@@ -1,11 +1,23 @@
 .addbook {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: #e8faf8;
   
   &__inputs {
-    padding-top: 60px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    padding: 40px;
   }
 
   &__button {
@@ -13,16 +25,17 @@
     justify-content: center;
   
     &_add {
-      width: 120px;
-      height: 60px;
-      border: 2px solid #00BF82;
-      box-sizing: border-box;
-      border-radius: 5px;
+      width: 360px;
+      height: 74px;
+      background: #4d9a0e;
+      border-radius: 25px;
+      font-family: 'Poppins', sans-serif;
       font-style: normal;
-      font-weight: normal;
-      font-size: 22px;
-      line-height: 26px;
-      color: #00BF82;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 45px;
+      color: #FFFFFF;
+      cursor: pointer;
     }
   }
 }
@@ -35,42 +48,41 @@
 
   &__name {
     position: relative;
-    max-width: 293px;
-    padding: 3px;
+    padding: 5px;
     width: 100%;
-    height: 34px;
-    border-bottom: 1px solid #3F51B5;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 26px;
+    border-bottom: 1px solid #A6A6A6;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 39px;
     color: #000000;
   }
 
   &__label {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 11px;
-    color: #3F51B5;
     position: absolute;
-    top: -12px;
+    top: -30px;
     left: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    color: #A6A6A6;
   }
 
   &__textarea {
     width: 100%;
     height: auto;
-    padding: 3px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 20px;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 39px;
     color: #000000;
+    background-color: transparent;
+    border: 1px solid #A6A6A6;
   }
 }
 
 .inputs__files {
+  width: 100%;
 
   &_block {
     display: flex;
@@ -84,18 +96,18 @@
   }
 
   &__title {
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 26px;
     display: flex;
     align-items: center;
-    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    color: #A6A6A6;
   }
 
   &__label {
     width: 130px;
     height: 34px;
-    border: 2px solid #00BF82;
+    border: 2px solid #4d9a0e;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -105,7 +117,7 @@
     font-weight: normal;
     font-size: 22px;
     line-height: 26px;
-    color: #00BF82;
+    color: #4d9a0e;
     cursor: pointer;
   }
 
@@ -116,6 +128,6 @@
   }
 
   &__view_img {
-    width: 115px;
+    width: 200px;
   }
 }

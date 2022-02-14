@@ -3,8 +3,7 @@ import { IBook } from "../types/IBook";
 
 class BookService {
   async addBook(book: IBook) {
-    const newBook = await bookModel.create(book);
-    return newBook;
+    return await bookModel.create(book);
   };
 
   async getBookByID(id: string) {

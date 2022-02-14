@@ -1,16 +1,19 @@
 import React, { FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
 import base64 from '../../services/Base64';
+import { addBook } from '../../store/reducers/BookReducer/BookActionCreatores';
 import './addbook.scss';
 
 const AddBookInner: FC = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [year, setYear] = useState('');
+  const [year, setYear] = useState(1);
   const [amount, setAmount] = useState(1);
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
-  const [imageSrc, setImageSrc] = useState('');
+  const [coverImage, setcoverImage] = useState('');
+  const dispatch = useAppDispatch();
 
   const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -19,7 +22,7 @@ const AddBookInner: FC = () => {
     setAuthor(event.target.value);
   }
   const yearHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setYear(event.target.value);
+    setYear(+event.target.value);
   }
   const amountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(+event.target.value);
@@ -43,17 +46,19 @@ const AddBookInner: FC = () => {
     // });
     const urlImage = await base64(file);
     if (urlImage) {
-      setImageSrc(urlImage as string)
+      setcoverImage(urlImage as string)
     }
+    //!!-----------ADD EMPTY IMAGE-----------
   }
 
-  const handlerAddBook = async () => {
-  
+  const handlerAddBook = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(addBook({title, author, description, amount, year, genre, coverImage}))
     
   }
 
   return (
-    <div className='addbook'>
+    <form onSubmit={handlerAddBook} className='addbook'>
       <div className="addbook__inputs">
         <div className="inputs__item">
           <input
@@ -120,19 +125,20 @@ const AddBookInner: FC = () => {
             <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
           </div>
           <div className="inputs__files__view">
-            <img  className='inputs__files__view_img' src={imageSrc}/>
+            <img  className='inputs__files__view_img' src={coverImage}/>
           </div>
         </div>
       </div>
       <div className='addbook__button'>
         <button
-          onClick={handlerAddBook}
+          // onSubmit={handlerAddBook}
+          type="submit"
           className='addbook__button_add'
         >
           Add book
         </button>
       </div>
-    </div>
+    </form>
     
   );
 };
