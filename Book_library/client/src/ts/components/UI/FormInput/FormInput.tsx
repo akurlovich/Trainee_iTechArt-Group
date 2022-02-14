@@ -6,6 +6,7 @@ interface IFormInput {
   label?: string,
   name?: string,
   type?: string,
+  value?: string,
   errorMessage?: string,
   required?: boolean,
   pattern?: string,
@@ -16,6 +17,7 @@ const FormInputInner: FC<IFormInput> = ({
   label = '',
   name = '',
   type = 'text',
+  value,
   errorMessage = '',
   required = false,
   pattern,
@@ -37,6 +39,7 @@ const FormInputInner: FC<IFormInput> = ({
       <input
         onChange={e => setData(e.target.value)}
         className='form-input__text'
+        value={value}
         placeholder=' '
         name={name}
         type={type}

@@ -16,6 +16,7 @@ const UserLoginInner: FC = () => {
     dispatch(checkAuth());
     setEmail('');
     setPassword('');
+    setButtonSubmit(prev => false);
   };
   const validFormData = () => {
     if (email.length && password.length) {
@@ -41,6 +42,7 @@ const UserLoginInner: FC = () => {
               label='Email address'
               name='email'
               type='text'
+              value={email}
               // errorMessage='Not valid email!'
               setData={setEmail}
               required={false}
@@ -50,6 +52,7 @@ const UserLoginInner: FC = () => {
               label='Password'
               name='password'
               type='password'
+              value={password}
               // errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
               setData={setPassword}
               required={false}

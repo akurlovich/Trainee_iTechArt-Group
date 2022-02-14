@@ -5,9 +5,6 @@ import { AddBook } from './ts/components/AddBook/AddBook';
 import { AllBooks } from './ts/components/AllBooks/AllBooks';
 import { UserBooking } from './ts/components/UserBooking/UserBooking';
 import { BookItem } from './ts/components/BookItem/BookItem';
-import { Footer } from './ts/components/Footer/Footer';
-import { Header } from './ts/components/Header/Header';
-import { LayoutRouter } from './ts/components/LayoutRouter/LayoutRouter';
 import { PageNotFound } from './ts/components/PageNotFound/PageNotFound';
 import { UserLogin } from './ts/components/UserLogin/UserLogin';
 import { UserProfile } from './ts/components/UserProfile/UserProfile';
@@ -16,6 +13,8 @@ import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
 import { fetchUsers } from './ts/store/reducers/ActionCreators';
 import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
 import UserService from './ts/services/UserService';
+import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/LayoutRouter';
+import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/RequireAuth';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -56,7 +55,11 @@ const App: FC = () => {
           <Route path='registration' element={<UserRegistration/>}/>
           <Route path='profile' element={<UserProfile/>}/>
           {/* <Route path='booking' element={<Booking/>}/> */}
-          <Route path='addbook' element={<AddBook/>}/>
+          <Route path='addbook' element={
+            <RequireAuth>
+              <AddBook/>
+            </RequireAuth>
+            }/>
           <Route path='book' element={<BookItem/>}/>
           <Route path='confirm_booking' element={<UserBooking/>}/>
           <Route path='*' element={<PageNotFound/>}/>
