@@ -53,7 +53,7 @@ const App: FC = () => {
           <Route index element={<AllBooks/>}/>
           <Route path='login' element={<UserLogin/>}/>
           <Route path='registration' element={<UserRegistration/>}/>
-          <Route path='profile' element={<UserProfile/>}/>
+          {/* <Route path='profile' element={<UserProfile/>}/> */}
           {/* <Route path='booking' element={<Booking/>}/> */}
           <Route path='addbook' element={
             <RequireAuth>
@@ -61,6 +61,7 @@ const App: FC = () => {
             </RequireAuth>
             }/>
           <Route path='book' element={<BookItem/>}/>
+          <Route path='book/new' element={<UserProfile/>}/>
           <Route path='confirm_booking' element={<UserBooking/>}/>
           <Route path='*' element={<PageNotFound/>}/>
         </Route>

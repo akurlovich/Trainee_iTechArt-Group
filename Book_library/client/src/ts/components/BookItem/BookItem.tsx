@@ -1,8 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getBookByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
 import './bookitem.scss';
 
 const BookItemInner: FC = () => {
+  const {books} = useAppSelector(state => state.bookReducer);
+  const dispatch = useAppDispatch();
+  console.log(useParams())
+
+  useEffect(() => {
+    // dispatch(getBookByID());
+  }, []);
+
   return (
     <div className='bookitem'>
       <div className="bookitem__container">
