@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IBookResponse } from '../../types/IBookResponse';
 import './bookblock.scss';
 
@@ -8,8 +9,12 @@ interface IBooKBlock {
 }
 
 const BookBlockItem: FC<IBooKBlock> = ({bgColor, book}) => {
+  const navigate = useNavigate();
   const style = {
     background: bgColor,
+  };
+  const handlerMore = () => {
+    navigate(`/book/${book?._id}`)
   }
   return (
     <div className="bookblock">
@@ -35,7 +40,7 @@ const BookBlockItem: FC<IBooKBlock> = ({bgColor, book}) => {
               {book?.year}
             </div>
           </div>
-          <div className="bookblock__button">
+          <div onClick={handlerMore} className="bookblock__button">
             More
           </div>
         </div>

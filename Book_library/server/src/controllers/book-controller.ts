@@ -15,16 +15,19 @@ class BookController {
       const bookData = await bookService.addBook({...req.body, genre: getGenre?._id});
       return res.json(bookData)
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      next(error);
     }
   };
 
   async getBookByID(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
       const book = await bookService.getBookByID(req.params.id);
+      // console.log('first', book)
       return res.json(book)
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      next(error);
     }
   };
 
@@ -33,7 +36,8 @@ class BookController {
       const books = await bookService.getAllBooks();
       return res.json(books)
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      next(error);
     }
   };
 }
