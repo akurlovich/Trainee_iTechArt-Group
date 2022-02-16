@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBook } from "../../../types/IBook";
 import { IBookResponse } from "../../../types/IBookResponse";
-import { addBook, getBookByID, getBooks } from "./BookActionCreatores";
+import { addBook, getBookByID, getBooks, updateBookAmountByID } from "./BookActionCreatores";
 
 interface IBookState {
   book: IBookResponse,
@@ -54,6 +54,17 @@ export const bookSlice = createSlice({
       state.book = action.payload;
     },
     [getBookByID.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [updateBookAmountByID.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [updateBookAmountByID.fulfilled.type]: (state, action: PayloadAction<IBookResponse>) => {
+      state.isLoading = false;
+      state.book = action.payload;
+    },
+    [updateBookAmountByID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

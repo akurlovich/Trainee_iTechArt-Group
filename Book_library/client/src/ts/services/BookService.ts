@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import serverApi from "../http";
-import { IBook } from "../types/IBook";
+import { IBook, IBookUpdate } from "../types/IBook";
 import { IBookResponse } from "../types/IBookResponse";
 
 export default class BookService {
@@ -14,5 +14,9 @@ export default class BookService {
 
   static async getBookByID(id: string): Promise<AxiosResponse<IBookResponse>> {
     return serverApi.get<IBookResponse>(`/books/${id}`);
+  };
+
+  static async updateBookAmountByID(newBook: IBookUpdate): Promise<AxiosResponse<IBookResponse>> {
+    return serverApi.put<IBookResponse>(`/books`, newBook);
   };
 }

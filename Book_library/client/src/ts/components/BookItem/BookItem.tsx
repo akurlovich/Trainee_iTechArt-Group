@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
-import { getBookByID } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { deleteBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { IBookedResponse } from '../../types/IBookedResponse';
 import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
@@ -16,28 +16,50 @@ const BookItemInner: FC = () => {
   const dispatch = useAppDispatch();
   const {bookID} = useParams();
   const [booking, setBooking] = useState(false);
-  const [isBooked, setIsBooked] = useState(false)
+  const [isBooked, setIsBooked] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(true)
 
-  const findBook = (array: IBookedResponse[]) => {
-    return array.find(item => item.bookID === bookID);
+  const findBooked = (array: IBookedResponse[]) => {
+    return array.find(item => item.bookID === book._id);
   }
 
   useEffect(() => {
     if (bookID) {
       dispatch(getBookByID(bookID));
-      dispatch(getAllBookedsByBookID(bookID))
+      dispatch(getAllBookedsByBookID(bookID));
     }
   }, []);
 
   useEffect(() => {
-    if (findBook(bookedsBookID)) {
-      setIsBooked(prev => true);
+    console.log('from bookedID');
+    if (findBooked(bookedsBookID)) {
+      console.log('book found');
+      setIsBooked(true);
     }
   }, [bookedsBookID]);
 
+  useEffect(() => {
+    console.log('amout', book.amount)
+    if (book.amount <= 0) {
+      setIsAvailable(false);
+    }
+  }, [book]);
+
   const bookingHandler = () => {
-    setBooking(prev => true);
+    setBooking(true);
     console.log('booked', bookedsBookID);
+  };
+
+  const canselBookingHandler = () => {
+    const booked = findBooked(bookedsBookID);
+    console.log('from cansel', booked)
+    console.log('from cansel bookedsBookID', bookedsBookID)
+    if (booked) {
+      dispatch(deleteBooked(booked._id));
+      dispatch(getAllBookedsByBookID(book._id));
+      setIsBooked(false);
+      dispatch(updateBookAmountByID({id: book._id, amount: book.amount + 1}));
+    }
   }
 
   return (
@@ -72,9 +94,20 @@ const BookItemInner: FC = () => {
                 </div>
                 <div className="bookitem__buttons">
                   {isBooked ?
-                  <div className="bookitem__button booked">
-                    Already booked
-                  </div>
+                  <>
+                    <div className="bookitem__button booked">
+                      Already booked
+                    </div>
+                    <button
+                      onClick={canselBookingHandler} 
+                      className="bookitem__button booking">
+                      Cansel Booking
+                    </button>
+                  </>
+                  : book.amount <= 0 ? 
+                    <div className="bookitem__button booked warning">
+                      Sorry, out of stock
+                    </div>
                   :
                   <button
                     onClick={bookingHandler} 

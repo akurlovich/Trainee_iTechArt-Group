@@ -8,6 +8,7 @@ import successIcon from '../../../assets/Success-Icon.png';
 import { useAppSelector } from '../../hooks/redux';
 import { useDispatch } from 'react-redux';
 import { addBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 
 interface IProps {
   book: IBookResponse,
@@ -22,10 +23,11 @@ const UserBookingInner: FC<IProps> = ({book, setData}) => {
     setData(false);
   };
   const bookedHandler = () => {
-    setSuccess(prev => true);
+    setSuccess(true);
     console.log('book', book?._id, 'user', user.id);
     dispatch(addBooked({bookID: book?._id, userID: user.id}));
     dispatch(getAllBookedsByBookID(book._id));
+    dispatch(updateBookAmountByID({id: book._id, amount: book.amount - 1}));
   };
 
   return (

@@ -7,3 +7,8 @@ export interface IBook {
   coverImage: string,
   amount: number,
 };
+
+export interface IBookUpdate {
+  id: string,
+  amount: number,
+}

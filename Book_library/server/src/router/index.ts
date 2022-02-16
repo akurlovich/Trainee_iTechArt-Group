@@ -22,6 +22,7 @@ router.get('/users', authMiddleware, userController.getUsers);
 router.get('/books', bookController.getAllBooks);
 router.get('/books/:id', bookController.getBookByID);
 router.post('/books', bookController.addBook);
+router.put('/books', bookController.updateBookAmountByID);
 
 router.get('/genre', genreController.getGenre);
 router.get('/genre/:id', genreController.getGenreByID);

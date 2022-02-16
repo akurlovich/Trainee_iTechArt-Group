@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import BookService from "../../../services/BookService";
-import { IBook } from "../../../types/IBook";
+import { IBook, IBookUpdate } from "../../../types/IBook";
 
 export const addBook = createAsyncThunk(
   'BOOK/addBook',
@@ -35,6 +35,20 @@ export const getBookByID = createAsyncThunk(
   async (id: string, {rejectWithValue}) => {
     try {
       const response = await BookService.getBookByID(id);
+      console.log(response.data)
+      return response.data;
+      
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const updateBookAmountByID = createAsyncThunk(
+  'BOOK/updateBookAmountByID',
+  async (newBook: IBookUpdate, {rejectWithValue}) => {
+    try {
+      const response = await BookService.updateBookAmountByID(newBook);
       console.log(response.data)
       return response.data;
       

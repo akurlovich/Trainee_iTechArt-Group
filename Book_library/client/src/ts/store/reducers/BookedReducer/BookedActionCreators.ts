@@ -21,7 +21,7 @@ export const getBookeds = createAsyncThunk(
   async (_, {rejectWithValue}) => {
     try {
       const response = await BookedService.getBookeds();
-      console.log(response.data)
+      console.log('getBookeds', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -35,7 +35,7 @@ export const getAllBookedsByBookID = createAsyncThunk(
   async (id: string, {rejectWithValue}) => {
     try {
       const response = await BookedService.getAllBookedsByBookID(id);
-      console.log(response.data)
+      console.log('getAllBookedsByBookID', response.data)
       return response.data;
       
     } catch (error: any) {

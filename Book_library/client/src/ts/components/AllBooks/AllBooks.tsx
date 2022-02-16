@@ -3,10 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { BookBlock } from '../BookBlock/BookBlock';
 import { FindBooks } from '../FindBooks/FindBooks';
+import { Loader } from '../UI/Loader/Loader';
 import './allbooks.scss';
 
 const AllBooksInner: FC = () => {
-  const {books} = useAppSelector(state => state.bookReducer);
+  const {books, isLoading} = useAppSelector(state => state.bookReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -14,6 +15,8 @@ const AllBooksInner: FC = () => {
   }, []);
   
   return (
+    <>
+    {isLoading && <Loader/>}
     <div className='allbooks'>
       <div className="allbooks__title">
         Most popular:
@@ -27,6 +30,7 @@ const AllBooksInner: FC = () => {
       </div>
       <FindBooks/>
     </div>
+    </>
   );
 };
 

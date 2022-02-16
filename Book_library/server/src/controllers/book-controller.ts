@@ -31,6 +31,18 @@ class BookController {
     }
   };
 
+  async updateBookAmountByID(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id, amount } = req.body;
+      const book = await bookService.updateBookAmountByID(id, amount);
+      console.log('update', book)
+      return res.json(book)
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
   async getAllBooks(req: Request, res: Response, next: NextFunction) {
     try {
       const books = await bookService.getAllBooks();
