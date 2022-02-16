@@ -11,7 +11,7 @@ const RequireAuthInner: FC<IProps> = ({children}) => {
   const {isAuth} = useAppSelector(state => state.authReducer);
 
   if (!isAuth) {
-    return <Navigate to='/login' state={location.pathname}/>
+    return <Navigate to='/login' state={{from: location.pathname}}/>
   }
 
   return children;

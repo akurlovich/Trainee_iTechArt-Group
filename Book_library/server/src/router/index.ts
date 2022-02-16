@@ -33,9 +33,11 @@ router.get('/role/:id', roleController.getRoleByID);
 router.get('/roles', roleController.getAllRoles);
 router.post('/roles', roleController.addRole);
 
-router.get('/booked', bookedController.getBooked);
+router.get('/booked/books/:id', bookedController.getAllBookedsBookID);
+router.get('/booked/users/:id', bookedController.getAllBookedsUserID);
 router.get('/booked/:id', bookedController.getBookedByID);
 router.get('/bookeds', bookedController.getAllBookeds);
-router.post('/bookeds', bookedController.addBooked);
+router.post('/booked', bookedController.addBooked);
+router.delete('/booked/:id', bookedController.deleteBooked);
 
 export default router;

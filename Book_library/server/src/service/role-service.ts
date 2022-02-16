@@ -3,8 +3,7 @@ import { IRole } from "../types/IRole";
 
 class RoleService {
   async addRole(role: IRole) {
-    const newRole = await roleModel.create(role);
-    return newRole;
+    return await roleModel.create(role);
   };
 
   async getRole(value: string) {
@@ -12,13 +11,11 @@ class RoleService {
   };
 
   async getRoleByID(id: string) {
-    const role = await roleModel.findById(id);
-    return role;
+    return await roleModel.findById(id);
   };
 
   async getAllRoles() {
-    const roles = await roleModel.find();
-    return roles;
+    return await roleModel.find();
   };
 };
 

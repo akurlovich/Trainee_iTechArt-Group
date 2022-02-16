@@ -15,6 +15,7 @@ import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
 import UserService from './ts/services/UserService';
 import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/LayoutRouter';
 import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/RequireAuth';
+import { AdminAuthRouter } from './ts/components/RouterComponents/AdminAuth/AdminAuthRouter';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -53,16 +54,24 @@ const App: FC = () => {
           <Route index element={<AllBooks/>}/>
           <Route path='login' element={<UserLogin/>}/>
           <Route path='registration' element={<UserRegistration/>}/>
-          <Route path='profile' element={<UserProfile/>}/>
+          <Route path='profile' element={
+            <RequireAuth>
+              <UserProfile/>
+            </RequireAuth>
+          }/>
           {/* <Route path='booking' element={<Booking/>}/> */}
           <Route path='addbook' element={
-            <RequireAuth>
+            <AdminAuthRouter>
               <AddBook/>
-            </RequireAuth>
+            </AdminAuthRouter>
             }/>
           <Route path='book' element={<BookItem/>}/>
           <Route path='book/:bookID' element={<BookItem/>}/>
-          <Route path='confirm_booking' element={<UserBooking/>}/>
+          <Route path='confirm-booking' element={
+            <RequireAuth>
+              <UserBooking/>
+            </RequireAuth>
+          }/>
           <Route path='*' element={<PageNotFound/>}/>
         </Route>
       </Routes>

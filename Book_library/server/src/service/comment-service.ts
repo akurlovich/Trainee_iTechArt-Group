@@ -3,23 +3,19 @@ import { IComment } from "../types/IComment";
 
 class CommentService {
   async addComment(comment: IComment) {
-    const newBooked = await commentModel.create(comment);
-    return newBooked;
+    return await commentModel.create(comment);
   };
 
   async getComment(value: string) {
-    const comment = await commentModel.findOne({value});
-    return comment;
+    return await commentModel.findOne({value});
   };
 
   async getCommentByID(id: string) {
-    const comment = await commentModel.findById(id);
-    return comment;
+    return await commentModel.findById(id);
   };
 
   async getAllComments() {
-    const comments = await commentModel.find();
-    return comments;
+    return await commentModel.find();
   };
 };
 

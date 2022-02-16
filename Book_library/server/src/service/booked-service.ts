@@ -3,23 +3,27 @@ import { IBooked } from "../types/IBooked";
 
 class BookedService {
   async addBooked(booked: IBooked) {
-    const newBooked = await bookedModel.create(booked);
-    return newBooked;
+    return await bookedModel.create(booked);
   };
 
-  async getBooked(value: string) {
-    const booked = await bookedModel.findOne({value});
-    return booked;
+  async getAllBookedsBookID(bookID: string) {
+    return await bookedModel.find({bookID});
+  };
+
+  async getAllBookedsUserID(userID: string) {
+    return await bookedModel.find({userID});
   };
 
   async getBookedByID(id: string) {
-    const booked = await bookedModel.findById(id);
-    return booked;
+    return await bookedModel.findById(id);
   };
 
   async getAllBookeds() {
-    const bookeds = await bookedModel.find();
-    return bookeds;
+    return await bookedModel.find();
+  };
+
+  async deleteBooked(id: string) {
+    return await bookedModel.findByIdAndDelete(id);
   };
 };
 
