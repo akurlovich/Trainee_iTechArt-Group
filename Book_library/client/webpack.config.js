@@ -43,7 +43,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        {from: path.resolve(__dirname, 'src/assets'), to: path.resolve(__dirname, 'app/assets')}
+        {from: path.resolve(__dirname, 'src/assets'), 
+        to: path.resolve(__dirname, 'app/assets')}
       ]
     }),
   ],
@@ -89,12 +90,13 @@ module.exports = {
       },
       {
         test: /\.(?:|gif|png|jpg|jpeg|svg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: `./images/${filename('[ext]')}`
-          }
-        }],
+        type: 'asset/resource',
+        // use: [{
+        //   loader: 'file-loader',
+        //   options: {
+        //     name: `./images/${filename('[ext]')}`
+        //   }
+        // }],
       },
       {
         test: /\.(?:|woff|wolf2)$/,

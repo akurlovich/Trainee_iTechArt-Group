@@ -88,6 +88,11 @@
         background: transparent;
         border: 2px solid  #a8e497;
       }
+
+    }
+    &.booked {
+      width: 300px;
+      cursor: default;
     }
   }
 

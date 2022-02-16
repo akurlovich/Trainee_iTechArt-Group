@@ -67,11 +67,11 @@ const App: FC = () => {
             }/>
           <Route path='book' element={<BookItem/>}/>
           <Route path='book/:bookID' element={<BookItem/>}/>
-          <Route path='confirm-booking' element={
+          {/* <Route path='confirm-booking' element={
             <RequireAuth>
               <UserBooking/>
             </RequireAuth>
-          }/>
+          }/> */}
           <Route path='*' element={<PageNotFound/>}/>
         </Route>
       </Routes>
