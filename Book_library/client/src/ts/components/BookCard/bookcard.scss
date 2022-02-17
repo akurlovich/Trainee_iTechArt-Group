@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    padding-left: 10px;
+    padding: 10px;
   }
 
   &__info {
@@ -47,26 +47,21 @@
     width: 60px;
     cursor: pointer;
 
-  &:active {
-    transform: scale(0.9);
+    &:active {
+      transform: scale(0.9);
+    }
   }
+
+  &__alarm {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+    font-size: 28px;
+    padding-top: 15px;
   }
 
-  // &__cansel {
-  //   height: 100%;
-  //   font-size: 20px;
-  //   background-color: #ffad9f;
-  //   padding: 5px;
-  //   transition: all 0.5s ease;
-
-  //   &:hover {
-  //     background-color: #99ceb8;
-  //   }
-
-  //   &:active {
-  //     transform: scale(0.9);
-  //   }
-  // }
 
 }
 

@@ -1,1 +1,7 @@
-export const ADMIN_ROLE = 'moderator'
+const ADMIN_ROLE = 'moderator';
+const BOOKING_TIME_MILLISECONDS = 86400000;
+
+export {
+  ADMIN_ROLE,
+  BOOKING_TIME_MILLISECONDS
+}

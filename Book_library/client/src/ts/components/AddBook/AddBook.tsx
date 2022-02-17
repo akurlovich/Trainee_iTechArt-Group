@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
-import base64 from '../../services/Base64';
+import base64 from '../../services/ClientServices/Base64';
 import { addBook } from '../../store/reducers/BookReducer/BookActionCreatores';
 import './addbook.scss';
 

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import base64 from '../../services/Base64';
+import base64 from '../../services/ClientServices/Base64';
 import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { BookCard } from '../BookCard/BookCard';
 import { Loader } from '../UI/Loader/Loader';
