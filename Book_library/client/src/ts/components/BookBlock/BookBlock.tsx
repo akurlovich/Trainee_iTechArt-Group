@@ -1,21 +1,27 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
+import { getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { getBookByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { IBookResponse } from '../../types/IBookResponse';
 import './bookblock.scss';
 
 interface IBooKBlock {
   bgColor?: string,
-  book?: IBookResponse,
+  book: IBookResponse,
 }
 
 const BookBlockItem: FC<IBooKBlock> = ({bgColor, book}) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const style = {
     background: bgColor,
   };
-  const handlerMore = () => {
-    navigate(`/book/${book?._id}`)
-  }
+  const handlerMore = async () => {
+    await dispatch(getBookByID(book._id));
+    await dispatch(getAllBookedsByBookID(book._id));
+    navigate(`/book/${book._id}`);
+  };
   return (
     <div className="bookblock">
       <div className="bookblock__container" style={style}>

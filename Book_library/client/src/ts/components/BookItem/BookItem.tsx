@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
@@ -11,54 +11,59 @@ import { UserBooking } from '../UserBooking/UserBooking';
 import './bookitem.scss';
 
 const BookItemInner: FC = () => {
+  const {isAuth, user} = useAppSelector(state => state.authReducer);
   const {book, isLoading} = useAppSelector(state => state.bookReducer);
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {bookID} = useParams();
   const [booking, setBooking] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(true)
 
   const findBooked = (array: IBookedResponse[]) => {
-    return array.find(item => item.bookID === book._id);
+    const bookArray = array.filter(item => item.bookID === book._id);
+    return bookArray.find(item => item.userID === user.id);
   }
 
   useEffect(() => {
-    if (bookID) {
-      dispatch(getBookByID(bookID));
-      dispatch(getAllBookedsByBookID(bookID));
-    }
+    (async () => {
+      if (book._id) {
+        await dispatch(getBookByID(book._id));
+        console.log('from book book id', book.title);
+        await dispatch(getAllBookedsByBookID(book._id));
+      } else if (bookID) {
+        await dispatch(getBookByID(bookID));
+        console.log('from book params', book.title);
+        await dispatch(getAllBookedsByBookID(bookID));
+      }
+    })()
   }, []);
 
   useEffect(() => {
-    console.log('from bookedID');
+    console.log('from bookedID', bookedsBookID);
     if (findBooked(bookedsBookID)) {
       console.log('book found');
       setIsBooked(true);
     }
   }, [bookedsBookID]);
 
-  useEffect(() => {
-    console.log('amout', book.amount)
-    if (book.amount <= 0) {
-      setIsAvailable(false);
-    }
-  }, [book]);
-
   const bookingHandler = () => {
-    setBooking(true);
-    console.log('booked', bookedsBookID);
+    if (isAuth) {
+      setBooking(true);
+      console.log('booked', bookedsBookID);
+    } else {
+      navigate(`/login`);
+    }
   };
 
-  const canselBookingHandler = () => {
+  const canselBookingHandler = async () => {
     const booked = findBooked(bookedsBookID);
     console.log('from cansel', booked)
     console.log('from cansel bookedsBookID', bookedsBookID)
     if (booked) {
-      dispatch(deleteBooked(booked._id));
-      dispatch(getAllBookedsByBookID(book._id));
+      await dispatch(deleteBooked(booked._id));
+      await dispatch(getAllBookedsByBookID(book._id));
       setIsBooked(false);
-      dispatch(updateBookAmountByID({id: book._id, amount: book.amount + 1}));
     }
   }
 

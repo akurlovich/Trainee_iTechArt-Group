@@ -5,7 +5,7 @@ import bookTwo from '../../../assets/book-2.png';
 import bookThree from '../../../assets/book-3.png';
 import { IBookResponse } from '../../types/IBookResponse';
 import successIcon from '../../../assets/Success-Icon.png';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useDispatch } from 'react-redux';
 import { addBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
@@ -17,17 +17,17 @@ interface IProps {
 
 const UserBookingInner: FC<IProps> = ({book, setData}) => {
   const { user } = useAppSelector(state => state.authReducer);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [success, setSuccess] = useState(false);
   const canselHandler = () => {
     setData(false);
   };
-  const bookedHandler = () => {
+  const bookedHandler = async () => {
     setSuccess(true);
     console.log('book', book?._id, 'user', user.id);
-    dispatch(addBooked({bookID: book?._id, userID: user.id}));
-    dispatch(getAllBookedsByBookID(book._id));
-    dispatch(updateBookAmountByID({id: book._id, amount: book.amount - 1}));
+    await dispatch(addBooked({bookID: book._id, userID: user.id}));
+    await dispatch(getAllBookedsByBookID(book._id));
+    // await dispatch(updateBookAmountByID({id: book._id, amount: book.amount - 1}));
   };
 
   return (

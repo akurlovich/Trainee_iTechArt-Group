@@ -1,9 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/Base64';
+import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { BookCard } from '../BookCard/BookCard';
+import { Loader } from '../UI/Loader/Loader';
 import './UserProfile.scss';
 
 const UserProfileInner: FC = () => {
+  const {user} = useAppSelector(state => state.authReducer);
+  const {userBookedBooks, isLoading} = useAppSelector(state => state.bookedReducer);
+  const dispatch = useAppDispatch();
   const [imageSrc, setImageSrc] = useState('./assets/book-1.png');
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
@@ -11,9 +17,15 @@ const UserProfileInner: FC = () => {
     if (urlImage) {
       setImageSrc(urlImage as string)
     }
-  }
+  };
+
+  useEffect(() => {
+    dispatch(getBookedsForUser(user.id))
+  }, []);
+
   return (
     <div className='profile'>
+      {isLoading && <Loader/>}
       <div className="profile__container">
         <div className="profile__info">
           <div className="profile__title">User information</div>
@@ -27,7 +39,7 @@ const UserProfileInner: FC = () => {
           </div>
           <div className="profile__info__email">
             <div className="profile__info__email_title">User email:</div>
-            <div className="profile__info__email_adress">yandex_and_tut@tut_mail.by</div>
+            <div className="profile__info__email_adress">{user.email}</div>
           </div>
           <div className="profile__info__password">
             <div className="profile__info__password__block">
@@ -40,14 +52,17 @@ const UserProfileInner: FC = () => {
         </div>
         <div className="profile__books">
           <div className="profile__title">Booked books:</div>
+          {userBookedBooks.length ?
+          userBookedBooks.map(booked => <BookCard key={booked._id} book={booked}/>)
+          :
+          <div className="profile__title">You havn`t booked books</div>}
+          {/* <BookCard/>
           <BookCard/>
-          <BookCard/>
-          <BookCard/>
-          <BookCard/>
+          <BookCard/> */}
         </div>
         <div className="profile__books">
         <div className="profile__title">Issued books:</div>
-          <BookCard/>
+          {/* <BookCard/> */}
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ class BookController {
     try {
       const { id, amount } = req.body;
       const book = await bookService.updateBookAmountByID(id, amount);
-      console.log('update', book)
+      // console.log('update', book)
       return res.json(book)
     } catch (error) {
       console.log(error);

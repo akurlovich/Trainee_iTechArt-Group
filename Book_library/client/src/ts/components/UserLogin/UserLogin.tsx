@@ -41,6 +41,8 @@ const UserLoginInner: FC = () => {
     if (isAuth) {
       if (prevPage.from) {
         navigate(prevPage.from)
+      } else {
+        navigate('/')
       }
     }
   }, [password, email, isAuth]);
