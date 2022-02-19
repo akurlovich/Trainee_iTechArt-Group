@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { deleteBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { deleteBookedAndReturnAmount, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { IBookedResponse } from '../../types/IBookedResponse';
 import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
@@ -61,7 +61,7 @@ const BookItemInner: FC = () => {
     console.log('from cansel', booked)
     console.log('from cansel bookedsBookID', bookedsBookID)
     if (booked) {
-      await dispatch(deleteBooked(booked._id));
+      await dispatch(deleteBookedAndReturnAmount(booked._id));
       await dispatch(getAllBookedsByBookID(book._id));
       setIsBooked(false);
     }

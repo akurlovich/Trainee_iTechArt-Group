@@ -12,8 +12,6 @@ class BookedController {
     }
   };
 
-  //! возможно не нужен!!!!!!!!!!!!!!! подумать как получить ответ либо по id юзера или id книги
-
   async getAllBookedsBookID(req: Request<{ id: string}>, res: Response, next: NextFunction) {
     try {
       const booked = await bookedService.getAllBookedsBookID(req.params.id);
@@ -57,7 +55,6 @@ class BookedController {
   async deleteBooked(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
       const booked = await bookedService.deleteBooked(req.params.id);
-      console.log('deletw', booked)
       return res.json(booked);
     } catch (error) {
       console.log(error);

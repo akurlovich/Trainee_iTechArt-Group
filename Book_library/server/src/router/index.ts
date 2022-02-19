@@ -6,6 +6,7 @@ import bookController from '../controllers/book-controller';
 import genreController from '../controllers/genre-controller';
 import roleController from '../controllers/role-controller';
 import bookedController from '../controllers/booked-controller';
+import issuedController from '../controllers/issued-controller';
 
 const router = Router();
 
@@ -40,5 +41,12 @@ router.get('/booked/:id', bookedController.getBookedByID);
 router.get('/bookeds', bookedController.getAllBookeds);
 router.post('/booked', bookedController.addBooked);
 router.delete('/booked/:id', bookedController.deleteBooked);
+
+router.get('/issued/books/:id', issuedController.getAllIssuedsBookID);
+router.get('/issued/users/:id', issuedController.getAllIssuedsUserID);
+router.get('/issued/:id', issuedController.getIssuedByID);
+router.get('/issueds', issuedController.getAllIssueds);
+router.post('/issued', issuedController.addIssued);
+router.delete('/issued/:id', issuedController.deleteIssued);
 
 export default router;

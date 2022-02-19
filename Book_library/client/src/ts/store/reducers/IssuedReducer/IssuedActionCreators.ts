@@ -1,19 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import BookedService from "../../../services/BookedService";
 import BookService from "../../../services/BookService";
-import { IBooked } from "../../../types/IBooked";
-import { IBookedResponse } from "../../../types/IBookedResponse";
+import IssuedService from "../../../services/IssuedService";
 import { IBookResponse } from "../../../types/IBookResponse";
-import { getBookByID } from "../BookReducer/BookActionCreatores";
+import { IIssued } from "../../../types/IIssued";
 
-export const addBooked = createAsyncThunk(
-  'BOOKED/addBooked',
-  async (booked: IBooked, {rejectWithValue}) => {
+export const addIssued = createAsyncThunk(
+  'ISSUED/addIssued',
+  async (issued: IIssued, {rejectWithValue}) => {
     try {
-      const response = await BookedService.addBooked(booked);
-      const book = await BookService.getBookByID(booked.bookID);
-      const updateBook = await BookService.updateBookAmountByID({id: book.data._id, amount: book.data.amount - 1});
-      console.log(response.data)
+      const response = await IssuedService.addIssued(issued);
+      const bookeds = await (await BookedService.getAllBookedsByBookID(issued.bookID)).data;
+      const foundByUser = bookeds.find(booked => booked.userID === issued.userID);
+      if (foundByUser) {
+        const delBooked = await BookedService.deleteBooked(foundByUser?._id);
+      }
+      console.log('addIssued', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -22,12 +24,12 @@ export const addBooked = createAsyncThunk(
   }
 );
 
-export const getBookeds = createAsyncThunk(
-  'BOOKED/getBookeds',
+export const getIssueds = createAsyncThunk(
+  'ISSUED/getIssueds',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await BookedService.getBookeds();
-      console.log('getBookeds', response.data)
+      const response = await IssuedService.getIssueds();
+      console.log('getIssueds', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -36,12 +38,12 @@ export const getBookeds = createAsyncThunk(
   }
 );
 
-export const getAllBookedsByBookID = createAsyncThunk(
-  'BOOKED/getAllBookedsByBookID',
+export const getAllIssuedsByBookID = createAsyncThunk(
+  'ISSUED/getAllIssuedsByBookID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await BookedService.getAllBookedsByBookID(id);
-      console.log('getAllBookedsByBookID', response.data)
+      const response = await IssuedService.getAllIssuedsByBookID(id);
+      console.log('getAllIssuedsByBookID', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -50,12 +52,12 @@ export const getAllBookedsByBookID = createAsyncThunk(
   }
 );
 
-export const getAllBookedsByUserID = createAsyncThunk(
-  'BOOKED/getAllBookedsByUserID',
+export const getAllIssuedsByUserID = createAsyncThunk(
+  'ISSUED/getAllIssuedsByUserID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await BookedService.getAllBookedsByUserID(id);
-      console.log('getAllBookedsByUserID', response.data)
+      const response = await IssuedService.getAllIssuedsByUserID(id);
+      console.log('getAllIssuedsByUserID', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -64,12 +66,12 @@ export const getAllBookedsByUserID = createAsyncThunk(
   }
 );
 
-export const deleteBooked = createAsyncThunk(
-  'BOOKED/deleteBooked',
+export const deleteIssued = createAsyncThunk(
+  'ISSUED/deleteIssued',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await BookedService.deleteBooked(id);
-      console.log(response.data)
+      const response = await IssuedService.deleteIssued(id);
+      console.log('deleteIssued', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -78,14 +80,14 @@ export const deleteBooked = createAsyncThunk(
   }
 );
 
-export const deleteBookedAndReturnAmount = createAsyncThunk(
-  'BOOKED/deleteBookedAndReturnAmount',
+export const deleteIssuedAndReturnAmount = createAsyncThunk(
+  'ISSUED/deleteIssuedAndReturnAmount',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await BookedService.deleteBooked(id);
+      const response = await IssuedService.deleteIssued(id);
       const book = await BookService.getBookByID(response.data.bookID);
       const updateBook = await BookService.updateBookAmountByID({id: book.data._id, amount: book.data.amount + 1});
-      console.log(response.data)
+      console.log('deleteIssuedAndReturnAmount', response.data)
       return response.data;
       
     } catch (error: any) {
@@ -94,18 +96,18 @@ export const deleteBookedAndReturnAmount = createAsyncThunk(
   }
 );
 
-export const getBookedsForUser = createAsyncThunk(
-  'BOOKED/getBookedsForUser',
+export const getIssuedsForUser = createAsyncThunk(
+  'ISSUED/getIssuedsForUser',
   async (userID: string, {rejectWithValue}) => {
     try {
-      const bookeds = await (await BookedService.getAllBookedsByUserID(userID)).data;
+      const issueds = await (await IssuedService.getAllIssuedsByUserID(userID)).data;
       // console.log('getBookeds', bookeds)
       // const userBookeds = bookeds.filter(booked => booked.userID === userID);
       const userBooks = [] as IBookResponse[]
       // let book = await BookService.getBookByID(bookeds[i].bookID)
 
-      for (let i = 0; i < bookeds.length; i++) {
-        let book = await (await BookService.getBookByID(bookeds[i].bookID)).data;
+      for (let i = 0; i < issueds.length; i++) {
+        let book = await (await BookService.getBookByID(issueds[i].bookID)).data;
         // console.log(book)
         userBooks.push(book)
       };

@@ -12,12 +12,19 @@ class IssuedController {
     }
   };
 
-  //! возможно не нужен!!!!!!!!!!!!!!! подумать как получить ответ либо по id юзера или id книги
-
-  async getIssued(req: Request, res: Response, next: NextFunction) {
+  async getAllIssuedsBookID(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-      const { id } = req.body;
-      const issued = await issuedService.getIssued(id);
+      const issued = await issuedService.getAllIssuedsBookID(req.params.id);
+      return res.json(issued);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  async getAllIssuedsUserID(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+    try {
+      const issued = await issuedService.getAllIssuedsUserID(req.params.id);
       return res.json(issued);
     } catch (error) {
       console.log(error);
@@ -39,6 +46,16 @@ class IssuedController {
     try {
       const issueds = await issuedService.getAllIssueds();
       return res.json(issueds);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  async deleteIssued(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+    try {
+      const issued = await issuedService.deleteIssued(req.params.id);
+      return res.json(issued);
     } catch (error) {
       console.log(error);
       next(error);

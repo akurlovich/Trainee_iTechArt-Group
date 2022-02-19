@@ -3,7 +3,7 @@ import { IBookResponse } from '../../types/IBookResponse';
 import { FcCancel, FcAlarmClock } from "react-icons/fc";
 import './bookcard.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { deleteBooked, getAllBookedsByUserID, getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { deleteBookedAndReturnAmount, getAllBookedsByUserID, getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { timeCulculate } from '../../services/ClientServices/TimeCulculate';
 
 interface IProps {
@@ -23,7 +23,7 @@ const BookCardInner:FC<IProps> = ({book}) => {
     console.log('by user', bookedsUserID);
     const findBooked = bookedsUserID.find(booked => booked.bookID === book._id);
     if (findBooked) {
-      await dispatch(deleteBooked(findBooked?._id));
+      await dispatch(deleteBookedAndReturnAmount(findBooked?._id));
       await dispatch(getBookedsForUser(user.id));
       console.log('del');
     }

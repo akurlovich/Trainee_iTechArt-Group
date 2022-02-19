@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBookedResponse } from "../../../types/IBookedResponse";
 import { IBookResponse } from "../../../types/IBookResponse";
-import { addBooked, deleteBooked, getAllBookedsByBookID, getAllBookedsByUserID, getBookedsForUser,  } from "./BookedActionCreators";
+import { addBooked, deleteBooked, deleteBookedAndReturnAmount, getAllBookedsByBookID, getAllBookedsByUserID, getBookedsForUser,  } from "./BookedActionCreators";
 
 interface IBookedState {
   booked: IBookedResponse,
@@ -68,6 +68,16 @@ export const bookedSlice = createSlice({
       state.isLoading = false;
     },
     [deleteBooked.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [deleteBookedAndReturnAmount.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteBookedAndReturnAmount.fulfilled.type]: (state) => {
+      state.isLoading = false;
+    },
+    [deleteBookedAndReturnAmount.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

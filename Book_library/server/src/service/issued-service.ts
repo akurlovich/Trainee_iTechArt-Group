@@ -3,23 +3,27 @@ import { IIssued } from "../types/IIssued";
 
 class IssuedService {
   async addIssued(issued: IIssued) {
-    const newIssued = await issuedModel.create(issued);
-    return newIssued;
+    return await issuedModel.create(issued);
   };
 
-  async getIssued(value: string) {
-    const issued = await issuedModel.findOne({value});
-    return issued;
+  async getAllIssuedsBookID(bookID: string) {
+    return await issuedModel.findOne({bookID});
+  };
+
+  async getAllIssuedsUserID(userID: string) {
+    return await issuedModel.findOne({userID});
   };
 
   async getIssuedByID(id: string) {
-    const issued = await issuedModel.findById(id);
-    return issued;
+    return await issuedModel.findById(id);
   };
 
   async getAllIssueds() {
-    const issueds = await issuedModel.find();
-    return issueds;
+    return await issuedModel.find();
+  };
+
+  async deleteIssued(id: string) {
+    return await issuedModel.findByIdAndDelete(id);
   };
 };
 
