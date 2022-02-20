@@ -6,8 +6,12 @@ class CommentService {
     return await commentModel.create(comment);
   };
 
-  async getComment(value: string) {
-    return await commentModel.findOne({value});
+  async getAllCommentsBookID(bookID: string) {
+    return await commentModel.findOne({bookID});
+  };
+
+  async getAllCommentsUserID(userID: string) {
+    return await commentModel.findOne({userID});
   };
 
   async getCommentByID(id: string) {
@@ -16,6 +20,14 @@ class CommentService {
 
   async getAllComments() {
     return await commentModel.find();
+  };
+
+  async updateCommetByModerator(id: string, comment: string) {
+    return await commentModel.findByIdAndUpdate({_id: id}, {comment: comment}, {new: true});
+  };
+
+  async deleteComment(id: string) {
+    return await commentModel.findByIdAndDelete(id);
   };
 };
 

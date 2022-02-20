@@ -12,12 +12,19 @@ class CommentController {
     }
   };
 
-  //! возможно не нужен!!!!!!!!!!!!!!! подумать как получить ответ либо по id юзера или id книги
-
-  async getComment(req: Request, res: Response, next: NextFunction) {
+  async getAllCommentsBookID(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-      const { id } = req.body;
-      const comment = await commentService.getComment(id);
+      const comment = await commentService.getAllCommentsBookID(req.params.id);
+      return res.json(comment);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  async getAllCommentsUserID(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+    try {
+      const comment = await commentService.getAllCommentsUserID(req.params.id);
       return res.json(comment);
     } catch (error) {
       console.log(error);
@@ -38,6 +45,27 @@ class CommentController {
   async getAllComments(req: Request, res: Response, next: NextFunction) {
     try {
       const comment = await commentService.getAllComments();
+      return res.json(comment);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  async updateCommetByModerator(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id, comment } = req.body;
+      const updateComment = await commentService.updateCommetByModerator(id, comment);
+      return res.json(updateComment);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  async deleteComment(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+    try {
+      const comment = await commentService.deleteComment(req.params.id);
       return res.json(comment);
     } catch (error) {
       console.log(error);

@@ -7,6 +7,7 @@ import genreController from '../controllers/genre-controller';
 import roleController from '../controllers/role-controller';
 import bookedController from '../controllers/booked-controller';
 import issuedController from '../controllers/issued-controller';
+import commentConroller from '../controllers/comment-conroller';
 
 const router = Router();
 
@@ -48,5 +49,13 @@ router.get('/issued/:id', issuedController.getIssuedByID);
 router.get('/issueds', issuedController.getAllIssueds);
 router.post('/issued', issuedController.addIssued);
 router.delete('/issued/:id', issuedController.deleteIssued);
+
+router.get('/comment/books/:id', commentConroller.getAllCommentsBookID);
+router.get('/comment/users/:id', commentConroller.getAllCommentsUserID);
+router.get('/comment/:id', commentConroller.getCommentByID);
+router.get('/comments', commentConroller.getAllComments);
+router.post('/comment', commentConroller.addComment);
+router.put('/comment', commentConroller.updateCommetByModerator);
+router.delete('/comment/:id', commentConroller.deleteComment);
 
 export default router;
