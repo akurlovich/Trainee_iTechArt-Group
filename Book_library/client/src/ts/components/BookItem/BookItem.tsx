@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteBookedAndReturnAmount, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { getAllCommentByBookID } from '../../store/reducers/CommentReducer/CommentActionCreators';
 import { IBookedResponse } from '../../types/IBookedResponse';
 import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
@@ -80,6 +81,7 @@ const BookItemInner: FC = () => {
               </div>
               <div className="bookitem__info">
                 <div className="bookitem__title">
+                {/* {commentsByBookID.length && commentsByBookID[0].comment} */}
                   {book?.title}
                 </div>
                 <div className="bookitem__detaile">

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICommentResponse } from "../../../types/ICommentResponse";
-import { addComment, getAllCommentByBookID, updateCommentByModerator } from "./CommentActionCreators";
+import { addComment, getAllCommentByBookID, getComments, updateCommentByModerator } from "./CommentActionCreators";
 
 interface ICommentState {
   comment: ICommentResponse,
@@ -33,6 +33,17 @@ export const commentSlice = createSlice({
       state.comment = action.payload;
     },
     [addComment.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [getComments.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getComments.fulfilled.type]: (state, action: PayloadAction<ICommentResponse[]>) => {
+      state.isLoading = false;
+      state.comments = action.payload;
+    },
+    [getComments.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

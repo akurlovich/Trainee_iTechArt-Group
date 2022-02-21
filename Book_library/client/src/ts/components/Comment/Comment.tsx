@@ -1,14 +1,20 @@
 import React, { FC } from 'react';
+import { ICommentResponse } from '../../types/ICommentResponse';
 import './comment.scss';
 
-const CommentInner:FC = () => {
+interface IProps {
+  comment?: ICommentResponse,
+  user?: string,
+}
+
+const CommentInner:FC<IProps> = ({comment, user}) => {
   return (
     <div className="comments__item">
       <div className="comments__user">
-        Ivan
+        {user}
       </div>
       <div className="comments__text">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem exercitationem id, iusto eos quam atque possimus soluta, sunt veniam perspiciatis harum iste ullam illum hic vero eum error pariatur corrupti.
+        {comment?.comment}
       </div>
     </div>
   );

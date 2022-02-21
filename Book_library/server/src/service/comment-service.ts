@@ -7,11 +7,11 @@ class CommentService {
   };
 
   async getAllCommentsBookID(bookID: string) {
-    return await commentModel.findOne({bookID});
+    return await commentModel.find({bookID});
   };
 
   async getAllCommentsUserID(userID: string) {
-    return await commentModel.findOne({userID});
+    return await commentModel.find({userID});
   };
 
   async getCommentByID(id: string) {

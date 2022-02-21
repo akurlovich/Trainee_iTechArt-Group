@@ -7,11 +7,11 @@ class IssuedService {
   };
 
   async getAllIssuedsBookID(bookID: string) {
-    return await issuedModel.findOne({bookID});
+    return await issuedModel.find({bookID});
   };
 
   async getAllIssuedsUserID(userID: string) {
-    return await issuedModel.findOne({userID});
+    return await issuedModel.find({userID});
   };
 
   async getIssuedByID(id: string) {
