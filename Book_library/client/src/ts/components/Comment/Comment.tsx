@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FcCancel } from 'react-icons/fc';
-import { DEFAULT_COMMENT } from '../../constants/user';
+import { ADMIN_ROLE, DEFAULT_COMMENT } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllCommentByBookID, updateCommentByModerator } from '../../store/reducers/CommentReducer/CommentActionCreators';
 import { ICommentResponse } from '../../types/ICommentResponse';
@@ -34,7 +34,7 @@ const CommentInner:FC<IProps> = ({comment, user, bookID}) => {
         <div
           onClick={canselHandler}
           className="comments__text_delete">
-          {role === 'moderator' && <FcCancel size={60}/>}
+          {role === ADMIN_ROLE && <FcCancel size={60}/>}
         </div>
       </div>
     </div>
