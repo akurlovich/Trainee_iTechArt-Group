@@ -16,16 +16,17 @@ const CommentsBlockInner:FC = () => {
   useEffect(() => {
     (async () => {
       if (bookID) {
-        console.log('object');
+        // console.log('object');
         await dispatch(getAllCommentByBookID(bookID));
       }
     })()
   }, [])
   
 
-  const commentHandler = () => {
+  const commentHandler = async () => {
     if (bookID) {
-      dispatch(addComment({bookID: bookID, userID: user.id, comment: text}));
+      await dispatch(addComment({bookID: bookID, userID: user.id, comment: text}));
+      await dispatch(getAllCommentByBookID(bookID));
     }
     setText('');
   }
@@ -39,7 +40,7 @@ const CommentsBlockInner:FC = () => {
       {/* {comments.length && comments[0].comment}
       {commentsByBookID.length && commentsByBookID[0].comment} */}
       {commentsByBookID.length ? commentsByBookID.map(item => 
-        <Comment key={item._id} comment={item} user={user.email}/>) : null}
+        <Comment key={item._id} comment={item} user={user.email} bookID={bookID}/>) : null}
       
       <div className="comments__add">
         <div className="comments__add__block">
