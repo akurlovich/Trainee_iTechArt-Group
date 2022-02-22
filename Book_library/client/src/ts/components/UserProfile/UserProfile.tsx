@@ -30,7 +30,7 @@ const UserProfileInner: FC = () => {
     (async () => {
       await dispatch(getBookedsForUser(user.id));
       await dispatch(getIssuedsForUser(user.id));
-    })
+    })()
     if (user.id !== userID) {
       // navigate(`/login`, {state: {from: location.pathname}});
       navigate(`/login`);
