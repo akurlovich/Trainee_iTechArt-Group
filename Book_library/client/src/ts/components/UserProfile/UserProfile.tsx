@@ -26,7 +26,8 @@ const UserProfileInner: FC = () => {
   useEffect(() => {
     dispatch(getBookedsForUser(user.id));
     if (user.id !== userID) {
-      navigate(`/login`, {state: {from: location.pathname}});
+      // navigate(`/login`, {state: {from: location.pathname}});
+      navigate(`/login`);
     }
   }, []);
 

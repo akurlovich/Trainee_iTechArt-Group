@@ -6,5 +6,9 @@ import { IUser } from "../types/IUser";
 export default class UserService {
   static async fetchUsers(): Promise<AxiosResponse<IUser[]>> {
     return serverApi.get<IUser[]>('/users')
-  }
+  };
+
+  static async getUserByID(id: string): Promise<AxiosResponse<IUser>> {
+    return serverApi.get<IUser>(`/users/${id}`)
+  };
 }

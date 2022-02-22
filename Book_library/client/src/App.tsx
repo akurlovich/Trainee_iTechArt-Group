@@ -17,6 +17,7 @@ import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/Layo
 import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/RequireAuth';
 import { AdminAuthRouter } from './ts/components/RouterComponents/AdminAuth/AdminAuthRouter';
 import { Booking } from './ts/components/Booking/Booking';
+import { allUserAndBookeds } from './ts/services/ClientServices/UsersBookeds';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -35,12 +36,13 @@ const App: FC = () => {
   // };
 
   const getUsers = async () => {
-    try {
-      const response = await UserService.fetchUsers();
-      console.log('users', response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const response = await UserService.fetchUsers();
+    //   console.log('users', response.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    console.log(await allUserAndBookeds())
   }
   
 
