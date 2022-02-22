@@ -28,7 +28,7 @@ const HeaderInner: FC = () => {
                     <Link to='/'>Home</Link>
                   </li>
                   <li className='navigation__menu_item'>
-                    <Link to='/confirm_booking'>Booking</Link>
+                    <Link to='/booking'>Booking</Link>
                   </li>
                   <li className='navigation__menu_item'>
                     <Link to='/addbook'>Add book</Link>

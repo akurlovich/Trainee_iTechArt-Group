@@ -16,6 +16,7 @@ import UserService from './ts/services/UserService';
 import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/LayoutRouter';
 import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/RequireAuth';
 import { AdminAuthRouter } from './ts/components/RouterComponents/AdminAuth/AdminAuthRouter';
+import { Booking } from './ts/components/Booking/Booking';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -63,6 +64,11 @@ const App: FC = () => {
           <Route path='addbook' element={
             <AdminAuthRouter>
               <AddBook/>
+            </AdminAuthRouter>
+            }/>
+          <Route path='booking' element={
+            <AdminAuthRouter>
+              <Booking/>
             </AdminAuthRouter>
             }/>
           <Route path='book' element={<BookItem/>}/>
