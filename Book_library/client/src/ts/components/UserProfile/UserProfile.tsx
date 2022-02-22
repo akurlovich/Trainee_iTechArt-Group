@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { getAllIssuedsByUserID, getIssuedsForUser } from '../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { BookCard } from '../BookCard/BookCard';
 import { Loader } from '../UI/Loader/Loader';
 import './UserProfile.scss';
@@ -10,11 +11,13 @@ import './UserProfile.scss';
 const UserProfileInner: FC = () => {
   const {user} = useAppSelector(state => state.authReducer);
   const {userBookedBooks, isLoading} = useAppSelector(state => state.bookedReducer);
+  const { userIssuedBooks } = useAppSelector(state => state.issuedReducer);
   const dispatch = useAppDispatch();
   const {userID} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [imageSrc, setImageSrc] = useState('./assets/book-1.png');
+  
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
     const urlImage = await base64(file);
@@ -24,7 +27,10 @@ const UserProfileInner: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getBookedsForUser(user.id));
+    (async () => {
+      await dispatch(getBookedsForUser(user.id));
+      await dispatch(getIssuedsForUser(user.id));
+    })
     if (user.id !== userID) {
       // navigate(`/login`, {state: {from: location.pathname}});
       navigate(`/login`);
@@ -70,7 +76,10 @@ const UserProfileInner: FC = () => {
         </div>
         <div className="profile__books">
         <div className="profile__title">Issued books:</div>
-          {/* <BookCard/> */}
+          {userIssuedBooks.length ?
+          userIssuedBooks.map(booked => <BookCard key={booked._id} book={booked}/>)
+          :
+          <div className="profile__title">You havn`t booked books</div>}
         </div>
       </div>
     </div>

@@ -1,14 +1,22 @@
 import React, { FC } from 'react';
 import { FcCancel, FcApproval } from "react-icons/fc";
-import book1 from '../../../../assets/book-1.png';
+import { useAppDispatch } from '../../../hooks/redux';
+import { allUsersAndBookeds } from '../../../store/reducers/BookedReducer/BookedActionCreators';
+import { addIssued } from '../../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { IBookResponse } from '../../../types/IBookResponse';
 import { IUsersAndBookeds } from '../../../types/IUsersAndBookeds';
 
 interface IProps {
   userBooks: IBookResponse,
+  userID: string,
 }
 
-const BookingCardInner:FC<IProps> = ({userBooks}) => {
+const BookingCardInner:FC<IProps> = ({userBooks, userID}) => {
+  const dispatch = useAppDispatch();
+  const approvalHandler = async () => {
+    await dispatch(addIssued({userID: userID, bookID: userBooks._id}));
+    await dispatch(allUsersAndBookeds());
+  }
   return ( 
     <div className="bookings__item">
       <img src={userBooks.coverImage} alt="" className="bookings__item__image" />
@@ -19,7 +27,9 @@ const BookingCardInner:FC<IProps> = ({userBooks}) => {
         <div className="bookings__item__button">
           <FcCancel size={60}/>
         </div>
-        <div className="bookings__item__button">
+        <div
+          onClick={approvalHandler}
+          className="bookings__item__button">
           <FcApproval size={60}/>
         </div>
       </div>
