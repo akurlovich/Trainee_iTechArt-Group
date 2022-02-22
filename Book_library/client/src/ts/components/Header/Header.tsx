@@ -44,7 +44,7 @@ const HeaderInner: FC = () => {
               <li className='navigation__item'>
                 <ul className='navigation__user'>
                   <li className='navigation__user_item'>
-                    <Link to='/profile'>Profile</Link>
+                    <Link to={`/profile/${user.id}`}>Profile</Link>
                   </li>
                   <li className='navigation__user_item'>
                     <Link to='/login'>Log in</Link>

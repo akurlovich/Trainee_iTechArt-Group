@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteBookedAndReturnAmount, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
@@ -17,6 +17,7 @@ const BookItemInner: FC = () => {
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const {bookID} = useParams();
   const [booking, setBooking] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
@@ -53,7 +54,7 @@ const BookItemInner: FC = () => {
       setBooking(true);
       console.log('booked', bookedsBookID);
     } else {
-      navigate(`/login`);
+      navigate(`/login`, {state: {from: location.pathname}});
     }
   };
 

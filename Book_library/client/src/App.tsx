@@ -54,7 +54,7 @@ const App: FC = () => {
           <Route index element={<AllBooks/>}/>
           <Route path='login' element={<UserLogin/>}/>
           <Route path='registration' element={<UserRegistration/>}/>
-          <Route path='profile' element={
+          <Route path='profile/:userID' element={
             <RequireAuth>
               <UserProfile/>
             </RequireAuth>

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
@@ -10,6 +11,9 @@ const UserProfileInner: FC = () => {
   const {user} = useAppSelector(state => state.authReducer);
   const {userBookedBooks, isLoading} = useAppSelector(state => state.bookedReducer);
   const dispatch = useAppDispatch();
+  const {userID} = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [imageSrc, setImageSrc] = useState('./assets/book-1.png');
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
@@ -20,7 +24,10 @@ const UserProfileInner: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getBookedsForUser(user.id))
+    dispatch(getBookedsForUser(user.id));
+    if (user.id !== userID) {
+      navigate(`/login`, {state: {from: location.pathname}});
+    }
   }, []);
 
   return (
