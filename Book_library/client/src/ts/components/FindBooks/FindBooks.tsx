@@ -7,7 +7,7 @@ const FindBooksInner:FC = () => {
   return (
     <div className="findbooks">
       <SearchBlock/>
-      <ResultBlock/>
+      {/* <ResultBlock/> */}
     </div>
   );
 };
