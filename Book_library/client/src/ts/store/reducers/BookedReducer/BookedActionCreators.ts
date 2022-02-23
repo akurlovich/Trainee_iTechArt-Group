@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import BookedService from "../../../services/BookedService";
 import BookService from "../../../services/BookService";
-import { allUserAndBookeds, usersBookeds } from "../../../services/ClientServices/UsersBookeds";
+import { allUserBookedsAndIssueds, usersBookeds } from "../../../services/ClientServices/UsersBookeds";
 import { IBooked } from "../../../types/IBooked";
 import { IBookResponse } from "../../../types/IBookResponse";
 
@@ -118,7 +118,7 @@ export const allUsersAndBookeds = createAsyncThunk(
   async (_, {rejectWithValue}) => {
     try {
 
-      const response = await allUserAndBookeds();
+      const response = await allUserBookedsAndIssueds();
       
       return response;
 

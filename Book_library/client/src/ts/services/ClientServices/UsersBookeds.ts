@@ -1,8 +1,9 @@
 import { IBookResponse } from "../../types/IBookResponse";
-import { IUsersAndBookeds } from "../../types/IUsersAndBookeds";
+import { IUsersBookedsAndIssueds } from "../../types/IUsersAndBookeds";
 import BookedService from "../BookedService";
 import BookService from "../BookService";
 import UserService from "../UserService";
+import IssuedService from '../IssuedService';
 
 export const usersBookeds = async (userID: string) => {
   const bookeds = await (await BookedService.getAllBookedsByUserID(userID)).data;
@@ -16,18 +17,47 @@ export const usersBookeds = async (userID: string) => {
   return userBooks;
 };
 
-export const allUserAndBookeds = async () => {
+// export const allUserAndBookeds = async () => {
+//   const allBookeds = await (await BookedService.getBookeds()).data;
+//   const newUserID: string[] = [];
+//   const allUserBookeds: IUsersBookedsAndIssueds[] = [];
+
+//   for (let i = 0; i < allBookeds.length; i++) {
+//     if (!newUserID.includes(allBookeds[i].userID)) {
+//       newUserID.push(allBookeds[i].userID);
+//       const user = await (await UserService.getUserByID(allBookeds[i].userID)).data;
+//       const userBooks = await usersBookeds(allBookeds[i].userID);
+//       allUserBookeds.push({user: user, userBooks: userBooks})
+//     }
+//   }
+//   return allUserBookeds;
+// };
+
+export const usersIssueds = async (userID: string) => {
+  const issueds = await (await IssuedService.getAllIssuedsByUserID(userID)).data;
+  const userIssueds = [] as IBookResponse[];
+
+  for (let i = 0; i < issueds.length; i++) {
+    let book = await (await BookService.getBookByID(issueds[i].bookID)).data;
+    userIssueds.push(book)
+  };
+
+  return userIssueds;
+};
+
+export const allUserBookedsAndIssueds = async () => {
   const allBookeds = await (await BookedService.getBookeds()).data;
   const newUserID: string[] = [];
-  const allUserBookeds: IUsersAndBookeds[] = [];
+  const allUserBookeds: IUsersBookedsAndIssueds[] = [];
 
   for (let i = 0; i < allBookeds.length; i++) {
     if (!newUserID.includes(allBookeds[i].userID)) {
       newUserID.push(allBookeds[i].userID);
       const user = await (await UserService.getUserByID(allBookeds[i].userID)).data;
-      const userBooks = await usersBookeds(allBookeds[i].userID);
-      allUserBookeds.push({user: user, userBooks: userBooks})
+      const userBooksBookeds = await usersBookeds(allBookeds[i].userID);
+      const userBooksIssueds = await usersIssueds(allBookeds[i].userID);
+      allUserBookeds.push({user: user, userBookeds: userBooksBookeds, userIssueds: userBooksIssueds})
     }
   }
   return allUserBookeds;
-}
+};

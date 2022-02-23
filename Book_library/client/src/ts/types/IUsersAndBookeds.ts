@@ -1,7 +1,8 @@
 import { IBookResponse } from "./IBookResponse";
 import { IUser } from "./IUser";
 
-export interface IUsersAndBookeds {
+export interface IUsersBookedsAndIssueds {
   user: IUser,
-  userBooks: IBookResponse[],
+  userBookeds: IBookResponse[],
+  userIssueds: IBookResponse[],
 }

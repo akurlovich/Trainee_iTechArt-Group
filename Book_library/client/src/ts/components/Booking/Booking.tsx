@@ -6,7 +6,7 @@ import './booking.scss';
 import { BookingCard } from './BookingBooked/BookingCard';
 
 const BookingInner:FC = () => {
-  const { allUsersAndBooks, isLoading } = useAppSelector(state => state.bookedReducer);
+  const { allUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,19 +19,19 @@ const BookingInner:FC = () => {
     <div className="bookings">
       {isLoading && <Loader/>}
       <div className="bookings__container">
-        {allUsersAndBooks && allUsersAndBooks.map(item => (
+        {allUsersBookedsAndIssueds && allUsersBookedsAndIssueds.map(item => (
           <div key={item.user.id} className="bookings__card">
             <div className="bookings__card__user">{item.user.email}</div>
             <div className="bookings__card__block">
               <div className="bookings__booked booked_line">
                 <div className="bookings__booked__title">Booking</div>
-                 {item.userBooks.map(card => (
+                 {item.userBookeds.map(card => (
                    <BookingCard key={card._id} userID={item.user.id} userBooks={card}/>
                  ))}
               </div>
               <div className="bookings__booked">
                 <div className="bookings__booked__title">Issued</div>
-                {item.userBooks.map(card => (
+                {item.userIssueds.map(card => (
                    <BookingCard key={card._id} userID={item.user.id} userBooks={card}/>
                  ))}
               </div>

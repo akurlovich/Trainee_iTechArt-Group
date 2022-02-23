@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { allUsersAndBookeds } from '../../../store/reducers/BookedReducer/BookedActionCreators';
 import { addIssued } from '../../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { IBookResponse } from '../../../types/IBookResponse';
-import { IUsersAndBookeds } from '../../../types/IUsersAndBookeds';
+import { IUsersBookedsAndIssueds } from '../../../types/IUsersAndBookeds';
 
 interface IProps {
   userBooks: IBookResponse,
