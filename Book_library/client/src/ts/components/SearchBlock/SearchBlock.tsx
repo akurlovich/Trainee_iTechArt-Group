@@ -7,6 +7,8 @@ import { FormInput } from '../UI/FormInput/FormInput';
 import './searchblock.scss';
 import '../ResultBlock/resultblock.scss';
 import { getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { randomBGColor } from '../../services/ClientServices/RandomBGColor';
+import { BOOKS_BG_COLORS } from '../../constants/user';
 
 const SearchBlockInner:FC = () => {
   const {books} = useAppSelector(state => state.bookReducer);
@@ -91,7 +93,7 @@ const SearchBlockInner:FC = () => {
       </div>
       <div className="resultblock">
       {foundBooks.map(item => 
-        <BookBlock key={item._id} book={item} bgColor='#405F71'/>
+        <BookBlock key={item._id} book={item} bgColor={BOOKS_BG_COLORS[randomBGColor()]}/>
       )}
       </div>
     </>
