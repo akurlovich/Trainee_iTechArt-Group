@@ -27,11 +27,14 @@ const SearchBlockInner:FC = () => {
   
 
   const searchBooks = () => {
-    return books.filter(book => book.title.toLowerCase().includes(title))
+    const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author));
+    return found;
   };
 
   const searchHandler = () => {
     setFoundBooks(searchBooks());
+    setTitle('');
+    setAuthor('');
   };
 
   return (
