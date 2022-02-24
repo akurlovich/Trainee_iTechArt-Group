@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BOOKS_BG_COLORS } from '../../constants/user';
 import { useAppDispatch } from '../../hooks/redux';
+import { randomBGColor } from '../../services/ClientServices/RandomBGColor';
 import { getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { IBookResponse } from '../../types/IBookResponse';
@@ -15,7 +17,7 @@ const BookBlockItem: FC<IBooKBlock> = ({bgColor, book}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const style = {
-    background: bgColor,
+    background: BOOKS_BG_COLORS[randomBGColor()],
   };
   const handlerMore = async () => {
     await dispatch(getBookByID(book._id));

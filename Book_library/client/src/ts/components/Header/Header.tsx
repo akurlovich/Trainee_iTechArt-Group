@@ -3,10 +3,12 @@ import { Link, Outlet } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { logoutUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { Footer } from '../Footer/Footer';
+import logo from '../../../assets/book_logo.png';
 import './header.scss';
+import { ADMIN_ROLE } from '../../constants/user';
 
 const HeaderInner: FC = () => {
-  const {user} = useAppSelector(state => state.authReducer);
+  const {user, role, isAuth} = useAppSelector(state => state.authReducer);
   const dispatch = useAppDispatch();
   const logoutHandler = () => {
     dispatch(logoutUser());
@@ -19,7 +21,8 @@ const HeaderInner: FC = () => {
             <ul className='navigation__list'>
               <li className='navigation__item'>
                 <div className='navigation__logo'>
-                  {user?.email?.length > 0 ? `${user.email}` : 'LOGO'}
+                  <img className='navigation__logo__image' src={logo} alt="logo" />
+                  {/* {user?.email?.length > 0 ? `${user.email}` : 'LOGO'} */}
                 </div>
               </li>
               <li className='navigation__item'>
@@ -27,34 +30,48 @@ const HeaderInner: FC = () => {
                   <li className='navigation__menu_item'>
                     <Link to='/'>Home</Link>
                   </li>
-                  <li className='navigation__menu_item'>
-                    <Link to='/booking'>Booking</Link>
-                  </li>
-                  <li className='navigation__menu_item'>
-                    <Link to='/addbook'>Add book</Link>
-                  </li>
-                  <li className='navigation__menu_item'>
+                  {(role === ADMIN_ROLE) && 
+                  <>
+                    <li className='navigation__menu_item'>
+                      <Link to='/booking'>Booking</Link>
+                    </li>
+                    <li className='navigation__menu_item'>
+                      <Link to='/addbook'>Add book</Link>
+                    </li>
+                  </>
+                  }
+                  {/* <li className='navigation__menu_item'>
                     <Link to='/book'>Book</Link>
-                  </li>
+                  </li> */}
                   <li className='navigation__menu_item'>
-                    About
+                    <Link to='/about'>About</Link>
                   </li>
                 </ul>
               </li>
               <li className='navigation__item'>
                 <ul className='navigation__user'>
-                  <li className='navigation__user_item'>
-                    <Link to={`/profile/${user.id}`}>Profile</Link>
-                  </li>
-                  <li className='navigation__user_item'>
-                    <Link to='/login'>Log in</Link>
-                  </li>
-                  <li className='navigation__user_item'>
-                    <Link to='/registration'>Sing in</Link> 
-                  </li>
-                  <li onClick={logoutHandler} className='navigation__user_item'>
-                    Log out
-                  </li>
+                  {(isAuth && (role !== ADMIN_ROLE)) &&
+                  <>
+                    <li className='navigation__user_item'>
+                      <Link to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</Link>
+                    </li>
+                  </>}
+                  {!isAuth && 
+                  <>
+                    <li className='navigation__user_item'>
+                      <Link to='/login'>Log in</Link>
+                    </li>
+                    <li className='navigation__user_item'>
+                      <Link to='/registration'>Sing in</Link> 
+                    </li>
+                  </>}
+                  
+                  {isAuth && 
+                  <>
+                    <li onClick={logoutHandler} className='navigation__user_item'>
+                      <Link to='/'>Log out</Link>
+                    </li>
+                  </>}
                 </ul>
               </li>
             </ul>

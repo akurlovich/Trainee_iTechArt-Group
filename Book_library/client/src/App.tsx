@@ -18,6 +18,7 @@ import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/Requir
 import { AdminAuthRouter } from './ts/components/RouterComponents/AdminAuth/AdminAuthRouter';
 import { Booking } from './ts/components/Booking/Booking';
 import { allUserBookedsAndIssueds } from './ts/services/ClientServices/UsersBookeds';
+import { AboutLibrary } from './ts/components/AboutLibrary/AboutLibrary';
 
 const App: FC = () => {
   const { users, isLoading, error } = useAppSelector(state => state.userReducer);
@@ -50,19 +51,19 @@ const App: FC = () => {
     <div className='wrapper'>
       {isLoading && <h1 style={{fontSize: '200px'}}>loading</h1>}
       <h1 style={{fontSize: '200px'}}>{isAuth ? 'авторизован' : 'войдите'}</h1>
-      <button onClick={() => console.log(users, error)}>click</button>
-      <button onClick={getUsers}>USERS</button>
+      {/* <button onClick={() => console.log(users, error)}>click</button>
+      <button onClick={getUsers}>USERS</button> */}
       <Routes>
         <Route path='/' element={<LayoutRouter/>}>
           <Route index element={<AllBooks/>}/>
           <Route path='login' element={<UserLogin/>}/>
+          <Route path='about' element={<AboutLibrary/>}/>
           <Route path='registration' element={<UserRegistration/>}/>
           <Route path='profile/:userID' element={
             <RequireAuth>
               <UserProfile/>
             </RequireAuth>
           }/>
-          {/* <Route path='booking' element={<Booking/>}/> */}
           <Route path='addbook' element={
             <AdminAuthRouter>
               <AddBook/>
@@ -75,11 +76,6 @@ const App: FC = () => {
             }/>
           <Route path='book' element={<BookItem/>}/>
           <Route path='book/:bookID' element={<BookItem/>}/>
-          {/* <Route path='confirm-booking' element={
-            <RequireAuth>
-              <UserBooking/>
-            </RequireAuth>
-          }/> */}
           <Route path='*' element={<PageNotFound/>}/>
         </Route>
       </Routes>

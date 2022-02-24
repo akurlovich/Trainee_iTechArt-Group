@@ -25,6 +25,15 @@
 
   }
 
+  &__logo {
+    
+
+    &__image {
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+
   &__menu {
     display: flex;
     gap: 20px;
@@ -36,6 +45,7 @@
 
   &__user {
     display: flex;
+    align-items: center;
     gap: 20px;
 
     &_item {

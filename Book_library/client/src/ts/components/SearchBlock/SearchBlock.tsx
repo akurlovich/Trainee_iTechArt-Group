@@ -1,15 +1,13 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { IBookResponse } from '../../types/IBookResponse';
 import { BookBlock } from '../BookBlock/BookBlock';
+import { ResultBlock } from '../ResultBlock/ResultBlock';
 import { Checkbox } from '../UI/Checkbox/Checkbox';
 import { FormInput } from '../UI/FormInput/FormInput';
 import './searchblock.scss';
-import '../UI/Checkbox/checkbox.scss';
 import '../ResultBlock/resultblock.scss';
 import { getAllGenres, getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
-import { randomBGColor } from '../../services/ClientServices/RandomBGColor';
-import { BOOKS_BG_COLORS } from '../../constants/user';
 
 const SearchBlockInner:FC = () => {
   const {books, genres} = useAppSelector(state => state.bookReducer);
@@ -37,12 +35,15 @@ const SearchBlockInner:FC = () => {
   }, [books]);
 
   
-
-
+  
   const searchBooks = () => {
     const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author));
     return found;
   };
+
+  // const memoSearchBooks = useMemo(() => searchBooks(), [books, title, author, showBookeds])
+
+
 
   const searchHandler = () => {
     setFoundBooks(searchBooks());
@@ -57,6 +58,7 @@ const SearchBlockInner:FC = () => {
           <div className="searchblock__title">
             <FormInput
               label='Enter book title'
+              value={title}
               setData={setTitle}
               errorShow={false}
             />
@@ -64,6 +66,7 @@ const SearchBlockInner:FC = () => {
           <div className="searchblock__author">
             <FormInput
               label='Enter book author'
+              value={author}
               setData={setAuthor}
               errorShow={false}
             />
@@ -93,7 +96,7 @@ const SearchBlockInner:FC = () => {
             </div>
           </div>
           <div className="searchblock__booking">
-          <div className="checkbox">
+          {/* <div className="checkbox">
             <input 
               defaultChecked={showBookeds}
               onChange={showBookedHandler}
@@ -101,11 +104,11 @@ const SearchBlockInner:FC = () => {
               className='checkbox__input' type="checkbox" name="checkbox__input" id='Show booked books?' />
             <label className='checkbox__label' htmlFor='Show booked books?'>Show booked books?</label>
             <img className='checkbox__image' src="./assets/check-solid.svg" alt="check icon" />
-          </div>
-            {/* <Checkbox
+          </div> */}
+            <Checkbox
               defaultChecked={showBookeds}
               setData={showBookedHandler}
-              field='Show booked books?'/> */}
+              field='Show booked books?'/>
           </div>
           <div
             onClick={searchHandler}
@@ -114,11 +117,12 @@ const SearchBlockInner:FC = () => {
           </div>
         </div>
       </div>
-      <div className="resultblock">
+      <ResultBlock books={foundBooks}/>
+      {/* <div className="resultblock">
       {foundBooks.map(item => 
-        <BookBlock key={item._id} book={item} bgColor={BOOKS_BG_COLORS[randomBGColor()]}/>
+        <BookBlock key={item._id} book={item} />
       )}
-      </div>
+      </div> */}
     </>
   );
 };
