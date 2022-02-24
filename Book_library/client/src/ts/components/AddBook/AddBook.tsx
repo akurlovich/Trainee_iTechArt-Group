@@ -28,7 +28,6 @@ const AddBookInner: FC = () => {
     setAmount(+event.target.value);
   }
   const genreHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value);
     setGenre(event.target.value);
   }
   const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

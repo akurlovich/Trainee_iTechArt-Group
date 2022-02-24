@@ -1,32 +1,43 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { IBookResponse } from '../../types/IBookResponse';
 import { BookBlock } from '../BookBlock/BookBlock';
 import { Checkbox } from '../UI/Checkbox/Checkbox';
 import { FormInput } from '../UI/FormInput/FormInput';
 import './searchblock.scss';
+import '../UI/Checkbox/checkbox.scss';
 import '../ResultBlock/resultblock.scss';
-import { getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { getAllGenres, getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { randomBGColor } from '../../services/ClientServices/RandomBGColor';
 import { BOOKS_BG_COLORS } from '../../constants/user';
 
 const SearchBlockInner:FC = () => {
-  const {books} = useAppSelector(state => state.bookReducer);
+  const {books, genres} = useAppSelector(state => state.bookReducer);
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
+  const [genre, setGenre] = useState('');
+  const [showBookeds, setShowBookeds] = useState(true);
   const [foundBooks, setFoundBooks] = useState<IBookResponse[]>([]);
+
+  const showBookedHandler = () => {
+    setShowBookeds(prev => !prev)
+    console.log(showBookeds);
+  };
 
   useEffect(() => {
     if (!books.length) {
       dispatch(getBooks());
     }
+    dispatch(getAllGenres());
   }, []);
 
   useEffect(() => {
     setFoundBooks(searchBooks())
-  }, [books])
+  }, [books]);
+
   
+
 
   const searchBooks = () => {
     const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author));
@@ -58,16 +69,16 @@ const SearchBlockInner:FC = () => {
             />
           </div>
           <div className="searchblock__genre">
-            <div className="searchblock__genre__title">
-              Choose book genre:
-            </div>
-            <Checkbox field='Computer Science'/>
-            <Checkbox field='Deteсtive'/>
-            <Checkbox field='Dramma'/>
-            <Checkbox field='Fantasy'/>
-            <Checkbox field='History'/>
-            <Checkbox field='Sci-Fi'/>
-            <Checkbox field='Thrillers'/>
+            <select
+              onChange={(event) => setGenre(event.target.value)}
+              value={genre}
+              className='searchblock__genre__title'
+              name="inputs__item__name">
+              <option disabled value="">Choose book genre:</option>
+              <option value="none">None</option>
+              {genres.map(genre => 
+                <option key={genre._id} value={genre.value}>{genre.value}</option>)}
+            </select>
           </div>
           <div className="searchblock__year">
             <div className="searchblock__year__title">
@@ -75,14 +86,26 @@ const SearchBlockInner:FC = () => {
             </div>
             <div className="searchblock__year__block">
               <input className="searchblock__year__block_input" type="number"/>
-              <div>
+              {/* <div>
                 -
               </div>
-              <input className="searchblock__year__block_input" type="number"/>
+              <input className="searchblock__year__block_input" type="number"/> */}
             </div>
           </div>
           <div className="searchblock__booking">
-            <Checkbox field='Show booked books?'/>
+          <div className="checkbox">
+            <input 
+              defaultChecked={showBookeds}
+              onChange={showBookedHandler}
+              // checked
+              className='checkbox__input' type="checkbox" name="checkbox__input" id='Show booked books?' />
+            <label className='checkbox__label' htmlFor='Show booked books?'>Show booked books?</label>
+            <img className='checkbox__image' src="./assets/check-solid.svg" alt="check icon" />
+          </div>
+            {/* <Checkbox
+              defaultChecked={showBookeds}
+              setData={showBookedHandler}
+              field='Show booked books?'/> */}
           </div>
           <div
             onClick={searchHandler}

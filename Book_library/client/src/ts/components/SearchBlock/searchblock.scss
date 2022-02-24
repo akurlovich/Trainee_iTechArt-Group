@@ -49,10 +49,12 @@
       font-size: 26px;
       line-height: 39px;
       color: #A6A6A6;
+      background-color: transparent;
     }
   }
 
   &__year {
+    padding-left: 4px;
 
     &__title {
       font-family: 'Poppins', sans-serif;
