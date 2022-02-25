@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { checkAuth, loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
@@ -51,6 +52,9 @@ const UserLoginInner: FC = () => {
     <div className='registration'>
       <div className="registration__block">
         <div className="registration__container">
+          <div onClick={() => navigate('/')} className="registration__close">
+            <AiOutlineCloseCircle size={40}/>
+          </div>
           <div className="registration__title">
             Log in
           </div>

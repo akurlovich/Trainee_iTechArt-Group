@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba($color: #000000, $alpha: 0.5);
+  font-family: 'Poppins', sans-serif;
 
   &__block {
     position: relative;
@@ -60,6 +61,13 @@
     text-align: center;
     box-shadow: 2px 3px 11px 5px rgb(0 0 0 / 50%);
     z-index: 5;
+  }
+
+  &__close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
   }
 
   &__title {
