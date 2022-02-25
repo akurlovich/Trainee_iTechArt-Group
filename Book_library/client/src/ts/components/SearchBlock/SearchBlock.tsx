@@ -72,20 +72,23 @@ const SearchBlockInner:FC = () => {
             />
           </div>
           <div className="searchblock__genre">
+            <div className="searchblock__genre__title">
+              Choose book genre:
+            </div>
             <select
               onChange={(event) => setGenre(event.target.value)}
               value={genre}
               className='searchblock__genre__title'
               name="inputs__item__name">
-              <option disabled value="">Choose book genre:</option>
-              <option value="none">None</option>
+              {/* <option disabled value="">Choose book genre:</option> */}
+              <option value="none"></option>
               {genres.map(genre => 
                 <option key={genre._id} value={genre.value}>{genre.value}</option>)}
             </select>
           </div>
           <div className="searchblock__year">
             <div className="searchblock__year__title">
-              Choose book years:
+              Choose book year:
             </div>
             <div className="searchblock__year__block">
               <input className="searchblock__year__block_input" type="number"/>

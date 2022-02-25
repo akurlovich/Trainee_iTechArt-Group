@@ -9,11 +9,10 @@ import { IBookResponse } from '../../types/IBookResponse';
 import './bookblock.scss';
 
 interface IBooKBlock {
-  bgColor?: string,
   book: IBookResponse,
 }
 
-const BookBlockItem: FC<IBooKBlock> = ({bgColor, book}) => {
+const BookBlockItem: FC<IBooKBlock> = ({book}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const style = {

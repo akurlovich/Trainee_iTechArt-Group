@@ -19,12 +19,12 @@ const AllBooksInner: FC = () => {
     {isLoading && <Loader/>}
     <div className='allbooks'>
       <div className="allbooks__title">
-        Most popular:
+        Latest books:
       </div>
       <div className="allbooks__container">
-        <BookBlock book={books[0]} bgColor='#405F71'/>
-        <BookBlock book={books[1]} bgColor='#563E70'/>
-        <BookBlock book={books[2]} bgColor='#733F55'/>
+        <BookBlock book={books[0]}/>
+        <BookBlock book={books[1]}/>
+        <BookBlock book={books[2]}/>
       </div>
       <div className="allbooks__search-bar">
       </div>
