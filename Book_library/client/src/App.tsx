@@ -50,7 +50,7 @@ const App: FC = () => {
   return (
     <div className='wrapper'>
       {isLoading && <h1 style={{fontSize: '200px'}}>loading</h1>}
-      <h1 style={{fontSize: '200px'}}>{isAuth ? 'авторизован' : 'войдите'}</h1>
+      {/* <h1 style={{fontSize: '200px'}}>{isAuth ? 'авторизован' : 'войдите'}</h1> */}
       {/* <button onClick={() => console.log(users, error)}>click</button>
       <button onClick={getUsers}>USERS</button> */}
       <Routes>

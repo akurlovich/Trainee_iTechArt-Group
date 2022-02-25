@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { logoutUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { Footer } from '../Footer/Footer';
@@ -28,15 +28,15 @@ const HeaderInner: FC = () => {
               <li className='navigation__item'>
                 <ul className='navigation__menu'>
                   <li className='navigation__menu_item'>
-                    <Link to='/'>Home</Link>
+                    <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/'>Home</NavLink>
                   </li>
                   {(role === ADMIN_ROLE) && 
                   <>
                     <li className='navigation__menu_item'>
-                      <Link to='/booking'>Booking</Link>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/booking'>Booking</NavLink>
                     </li>
                     <li className='navigation__menu_item'>
-                      <Link to='/addbook'>Add book</Link>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/addbook'>Add book</NavLink>
                     </li>
                   </>
                   }
@@ -44,7 +44,7 @@ const HeaderInner: FC = () => {
                     <Link to='/book'>Book</Link>
                   </li> */}
                   <li className='navigation__menu_item'>
-                    <Link to='/about'>About</Link>
+                    <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/about'>About</NavLink>
                   </li>
                 </ul>
               </li>
@@ -53,23 +53,23 @@ const HeaderInner: FC = () => {
                   {(isAuth && (role !== ADMIN_ROLE)) &&
                   <>
                     <li className='navigation__user_item'>
-                      <Link to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</Link>
+                      <Link className={'navigation__link'} to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</Link>
                     </li>
                   </>}
                   {!isAuth && 
                   <>
                     <li className='navigation__user_item'>
-                      <Link to='/login'>Log in</Link>
+                      <Link className={'navigation__link_login'} to='/login'>Log in</Link>
                     </li>
                     <li className='navigation__user_item'>
-                      <Link to='/registration'>Sing in</Link> 
+                      <Link className={'navigation__link_sing-in'} to='/registration'>Sing in</Link> 
                     </li>
                   </>}
                   
                   {isAuth && 
                   <>
                     <li onClick={logoutHandler} className='navigation__user_item'>
-                      <Link to='/'>Log out</Link>
+                      <Link className={'navigation__link_login'} to='/'>Log out</Link>
                     </li>
                   </>}
                 </ul>
