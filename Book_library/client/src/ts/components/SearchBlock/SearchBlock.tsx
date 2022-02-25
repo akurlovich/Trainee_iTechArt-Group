@@ -15,6 +15,7 @@ const SearchBlockInner:FC = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [genre, setGenre] = useState('');
+  const [year, setYear] = useState('');
   const [showBookeds, setShowBookeds] = useState(true);
   const [foundBooks, setFoundBooks] = useState<IBookResponse[]>([]);
 
@@ -37,7 +38,7 @@ const SearchBlockInner:FC = () => {
   
   
   const searchBooks = () => {
-    const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author));
+    const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author)).filter(book => book.year.toString().includes(year.toString())).filter(book => book.genre.filter(genre => genre.includes(genre)));
     return found;
   };
 
@@ -49,6 +50,7 @@ const SearchBlockInner:FC = () => {
     setFoundBooks(searchBooks());
     setTitle('');
     setAuthor('');
+    setYear('');
   };
 
   return (
@@ -76,12 +78,12 @@ const SearchBlockInner:FC = () => {
               Choose book genre:
             </div>
             <select
-              onChange={(event) => setGenre(event.target.value)}
+              onChange={(event) => {setGenre(event.target.value), console.log(genre)} }
               value={genre}
               className='searchblock__genre__title'
               name="inputs__item__name">
               {/* <option disabled value="">Choose book genre:</option> */}
-              <option value="none"></option>
+              <option value=""></option>
               {genres.map(genre => 
                 <option key={genre._id} value={genre.value}>{genre.value}</option>)}
             </select>
@@ -91,7 +93,10 @@ const SearchBlockInner:FC = () => {
               Choose book year:
             </div>
             <div className="searchblock__year__block">
-              <input className="searchblock__year__block_input" type="number"/>
+              <input
+                value={year}
+                onChange={(e) => {setYear(e.target.value)}}
+                className="searchblock__year__block_input" type="number"/>
               {/* <div>
                 -
               </div>
@@ -120,7 +125,10 @@ const SearchBlockInner:FC = () => {
           </div>
         </div>
       </div>
-      <ResultBlock books={foundBooks}/>
+      {foundBooks.length ? 
+        <ResultBlock books={foundBooks}/>
+        : <div className="searchblock__not-found">Sorry, Books not found!</div>
+      }
       {/* <div className="resultblock">
       {foundBooks.map(item => 
         <BookBlock key={item._id} book={item} />
