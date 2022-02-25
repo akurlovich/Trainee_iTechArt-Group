@@ -5,7 +5,7 @@ import { logoutUser } from '../../store/reducers/AuthReducer/AuthActionCreatores
 import { Footer } from '../Footer/Footer';
 import logo from '../../../assets/book_logo.png';
 import './header.scss';
-import { ADMIN_ROLE } from '../../constants/user';
+import { ADMIN_ROLE, USER_AVATAR } from '../../constants/user';
 
 const HeaderInner: FC = () => {
   const {user, role, isAuth} = useAppSelector(state => state.authReducer);
@@ -52,8 +52,9 @@ const HeaderInner: FC = () => {
                 <ul className='navigation__user'>
                   {(isAuth && (role !== ADMIN_ROLE)) &&
                   <>
+                    <img className="navigation__user_photo" src={user.profileImage} alt="user avatar" />
                     <li className='navigation__user_item'>
-                      <Link className={'navigation__link'} to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</Link>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</NavLink>
                     </li>
                   </>}
                   {!isAuth && 

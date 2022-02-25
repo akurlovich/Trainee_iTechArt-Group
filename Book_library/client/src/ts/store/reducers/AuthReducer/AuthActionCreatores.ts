@@ -8,14 +8,20 @@ import { IAuthResponse } from "../../../types/IAuthResponse";
 interface IUserReg {
   email: string,
   password: string,
+  profileImage: string,
+};
+
+interface IUserLogin {
+  email: string,
+  password: string,
 };
 
 export const registerUser = createAsyncThunk(
   'AUTH/regUser',
   async (data: IUserReg, {rejectWithValue}) => {
     try {
-      const { email, password } = data;
-      const response = await AuthService.registration(email, password);
+      const { email, password, profileImage } = data;
+      const response = await AuthService.registration(email, password, profileImage);
       localStorage.setItem('token', response.data.refreshToken);
       // console.log(response.data)
       const role = await RoleService.getRoleByID(response.data.user.role[0]);
@@ -32,7 +38,7 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'AUTH/loginUser',
-  async (data: IUserReg, {rejectWithValue}) => {
+  async (data: IUserLogin, {rejectWithValue}) => {
     try {
       const { email, password } = data;
       const response = await AuthService.login(email, password);

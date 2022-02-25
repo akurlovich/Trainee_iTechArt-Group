@@ -44,7 +44,7 @@ const UserProfileInner: FC = () => {
         <div className="profile__info">
           <div className="profile__title">User information</div>
           <div className="profile__info__block">
-            <img className="profile__info__avatar" src={imageSrc} alt="user avatar" />
+            <img className="profile__info__avatar" src={user.profileImage} alt="user avatar" />
             <input
               onChange={imageHandler}
               className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />

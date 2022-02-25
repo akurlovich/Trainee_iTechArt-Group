@@ -11,14 +11,14 @@ import config from '../common/config';
 import jwt from 'jsonwebtoken';
 
 class UserService {
-  async registration(email: string, password: string) {
+  async registration(email: string, password: string, profileImage: string) {
     const applicant = await UserModel.findOne({email});
     if (applicant) {
       throw ApiError.BadRequest(`User with ${email} already exists!`, [''])
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const role = await roleModel.findOne({value: DEFAULT_USER_ROLE});
-    const user = await UserModel.create({email, password: hashPassword, role: [role?._id]});
+    const user = await UserModel.create({email, password: hashPassword, role: [role?._id], profileImage});
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({...userDto});
     // const tokenData = jwt.verify(tokens.refreshToken, config.JWT_REFRESH_SECRET_KEY);

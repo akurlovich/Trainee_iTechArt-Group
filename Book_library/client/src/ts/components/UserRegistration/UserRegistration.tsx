@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
+import { USER_AVATAR } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { registerUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
@@ -16,7 +17,7 @@ const UserRegistrationInner: FC = () => {
   const navigate = useNavigate();
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(registerUser({email, password}));
+    dispatch(registerUser({email, password, profileImage: USER_AVATAR}));
     // console.log(user);
   };
   const validFormData = () => {
