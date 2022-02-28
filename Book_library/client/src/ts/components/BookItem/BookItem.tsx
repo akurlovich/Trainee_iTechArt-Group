@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteBookedAndReturnAmount, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getBookByID, updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { getAllIssuedsByBookID } from '../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { getAllCommentByBookID } from '../../store/reducers/CommentReducer/CommentActionCreators';
 import { IBookedResponse } from '../../types/IBookedResponse';
 import { CommentsBlock } from '../CommentsBlock/CommentsBlock';
@@ -10,22 +11,25 @@ import { PageNotFound } from '../PageNotFound/PageNotFound';
 import { Loader } from '../UI/Loader/Loader';
 import { UserBooking } from '../UserBooking/UserBooking';
 import './bookitem.scss';
+import { IIssuedResponse } from '../../types/IIssuedResponse';
 
 const BookItemInner: FC = () => {
   const {isAuth, user} = useAppSelector(state => state.authReducer);
   const {book, isLoading} = useAppSelector(state => state.bookReducer);
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
+  const { issuedsByBookID } = useAppSelector(state => state.issuedReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const {bookID} = useParams();
   const [booking, setBooking] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
+  const [isIssued, setIsIssued] = useState(false);
 
-  const findBooked = (array: IBookedResponse[]) => {
+  const findBooked = (array: IBookedResponse[] | IIssuedResponse[]) => {
     const bookArray = array.filter(item => item.bookID === book._id);
     return bookArray.find(item => item.userID === user.id);
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -33,10 +37,12 @@ const BookItemInner: FC = () => {
         await dispatch(getBookByID(book._id));
         console.log('from book book id', book.title);
         await dispatch(getAllBookedsByBookID(book._id));
+        await dispatch(getAllIssuedsByBookID(book._id));
       } else if (bookID) {
         await dispatch(getBookByID(bookID));
         console.log('from book params', book.title);
         await dispatch(getAllBookedsByBookID(bookID));
+        await dispatch(getAllIssuedsByBookID(bookID));
       }
     })()
   }, []);
@@ -48,6 +54,14 @@ const BookItemInner: FC = () => {
       setIsBooked(true);
     }
   }, [bookedsBookID]);
+
+  useEffect(() => {
+    console.log('from issuedID', issuedsByBookID);
+    if (findBooked(issuedsByBookID)) {
+      console.log('issued found');
+      setIsIssued(true);
+    }
+  }, [issuedsByBookID]);
 
   const bookingHandler = () => {
     if (isAuth) {
@@ -103,7 +117,12 @@ const BookItemInner: FC = () => {
                   {book?.description}
                 </div>
                 <div className="bookitem__buttons">
-                  {isBooked ?
+                  {isIssued ?
+                    <div className="bookitem__button booked">
+                      Already booked
+                    </div>
+                  :
+                  isBooked ?
                   <>
                     <div className="bookitem__button booked">
                       Already booked
@@ -124,7 +143,6 @@ const BookItemInner: FC = () => {
                     className="bookitem__button booking">
                     Booking
                   </button>
-                  
                   }
                 </div>
               </div>
