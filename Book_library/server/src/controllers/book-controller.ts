@@ -46,6 +46,7 @@ class BookController {
   async getAllBooks(req: Request, res: Response, next: NextFunction) {
     try {
       const books = await bookService.getAllBooks();
+      
       return res.json(books)
     } catch (error) {
       console.log(error);

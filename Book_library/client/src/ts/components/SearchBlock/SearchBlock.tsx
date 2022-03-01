@@ -38,15 +38,22 @@ const SearchBlockInner:FC = () => {
   
   
   const searchBooks = () => {
-    const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author)).filter(book => book.year.toString().includes(year.toString())).filter(book => book.genre.filter(genre => genre.includes(genre)));
+    const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author)).filter(book => book.year.toString().includes(year.toString())).filter(book => book.genre[0].includes(genre));
+    // console.log(books[0].genre)
     return found;
   };
+
+  // const searchBooks = () => {
+  //   const found = books.filter(book => book.title.toLowerCase().includes(title)).filter(book => book.author.toLowerCase().includes(author)).filter(book => book.year.toString().includes(year.toString())).filter(book => book.genre.filter(genre => genre.includes(genre)));
+  //   return found;
+  // };
 
   // const memoSearchBooks = useMemo(() => searchBooks(), [books, title, author, showBookeds])
 
 
 
   const searchHandler = () => {
+    console.log(books[0].genre)
     setFoundBooks(searchBooks());
     setTitle('');
     setAuthor('');
