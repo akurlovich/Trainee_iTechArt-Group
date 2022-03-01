@@ -10,3 +10,14 @@ export interface IBook extends Document {
   coverImage: string | Binary,
   amount: number,
 };
+
+export interface IBookDTO {
+  _id: string,
+  title: string,
+  author: string,
+  year: number,
+  genre: string[],
+  description: string,
+  coverImage: string | Binary,
+  amount: number,
+};

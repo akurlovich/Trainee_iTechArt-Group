@@ -1,7 +1,8 @@
 import { Schema } from "mongoose";
 import ApiError from "../exceptions/api-error";
 import bookModel from "../models/book-model";
-import { IBook } from "../types/IBook";
+import genreModel from "../models/genre-model";
+import { IBook, IBookDTO } from "../types/IBook";
 import genreService from "./genre-service";
 
 class BookService {
@@ -18,22 +19,32 @@ class BookService {
   };
   
   async getAllBooks() {
-    // return await bookModel.find();
     const books = await bookModel.find();
     if (!books) {
       throw ApiError.NotFound('Books not found!', [''])
-    }
+    };
+
+    const booksDTO: IBookDTO[] = [];
 
     for (let i = 0; i < books.length; i++) {
-        for (let j = 0; j < books[i]?.genre.length; i++) {
-          let genre = await genreService.getGenreByID(books[i].genre[j]);
-          // books[i].genre[j] = genre.value;
-        }
+      const genres: string[] = [];
+      for (let j = 0; j < books[i]?.genre.length; j++) {
+        let genre = await genreService.getGenreByID(books[i].genre[j].toString());
+        genres.push(genre.value);
+      };
+      
+      booksDTO.push({
+        _id: books[i]._id,
+        title: books[i].title,
+        author: books[i].author,
+        year: books[i].year,
+        description: books[i].description,
+        coverImage: books[i].coverImage,
+        amount: books[i].amount,
+        genre: [...genres]})
+    };
 
-    }
-
-
-    return books;
+    return booksDTO;
   };
 
 }
