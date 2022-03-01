@@ -87,7 +87,15 @@ class UserService {
       throw ApiError.BadRequest('User not found!', [''])
     }
     return new UserDto(user);
-  }
+  };
+
+  async updateUserProfileImage(id: string, profileImage: string) {
+    const user = await UserModel.findByIdAndUpdate({_id: id}, {profileImage: profileImage}, {new: true});
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
+    }
+    return new UserDto(user);
+  };
 }
 
 export default new UserService();

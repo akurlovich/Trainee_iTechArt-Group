@@ -68,6 +68,16 @@ class UserController {
     }
   };
 
+  async updateUserProfileImage(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id, profileImage } = req.body;
+      const user = await userService.updateUserProfileImage(id, profileImage);
+      return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  };
+
 };
 
 export default new UserController();

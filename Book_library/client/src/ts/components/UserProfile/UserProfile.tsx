@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
+import { updateUserProfileImage } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
 import { getAllIssuedsByUserID, getIssuedsForUser } from '../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { BookCard } from '../BookCard/BookCard';
@@ -26,10 +27,15 @@ const UserProfileInner: FC = () => {
     }
   };
 
+  const changeImageHandler = () => {
+    dispatch(updateUserProfileImage({id: user.id, profileImage: imageSrc}))
+  }
+
   useEffect(() => {
     (async () => {
       await dispatch(getBookedsForUser(user.id));
       await dispatch(getIssuedsForUser(user.id));
+      setImageSrc(user.profileImage)
     })()
     if (user.id !== userID) {
       // navigate(`/login`, {state: {from: location.pathname}});
@@ -44,12 +50,14 @@ const UserProfileInner: FC = () => {
         <div className="profile__info">
           <div className="profile__title">User information</div>
           <div className="profile__info__block">
-            <img className="profile__info__avatar" src={user.profileImage} alt="user avatar" />
+            <img className="profile__info__avatar" src={imageSrc} alt="user avatar" />
             <input
               onChange={imageHandler}
               className='inputs__files_display' type="file" name="label_for_file" id="label_for_file" />
             <label className='inputs__files__label' htmlFor="label_for_file">Select file</label>
-            <button className="profile__info__avatar_button">Change image</button>
+            <button
+              onClick={changeImageHandler}
+              className="profile__info__avatar_button">Change image</button>
           </div>
           <div className="profile__info__email">
             <div className="profile__info__email_title">User email:</div>

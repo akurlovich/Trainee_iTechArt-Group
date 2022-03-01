@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from './reducers/UserSlice';
+import userReducer from './reducers/UserReducer/UserSlice';
 import authReducer from './reducers/AuthReducer/AuthSlice';
 import bookReducer from './reducers/BookReducer/BookSlice';
 import bookedReducer from './reducers/BookedReducer/BookedSlice';

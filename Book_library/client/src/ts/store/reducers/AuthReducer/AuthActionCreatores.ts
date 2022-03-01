@@ -3,7 +3,9 @@ import axios from "axios";
 import { API_URL } from "../../../constants/http";
 import AuthService from "../../../services/AuthService";
 import RoleService from "../../../services/RoleService";
+import UserService from "../../../services/UserService";
 import { IAuthResponse } from "../../../types/IAuthResponse";
+import { IUserUpdateProfileImage } from "../../../types/IUser";
 
 interface IUserReg {
   email: string,
@@ -86,6 +88,19 @@ export const checkAuth = createAsyncThunk(
       
     } catch (error) {
       return rejectWithValue(`Auth went wrong!`)
+    }
+  }
+);
+
+export const updateUserProfileImage = createAsyncThunk(
+  'AUTH/updateUserProfileImage',
+  async (newImage: IUserUpdateProfileImage, thunkAPI) => {
+    try {
+      const response = await UserService.updateUserProfileImage(newImage)
+      return response.data;
+      
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Can't update user!")
     }
   }
 );

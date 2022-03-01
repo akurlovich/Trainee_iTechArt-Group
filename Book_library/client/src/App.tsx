@@ -10,7 +10,7 @@ import { UserLogin } from './ts/components/UserLogin/UserLogin';
 import { UserProfile } from './ts/components/UserProfile/UserProfile';
 import { UserRegistration } from './ts/components/UserRegistration/UserRegistration';
 import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
-import { fetchUsers } from './ts/store/reducers/ActionCreators';
+import { fetchUsers } from './ts/store/reducers/UserReducer/ActionCreators';
 import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
 import UserService from './ts/services/UserService';
 import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/LayoutRouter';

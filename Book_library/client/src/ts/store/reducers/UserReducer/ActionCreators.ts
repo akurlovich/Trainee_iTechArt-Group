@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import AuthService from "../../services/AuthService";
-import { IUser } from "../../types/IUser";
-import { AppDispatch } from "../store";
-import { userSlice } from "./UserSlice";
+import AuthService from "../../../services/AuthService";
+import UserService from "../../../services/UserService";
+import { IUser, IUserUpdateProfileImage } from "../../../types/IUser";
+
 
 // export const fetchUsers = () => async (dispatch: AppDispatch) => {
 //   try {
@@ -28,25 +28,19 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-interface IUserReg {
-  email: string,
-  password: string,
-}
-
-// export const registerUser = createAsyncThunk(
-//   'USER/regUsers',
-//   async (data: IUserReg, {rejectWithValue}) => {
+// export const updateUserProfileImage = createAsyncThunk(
+//   'USER/updateUserProfileImage',
+//   async (newImage: IUserUpdateProfileImage, thunkAPI) => {
 //     try {
-//       const { email, password } = data;
-//       const response = await AuthService.registration(email, password);
-//       localStorage.setItem('token', response.data.refreshToken);
+//       const response = await UserService.updateUserProfileImage(newImage)
 //       return response.data;
       
 //     } catch (error) {
-//       return rejectWithValue('Don"t get users')
+//       return thunkAPI.rejectWithValue("Can't update user!")
 //     }
 //   }
 // );
+
 
 
 

@@ -20,6 +20,7 @@ router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
 router.get('/users/:id', userController.getUserById);
+router.put('/users/profileImage', userController.updateUserProfileImage);
 
 router.get('/books', bookController.getAllBooks);
 router.get('/books/:id', bookController.getBookByID);
