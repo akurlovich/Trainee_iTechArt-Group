@@ -4,6 +4,7 @@ import { allUsersAndBookeds } from '../../store/reducers/BookedReducer/BookedAct
 import { Loader } from '../UI/Loader/Loader';
 import './booking.scss';
 import { BookingCard } from './BookingBooked/BookingCard';
+import { BookingSearch } from './BookingSearch/BookingSearch';
 
 const BookingInner:FC = () => {
   const { allUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
@@ -17,6 +18,7 @@ const BookingInner:FC = () => {
   
   return (
     <div className="bookings">
+      <BookingSearch/>
       {isLoading && <Loader/>}
       <div className="bookings__container">
         {allUsersBookedsAndIssueds && allUsersBookedsAndIssueds.map(item => (
