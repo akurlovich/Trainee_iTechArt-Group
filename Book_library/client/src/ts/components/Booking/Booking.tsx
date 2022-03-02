@@ -32,7 +32,7 @@ const BookingInner:FC = () => {
               <div className="bookings__booked">
                 <div className="bookings__booked__title">Issued</div>
                 {item.userIssueds.map(card => (
-                   <BookingCard key={card._id} userID={item.user.id} userBooks={card}/>
+                   <BookingCard key={card._id} userID={item.user.id} userBooks={card} isNotIssued={false}/>
                  ))}
               </div>
             </div>

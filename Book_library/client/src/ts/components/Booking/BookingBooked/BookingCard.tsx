@@ -9,9 +9,10 @@ import { IUsersBookedsAndIssueds } from '../../../types/IUsersAndBookeds';
 interface IProps {
   userBooks: IBookResponse,
   userID: string,
+  isNotIssued?: boolean,
 }
 
-const BookingCardInner:FC<IProps> = ({userBooks, userID}) => {
+const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) => {
   const dispatch = useAppDispatch();
   const approvalHandler = async () => {
     await dispatch(addIssued({userID: userID, bookID: userBooks._id}));
@@ -27,11 +28,13 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID}) => {
         <div className="bookings__item__button">
           <FcCancel size={60}/>
         </div>
-        <div
-          onClick={approvalHandler}
-          className="bookings__item__button">
-          <FcApproval size={60}/>
-        </div>
+        {isNotIssued && 
+          <div
+            onClick={approvalHandler}
+            className="bookings__item__button">
+            <FcApproval size={60}/>
+          </div>
+        }
       </div>
     </div>
   )
