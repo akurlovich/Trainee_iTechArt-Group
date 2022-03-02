@@ -47,6 +47,7 @@ export const usersIssueds = async (userID: string) => {
 
 export const allUserBookedsAndIssueds = async () => {
   const allBookeds = await (await BookedService.getBookeds()).data;
+  const allIssueds = await (await IssuedService.getIssueds()).data;
   const newUserID: string[] = [];
   const allUserBookeds: IUsersBookedsAndIssueds[] = [];
 
@@ -58,6 +59,17 @@ export const allUserBookedsAndIssueds = async () => {
       const userBooksIssueds = await usersIssueds(allBookeds[i].userID);
       allUserBookeds.push({user: user, userBookeds: userBooksBookeds, userIssueds: userBooksIssueds})
     }
+  };
+
+  for (let i = 0; i < allIssueds.length; i++) {
+    if (!newUserID.includes(allIssueds[i].userID)) {
+      newUserID.push(allIssueds[i].userID);
+      const user = await (await UserService.getUserByID(allIssueds[i].userID)).data;
+      const userBooksBookeds = await usersBookeds(allIssueds[i].userID);
+      const userBooksIssueds = await usersIssueds(allIssueds[i].userID);
+      allUserBookeds.push({user: user, userBookeds: userBooksBookeds, userIssueds: userBooksIssueds})
+    }
   }
+
   return allUserBookeds;
 };

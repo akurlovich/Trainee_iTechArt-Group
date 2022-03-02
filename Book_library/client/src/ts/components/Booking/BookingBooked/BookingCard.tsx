@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { FcCancel, FcApproval } from "react-icons/fc";
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { allUsersAndBookeds, deleteBookedAndReturnAmount, getAllBookedsByUserID } from '../../../store/reducers/BookedReducer/BookedActionCreators';
-import { addIssued } from '../../../store/reducers/IssuedReducer/IssuedActionCreators';
+import { addIssued, deleteIssuedAndReturnAmount, getAllIssuedsByUserID } from '../../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { IBookResponse } from '../../../types/IBookResponse';
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IProps {
 const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) => {
   const dispatch = useAppDispatch();
   const { bookedsUserID } = useAppSelector(state => state.bookedReducer);
+  const { issuedsByUserID } = useAppSelector(state => state.issuedReducer);
 
   const approvalHandler = async () => {
     await dispatch(addIssued({userID: userID, bookID: userBooks._id}));
@@ -33,12 +34,18 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
 
   const canselIssuedHandler = async () => {
     console.log('issued')
-    await dispatch(allUsersAndBookeds());
+    const findBooked = issuedsByUserID.find(booked => booked.bookID === userBooks._id);
+    console.log(findBooked)
+    if (findBooked) {
+      await dispatch(deleteIssuedAndReturnAmount(findBooked._id));
+      await dispatch(allUsersAndBookeds());
+    };
   };
 
   useEffect(() => {
     (async () => {
       await dispatch(getAllBookedsByUserID(userID));
+      await dispatch(getAllIssuedsByUserID(userID));
     })()
   }, [])
 
