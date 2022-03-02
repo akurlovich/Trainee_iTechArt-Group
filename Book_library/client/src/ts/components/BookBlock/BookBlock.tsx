@@ -47,6 +47,9 @@ const BookBlockItem: FC<IBooKBlock> = ({book}) => {
               {book?.year}
             </div>
           </div>
+          <div className="bookBlock__info_genre">
+            {book.genre[0]}
+          </div>
           <div onClick={handlerMore} className="bookblock__button">
             More
           </div>

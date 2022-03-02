@@ -58,6 +58,7 @@ const SearchBlockInner:FC = () => {
     setTitle('');
     setAuthor('');
     setYear('');
+    setGenre('');
   };
 
   return (

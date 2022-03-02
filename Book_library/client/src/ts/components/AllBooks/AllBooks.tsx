@@ -21,11 +21,13 @@ const AllBooksInner: FC = () => {
       <div className="allbooks__title">
         Latest books:
       </div>
-      <div className="allbooks__container">
-        <BookBlock book={books[books.length - 3]}/>
-        <BookBlock book={books[books.length - 2]}/>
-        <BookBlock book={books[books.length - 1]}/>
-      </div>
+      {books.length && 
+        <div className="allbooks__container">
+          <BookBlock book={books[books.length - 3]}/>
+          <BookBlock book={books[books.length - 2]}/>
+          <BookBlock book={books[books.length - 1]}/>
+        </div>
+      }
       <div className="allbooks__search-bar">
       </div>
       <FindBooks/>
