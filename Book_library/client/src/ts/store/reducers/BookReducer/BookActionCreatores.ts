@@ -35,7 +35,7 @@ export const getBookByID = createAsyncThunk(
   async (id: string, {rejectWithValue}) => {
     try {
       const response = await BookService.getBookByID(id);
-      // console.log(response.data)
+      // console.log('111111111111111111111111111111111111', response.data)
       return response.data;
       
     } catch (error: any) {

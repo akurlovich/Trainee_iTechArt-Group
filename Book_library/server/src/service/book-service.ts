@@ -11,7 +11,29 @@ class BookService {
   };
 
   async getBookByID(id: string) {
-    return await bookModel.findById(id);
+    const book = await bookModel.findById(id);
+    if (!book) {
+      throw ApiError.NotFound('Book not found!', [''])
+    };
+    const genres: string[] = [];
+    for (let j = 0; j < book.genre.length; j++) {
+      let genre = await genreService.getGenreByID(book.genre[j].toString());
+      genres.push(genre.value);
+    };
+
+    // console.log('22222', book)
+
+    const bookDTO: IBookDTO = {
+      _id: book._id,
+      title: book.title,
+      author: book.author,
+      year: book.year,
+      description: book.description,
+      coverImage: book.coverImage,
+      amount: book.amount,
+      genre: [...genres]};
+
+    return bookDTO;
   };
   
   async updateBookAmountByID(id: string, amount: number) {

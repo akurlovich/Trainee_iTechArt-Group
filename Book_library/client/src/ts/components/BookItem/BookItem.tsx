@@ -108,10 +108,9 @@ const BookItemInner: FC = () => {
                   <div className="bookitem__year">
                     {book?.year}
                   </div>
-      //TODO_______HOW GET GENRE_________
-                  {/* <div className="bookitem__year">
-                    {book?.genre}
-                  </div> */}
+                  <div className="bookitem__year">
+                    {book?.genre[0]}
+                  </div>
                 </div>
                 <div className="bookitem__description">
                   {book?.description}
