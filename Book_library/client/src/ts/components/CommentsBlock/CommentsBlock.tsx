@@ -40,7 +40,7 @@ const CommentsBlockInner:FC = () => {
       {/* {comments.length && comments[0].comment}
       {commentsByBookID.length && commentsByBookID[0].comment} */}
       {commentsByBookID.length ? commentsByBookID.map(item => 
-        <Comment key={item._id} comment={item} user={user.email} bookID={bookID}/>) : null}
+        <Comment key={item._id} comment={item} user={item.userID} bookID={bookID}/>) : null}
       
       <div className="comments__add">
         <div className="comments__add__block">
