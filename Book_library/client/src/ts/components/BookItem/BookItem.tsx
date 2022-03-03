@@ -12,6 +12,7 @@ import { Loader } from '../UI/Loader/Loader';
 import { UserBooking } from '../UserBooking/UserBooking';
 import './bookitem.scss';
 import { IIssuedResponse } from '../../types/IIssuedResponse';
+import { BookItemMain } from './BookItemMain/BookItemMain';
 
 const BookItemInner: FC = () => {
   const {isAuth, user} = useAppSelector(state => state.authReducer);
@@ -35,12 +36,12 @@ const BookItemInner: FC = () => {
     (async () => {
       if (book._id) {
         await dispatch(getBookByID(book._id));
-        console.log('from book book id', book.title);
+        // console.log('from book book id', book.title);
         await dispatch(getAllBookedsByBookID(book._id));
         await dispatch(getAllIssuedsByBookID(book._id));
       } else if (bookID) {
         await dispatch(getBookByID(bookID));
-        console.log('from book params', book.title);
+        // console.log('from book params', book.title);
         await dispatch(getAllBookedsByBookID(bookID));
         await dispatch(getAllIssuedsByBookID(bookID));
       }
@@ -48,17 +49,17 @@ const BookItemInner: FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log('from bookedID', bookedsBookID);
+    // console.log('from bookedID', bookedsBookID);
     if (findBooked(bookedsBookID)) {
-      console.log('book found');
+      // console.log('book found');
       setIsBooked(true);
     }
   }, [bookedsBookID]);
 
   useEffect(() => {
-    console.log('from issuedID', issuedsByBookID);
+    // console.log('from issuedID', issuedsByBookID);
     if (findBooked(issuedsByBookID)) {
-      console.log('issued found');
+      // console.log('issued found');
       setIsIssued(true);
     }
   }, [issuedsByBookID]);
@@ -66,7 +67,7 @@ const BookItemInner: FC = () => {
   const bookingHandler = () => {
     if (isAuth) {
       setBooking(true);
-      console.log('booked', bookedsBookID);
+      // console.log('booked', bookedsBookID);
     } else {
 //!__________________________some not work_____________________
       // navigate(`/login`, {state: {from: location.pathname}});
@@ -76,8 +77,8 @@ const BookItemInner: FC = () => {
 
   const canselBookingHandler = async () => {
     const booked = findBooked(bookedsBookID);
-    console.log('from cansel', booked)
-    console.log('from cansel bookedsBookID', bookedsBookID)
+    // console.log('from cansel', booked)
+    // console.log('from cansel bookedsBookID', bookedsBookID)
     if (booked) {
       await dispatch(deleteBookedAndReturnAmount(booked._id));
       await dispatch(getAllBookedsByBookID(book._id));
@@ -92,13 +93,19 @@ const BookItemInner: FC = () => {
       {!book?.title ? <PageNotFound/> : 
         <div className='bookitem'>
           <div className="bookitem__container">
-            <div className="bookitem__main">
+            <BookItemMain
+              book={book}
+              isBooked={isBooked}
+              isIssued={isIssued}
+              canselBookingHandler={canselBookingHandler}
+              bookingHandler={bookingHandler}
+            />
+            {/* <div className="bookitem__main">
               <div className="bookitem__main__cover">
                 <img className='bookitem__main__cover__image' src={book?.coverImage} alt="book cover" />
               </div>
               <div className="bookitem__info">
                 <div className="bookitem__title">
-                {/* {commentsByBookID.length && commentsByBookID[0].comment} */}
                   {book?.title}
                 </div>
                 <div className="bookitem__detaile">
@@ -145,7 +152,7 @@ const BookItemInner: FC = () => {
                   }
                 </div>
               </div>
-            </div>
+            </div> */}
             <CommentsBlock/>
           </div>
         </div>
