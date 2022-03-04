@@ -13,10 +13,12 @@ import { UserBooking } from '../UserBooking/UserBooking';
 import './bookitem.scss';
 import { IIssuedResponse } from '../../types/IIssuedResponse';
 import { BookItemMain } from './BookItemMain/BookItemMain';
+import { ADMIN_ROLE } from '../../constants/user';
+import { BookItemAdmin } from './BookItemAdmin/BookItemAdmin';
 
 const BookItemInner: FC = () => {
-  const {isAuth, user} = useAppSelector(state => state.authReducer);
-  const {book, isLoading} = useAppSelector(state => state.bookReducer);
+  const { isAuth, user, role } = useAppSelector(state => state.authReducer);
+  const { book, isLoading } = useAppSelector(state => state.bookReducer);
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
   const { issuedsByBookID } = useAppSelector(state => state.issuedReducer);
   const dispatch = useAppDispatch();
@@ -93,13 +95,17 @@ const BookItemInner: FC = () => {
       {!book?.title ? <PageNotFound/> : 
         <div className='bookitem'>
           <div className="bookitem__container">
-            <BookItemMain
-              book={book}
-              isBooked={isBooked}
-              isIssued={isIssued}
-              canselBookingHandler={canselBookingHandler}
-              bookingHandler={bookingHandler}
-            />
+            {role !== ADMIN_ROLE ?
+              <BookItemMain
+                book={book}
+                isBooked={isBooked}
+                isIssued={isIssued}
+                canselBookingHandler={canselBookingHandler}
+                bookingHandler={bookingHandler}
+              />
+            :
+              <BookItemAdmin bookID={book._id}/>
+            }
             {/* <div className="bookitem__main">
               <div className="bookitem__main__cover">
                 <img className='bookitem__main__cover__image' src={book?.coverImage} alt="book cover" />

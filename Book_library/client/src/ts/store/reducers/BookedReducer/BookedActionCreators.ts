@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import BookedService from "../../../services/BookedService";
 import BookService from "../../../services/BookService";
-import { allUserBookedsAndIssueds, usersBookeds } from "../../../services/ClientServices/UsersBookeds";
+import { allUserBookedsAndIssueds, bookUserBookedsAndIssueds, usersBookeds } from "../../../services/ClientServices/UsersBookeds";
 import { IBooked } from "../../../types/IBooked";
 import { IBookResponse } from "../../../types/IBookResponse";
 
@@ -119,6 +119,21 @@ export const allUsersAndBookeds = createAsyncThunk(
     try {
 
       const response = await allUserBookedsAndIssueds();
+      
+      return response;
+
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
+
+export const bookUsersAndBookeds = createAsyncThunk(
+  'BOOKED/bookUsersAndBookeds',
+  async (bookID: string, {rejectWithValue}) => {
+    try {
+
+      const response = await bookUserBookedsAndIssueds(bookID);
       
       return response;
 

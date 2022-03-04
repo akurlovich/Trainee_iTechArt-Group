@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBookedResponse } from "../../../types/IBookedResponse";
 import { IBookResponse } from "../../../types/IBookResponse";
 import { IUsersBookedsAndIssueds } from "../../../types/IUsersAndBookeds";
-import { addBooked, allUsersAndBookeds, deleteBooked, deleteBookedAndReturnAmount, getAllBookedsByBookID, getAllBookedsByUserID, getBookedsForUser,  } from "./BookedActionCreators";
+import { addBooked, allUsersAndBookeds, bookUsersAndBookeds, deleteBooked, deleteBookedAndReturnAmount, getAllBookedsByBookID, getAllBookedsByUserID, getBookedsForUser,  } from "./BookedActionCreators";
 
 interface IBookedState {
   booked: IBookedResponse,
@@ -10,6 +10,7 @@ interface IBookedState {
   bookedsUserID: IBookedResponse[],
   userBookedBooks: IBookResponse[],
   allUsersBookedsAndIssueds: IUsersBookedsAndIssueds[],
+  bookUsersBookedsAndIssueds: IUsersBookedsAndIssueds[],
   isLoading: boolean,
   error: string,
 };
@@ -20,6 +21,7 @@ const initialState: IBookedState = {
   bookedsUserID: [],
   userBookedBooks: [],
   allUsersBookedsAndIssueds: [],
+  bookUsersBookedsAndIssueds: [],
   isLoading: false,
   error: '',
 };
@@ -103,6 +105,17 @@ export const bookedSlice = createSlice({
       state.allUsersBookedsAndIssueds = action.payload;
     },
     [allUsersAndBookeds.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [bookUsersAndBookeds.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [bookUsersAndBookeds.fulfilled.type]: (state, action: PayloadAction<IUsersBookedsAndIssueds[]>) => {
+      state.isLoading = false;
+      state.bookUsersBookedsAndIssueds = action.payload;
+    },
+    [bookUsersAndBookeds.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

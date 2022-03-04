@@ -73,3 +73,34 @@ export const allUserBookedsAndIssueds = async () => {
 
   return allUserBookeds;
 };
+
+export const bookUserBookedsAndIssueds = async (bookID: string) => {
+  const allBookeds = await (await BookedService.getAllBookedsByBookID(bookID)).data;
+  const allIssueds = await (await IssuedService.getAllIssuedsByBookID(bookID)).data;
+  const newUserID: string[] = [];
+  const allUserBookeds: IUsersBookedsAndIssueds[] = [];
+
+  for (let i = 0; i < allBookeds.length; i++) {
+    if (!newUserID.includes(allBookeds[i].userID)) {
+      newUserID.push(allBookeds[i].userID);
+      const user = await (await UserService.getUserByID(allBookeds[i].userID)).data;
+      const userBooksBookeds = await usersBookeds(allBookeds[i].userID);
+      const userBooksIssueds = await usersIssueds(allBookeds[i].userID);
+      allUserBookeds.push({user: user, userBookeds: userBooksBookeds.filter(item => item._id === bookID), userIssueds: userBooksIssueds.filter(item => item._id === bookID)
+      })
+    }
+  };
+
+  for (let i = 0; i < allIssueds.length; i++) {
+    if (!newUserID.includes(allIssueds[i].userID)) {
+      newUserID.push(allIssueds[i].userID);
+      const user = await (await UserService.getUserByID(allIssueds[i].userID)).data;
+      const userBooksBookeds = await usersBookeds(allIssueds[i].userID);
+      const userBooksIssueds = await usersIssueds(allIssueds[i].userID);
+      allUserBookeds.push({user: user, userBookeds: userBooksBookeds.filter(item => item._id === bookID), userIssueds: userBooksIssueds.filter(item => item._id === bookID)
+      })
+    }
+  };
+
+  return allUserBookeds;
+};

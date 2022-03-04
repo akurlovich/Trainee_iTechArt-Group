@@ -1,27 +1,46 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { allUsersAndBookeds } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { allUsersAndBookeds, bookUsersAndBookeds } from '../../store/reducers/BookedReducer/BookedActionCreators';
+import { IUsersBookedsAndIssueds } from '../../types/IUsersAndBookeds';
 import { Loader } from '../UI/Loader/Loader';
 import './booking.scss';
 import { BookingCard } from './BookingBooked/BookingCard';
 import { BookingSearch } from './BookingSearch/BookingSearch';
 
-const BookingInner:FC = () => {
-  const { allUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
+interface IProps {
+  isSearch?: boolean,
+  bookAdminID?: string,
+}
+
+const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
+  const { allUsersBookedsAndIssueds, bookUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
+  const [bookingArray, setBookingArray] = useState<IUsersBookedsAndIssueds[]>([]);
   const dispatch = useAppDispatch();
+
+  // const foundBooking = allUsersBookedsAndIssueds.filter(item => 
+  //   (item.userBookeds.filter(booked => booked._id === bookAdminID) & item.userIssueds.filter(issued => issued._id === bookAdminID))
+  //   )
 
   useEffect(() => {
     (async () => {
-      dispatch(allUsersAndBookeds());
+      if (isSearch) {
+        await dispatch(allUsersAndBookeds());
+        setBookingArray(allUsersBookedsAndIssueds);
+      } else {
+        if (bookAdminID) {
+          await dispatch(bookUsersAndBookeds(bookAdminID));
+          setBookingArray(bookUsersBookedsAndIssueds);
+        }
+      }
     })()
   }, []);
   
   return (
     <div className="bookings">
-      <BookingSearch/>
+      {isSearch && <BookingSearch/>}
       {isLoading && <Loader/>}
       <div className="bookings__container">
-        {allUsersBookedsAndIssueds && allUsersBookedsAndIssueds.map(item => (
+        {bookingArray && bookingArray.map(item => (
           <div key={item.user.id} className="bookings__card">
             <div className="bookings__card__user">{item.user.email}</div>
             <div className="bookings__card__block">
