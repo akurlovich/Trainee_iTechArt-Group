@@ -1,10 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import bookedService from "../service/booked-service";
+import schedule from 'node-schedule';
 
 class BookedController {
   async addBooked(req: Request, res: Response, next: NextFunction) {
     try {
       const newBooked = await bookedService.addBooked(req.body);
+      // const date = new Date(Date.now() + 5000);
+
+      // const job = schedule.scheduleJob(date, function() {
+      //   console.log('The world is going to end today.');
+      // });
+      
       return res.json(newBooked);
     } catch (error) {
       console.log(error);

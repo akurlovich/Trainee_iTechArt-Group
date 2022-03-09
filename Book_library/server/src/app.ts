@@ -7,6 +7,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import router from './router/index';
 import errorMiddleware from './middlewares/error-middleware';
+import schedule from 'node-schedule';
 import CLIENT_URL from './common/config';
 
 const app = express();
@@ -27,5 +28,24 @@ mongoose
 
 // app.use('/api/user', authRouter);
 // app.use('/api/books', bookRouter);
+// const job = schedule.scheduleJob('42 * * * * *', function(){
+//   console.log('The answer to life, the universe, and everything!');
+// });
+
+// const startTime = new Date(Date.now() + 5000);
+// const endTime = new Date(startTime.getTime() + 5000);
+// const job = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/1 * * * * *' }, function(){
+//   console.log('Time for tea!');
+// });
+// const ffff = true;
+// const date = new Date(Date.now() + 5000);
+
+// const job = schedule.scheduleJob(date, function() {
+//   if (ffff) {
+//     console.log('The world is going to end today.');
+    
+//   }
+// });
+// job.cancel();
 
 export default app;
