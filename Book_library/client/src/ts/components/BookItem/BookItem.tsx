@@ -36,18 +36,19 @@ const BookItemInner: FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (book._id) {
-        await dispatch(getBookByID(book._id));
-        // console.log('from book book id', book.title);
-        await dispatch(getAllBookedsByBookID(book._id));
-        await dispatch(getAllIssuedsByBookID(book._id));
-      } else if (bookID) {
-        await dispatch(getBookByID(bookID));
-        // console.log('from book params', book.title);
-        await dispatch(getAllBookedsByBookID(bookID));
-        await dispatch(getAllIssuedsByBookID(bookID));
+      if (role !== ADMIN_ROLE) {
+        if (book._id) {
+          await dispatch(getBookByID(book._id));
+          // console.log('from book book id', book.title);
+          await dispatch(getAllBookedsByBookID(book._id));
+          await dispatch(getAllIssuedsByBookID(book._id));
+        } else if (bookID) {
+          await dispatch(getBookByID(bookID));
+          // console.log('from book params', book.title);
+          await dispatch(getAllBookedsByBookID(bookID));
+          await dispatch(getAllIssuedsByBookID(bookID));
       }
-    })()
+    }})()
   }, []);
 
   useEffect(() => {
