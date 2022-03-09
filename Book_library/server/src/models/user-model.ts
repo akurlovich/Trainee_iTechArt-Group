@@ -15,6 +15,10 @@ const UserSchema: Schema = new Schema<IUser>({
     type: String,
     default: '',
   },
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
   role: [{
     type: Schema.Types.ObjectId,
     ref: 'Role',
