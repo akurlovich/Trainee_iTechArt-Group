@@ -78,21 +78,21 @@ const BookItemInner: FC = () => {
   }, [role]);
 
 
-  // useEffect(() => {
-  //   // console.log('from bookedID', bookedsBookID);
-  //   if (findBooked(bookedsBookID)) {
-  //     // console.log('book found');
-  //     setIsBooked(true);
-  //   }
-  // }, [bookedsBookID]);
+  useEffect(() => {
+    // console.log('from bookedID', bookedsBookID);
+    if (findBooked(bookedsBookID)) {
+      // console.log('book found');
+      setIsBooked(true);
+    }
+  }, [bookedsBookID]);
 
-  // useEffect(() => {
-  //   // console.log('from issuedID', issuedsByBookID);
-  //   if (findBooked(issuedsByBookID)) {
-  //     // console.log('issued found');
-  //     setIsIssued(true);
-  //   }
-  // }, [issuedsByBookID]);
+  useEffect(() => {
+    // console.log('from issuedID', issuedsByBookID);
+    if (findBooked(issuedsByBookID)) {
+      // console.log('issued found');
+      setIsIssued(true);
+    }
+  }, [issuedsByBookID]);
 
   const bookingHandler = () => {
     if (isAuth) {
