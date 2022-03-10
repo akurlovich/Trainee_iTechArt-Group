@@ -113,7 +113,7 @@ export const authSlice = createSlice({
     [updateUserIsBlocked.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.isLoading = false;
       state.isAuth = true;
-      state.user = action.payload;
+      // state.user = action.payload;
     },
     [updateUserIsBlocked.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;

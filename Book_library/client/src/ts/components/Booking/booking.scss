@@ -35,6 +35,10 @@
       }
     }
 
+    &__blocked {
+      cursor: pointer;
+    }
+
     &__block {
       display: flex;
       justify-content: center;

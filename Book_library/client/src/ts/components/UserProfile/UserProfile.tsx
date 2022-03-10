@@ -27,8 +27,8 @@ const UserProfileInner: FC = () => {
     (urlImage !== imageSrc) && setIsNewImage(true);
   };
 
-  const changeImageHandler = () => {
-    dispatch(updateUserProfileImage({id: user.id, profileImage: imageSrc}))
+  const changeImageHandler = async () => {
+    await dispatch(updateUserProfileImage({id: user.id, profileImage: imageSrc}))
   };
 
   useEffect(() => {

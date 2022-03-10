@@ -43,9 +43,24 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
     setBookingArray(bookUsersBookedsAndIssueds);
   }, [bookUsersBookedsAndIssueds]);
 
+  useEffect(() => {
+    setBookingArray(allUsersBookedsAndIssueds);
+  }, [allUsersBookedsAndIssueds]);
 
-  const isBlockedHandler = (userID: string) => {
-    dispatch(updateUserIsBlocked({id: userID, isBlocked: true}))
+
+  const isBlockedHandler = async (userID: string, isBlock: boolean) => {
+    await dispatch(updateUserIsBlocked({id: userID, isBlocked: !isBlock}));
+    if (isSearch) {
+      await dispatch(allUsersAndBookeds());
+      setBookingArray(allUsersBookedsAndIssueds);
+    } else {
+      if (bookAdminID) {
+        console.log('object');
+        await dispatch(bookUsersAndBookeds(bookAdminID));
+        setBookingArray(bookUsersBookedsAndIssueds);
+      }
+    }
+    
   }
   
   return (
@@ -60,8 +75,13 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
                 {item.user.email}
               </div>
               {item.user.isBlocked
-                ? <FcLock onClick={() => isBlockedHandler(item.user.id)} size={40}/>
-                : <FcUnlock size={40}/>}
+                ? <div className='bookings__card__blocked'>
+                    <FcLock onClick={() => isBlockedHandler(item.user.id, item.user.isBlocked)} size={40}/>
+                  </div> 
+                : <div className='bookings__card__blocked'>
+                    <FcUnlock onClick={() => isBlockedHandler(item.user.id, item.user.isBlocked)} size={40}/>
+                  </div> 
+                }
             </div>
             <div className="bookings__card__block">
               <div className="bookings__booked booked_line">
