@@ -50,6 +50,7 @@ const UserProfileInner: FC = () => {
         <div className="profile__info">
           <div className="profile__title">User information</div>
           <div className="profile__info__block">
+            {user.isBlocked && <div className='profile__info__blocked'>Sorry, you are blocked!</div>}
             <img className="profile__info__avatar" src={imageSrc} alt="user avatar" />
             <input
               onChange={imageHandler}

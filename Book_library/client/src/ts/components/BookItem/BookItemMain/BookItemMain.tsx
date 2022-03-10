@@ -5,6 +5,7 @@ interface IProps {
   book: IBookResponse;
   isIssued: boolean;
   isBooked: boolean;
+  blocked: boolean;
   canselBookingHandler: () => void;
   bookingHandler: () => void;
 }
@@ -13,6 +14,7 @@ const BookItemMainInner: FC<IProps> = ({
   book,
   isIssued,
   isBooked,
+  blocked,
   canselBookingHandler,
   bookingHandler,
 }) => {
@@ -37,8 +39,10 @@ const BookItemMainInner: FC<IProps> = ({
         </div>
         <div className="bookitem__description">{book?.description}</div>
         <div className="bookitem__buttons">
-          {isIssued ? (
-            <div className="bookitem__button booked">Already booked</div>
+          {blocked ? <div className="bookitem__button booked warning">You are blocked!</div>
+            :
+          isIssued ? (
+            <div className="bookitem__button booked">Already issued</div>
           ) : isBooked ? (
             <>
               <div className="bookitem__button booked">Already booked</div>

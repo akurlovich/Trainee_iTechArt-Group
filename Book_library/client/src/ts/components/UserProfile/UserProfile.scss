@@ -18,9 +18,15 @@
     padding: 30px;
     gap: 20px;
 
+    &__blocked {
+      font-size: 36px;
+      color: #c71d1d;
+    }
+
     &__block {
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
     &__avatar {

@@ -59,18 +59,18 @@ const BookItemInner: FC = () => {
 
   useEffect(() => {
     (async () => {
-      
-      console.log('role', role);
+      // await dispatch(checkAuth());      
+      // console.log('role', role);
       if (role !== ADMIN_ROLE) {
         if (book._id) {
           await dispatch(getBookByID(book._id));
-          console.log('from book book id', book.title);
+          // console.log('from book book id', book.title);
           await dispatch(getAllBookedsByBookID(book._id));
           await dispatch(getAllIssuedsByBookID(book._id));
         } else if (bookID) {
           await dispatch(getBookByID(bookID));
-          console.log('from book bookID', bookID);
-          console.log('from book params', book.title);
+          // console.log('from book bookID', bookID);
+          // console.log('from book params', book.title);
           await dispatch(getAllBookedsByBookID(bookID));
           await dispatch(getAllIssuedsByBookID(bookID));
       }
@@ -125,6 +125,7 @@ const BookItemInner: FC = () => {
           <div className="bookitem__container">
             {role !== ADMIN_ROLE ?
               <BookItemMain
+                blocked={user.isBlocked}
                 book={book}
                 isBooked={isBooked}
                 isIssued={isIssued}
