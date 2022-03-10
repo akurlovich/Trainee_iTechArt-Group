@@ -96,6 +96,14 @@ class UserService {
     }
     return new UserDto(user);
   };
+
+  async updateUserIsBlocked(id: string, isBlocked: boolean) {
+    const user = await UserModel.findByIdAndUpdate({_id: id}, {isBlocked: isBlocked}, {new: true});
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
+    }
+    return new UserDto(user);
+  };
 }
 
 export default new UserService();

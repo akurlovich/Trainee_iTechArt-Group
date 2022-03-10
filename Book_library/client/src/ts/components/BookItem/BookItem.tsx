@@ -15,8 +15,10 @@ import { IIssuedResponse } from '../../types/IIssuedResponse';
 import { BookItemMain } from './BookItemMain/BookItemMain';
 import { ADMIN_ROLE } from '../../constants/user';
 import { BookItemAdmin } from './BookItemAdmin/BookItemAdmin';
+import { checkAuth } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 
 const BookItemInner: FC = () => {
+  console.log('BookItem');
   const { isAuth, user, role } = useAppSelector(state => state.authReducer);
   const { book, isLoading } = useAppSelector(state => state.bookReducer);
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
@@ -36,36 +38,61 @@ const BookItemInner: FC = () => {
 
   useEffect(() => {
     (async () => {
+      // await dispatch(checkAuth());
+      // console.log('role', role);
+      // if (role !== ADMIN_ROLE) {
+      //   if (book._id) {
+      //     await dispatch(getBookByID(book._id));
+      //     console.log('from book book id', book.title);
+      //     await dispatch(getAllBookedsByBookID(book._id));
+      //     await dispatch(getAllIssuedsByBookID(book._id));
+      //   } else if (bookID) {
+      //     await dispatch(getBookByID(bookID));
+      //     console.log('from book bookID', bookID);
+      //     console.log('from book params', book.title);
+      //     await dispatch(getAllBookedsByBookID(bookID));
+      //     await dispatch(getAllIssuedsByBookID(bookID));
+      // }
+    // }
+  })()
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      
+      console.log('role', role);
       if (role !== ADMIN_ROLE) {
         if (book._id) {
           await dispatch(getBookByID(book._id));
-          // console.log('from book book id', book.title);
+          console.log('from book book id', book.title);
           await dispatch(getAllBookedsByBookID(book._id));
           await dispatch(getAllIssuedsByBookID(book._id));
         } else if (bookID) {
           await dispatch(getBookByID(bookID));
-          // console.log('from book params', book.title);
+          console.log('from book bookID', bookID);
+          console.log('from book params', book.title);
           await dispatch(getAllBookedsByBookID(bookID));
           await dispatch(getAllIssuedsByBookID(bookID));
       }
     }})()
-  }, []);
+  }, [role]);
 
-  useEffect(() => {
-    // console.log('from bookedID', bookedsBookID);
-    if (findBooked(bookedsBookID)) {
-      // console.log('book found');
-      setIsBooked(true);
-    }
-  }, [bookedsBookID]);
 
-  useEffect(() => {
-    // console.log('from issuedID', issuedsByBookID);
-    if (findBooked(issuedsByBookID)) {
-      // console.log('issued found');
-      setIsIssued(true);
-    }
-  }, [issuedsByBookID]);
+  // useEffect(() => {
+  //   // console.log('from bookedID', bookedsBookID);
+  //   if (findBooked(bookedsBookID)) {
+  //     // console.log('book found');
+  //     setIsBooked(true);
+  //   }
+  // }, [bookedsBookID]);
+
+  // useEffect(() => {
+  //   // console.log('from issuedID', issuedsByBookID);
+  //   if (findBooked(issuedsByBookID)) {
+  //     // console.log('issued found');
+  //     setIsIssued(true);
+  //   }
+  // }, [issuedsByBookID]);
 
   const bookingHandler = () => {
     if (isAuth) {
@@ -105,7 +132,7 @@ const BookItemInner: FC = () => {
                 bookingHandler={bookingHandler}
               />
             :
-              <BookItemAdmin bookID={book._id}/>
+              <BookItemAdmin book={book}/>
             }
             {/* <div className="bookitem__main">
               <div className="bookitem__main__cover">

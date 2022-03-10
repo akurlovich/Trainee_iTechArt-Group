@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../../types/IUser";
-import { checkAuth, loginUser, logoutUser, registerUser, updateUserProfileImage } from "./AuthActionCreatores";
+import { checkAuth, loginUser, logoutUser, registerUser, updateUserIsBlocked, updateUserProfileImage } from "./AuthActionCreatores";
 
 interface IResponseData {
   user: IUser,
@@ -103,6 +103,19 @@ export const authSlice = createSlice({
       state.user = action.payload;
     },
     [updateUserProfileImage.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [updateUserIsBlocked.pending.type]: (state, action) => {
+      state.isLoading = true;
+      // state.isAuth = false;
+    },
+    [updateUserIsBlocked.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+      state.isLoading = false;
+      state.isAuth = true;
+      state.user = action.payload;
+    },
+    [updateUserIsBlocked.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },

@@ -78,6 +78,16 @@ class UserController {
     }
   };
 
+  async updateUserIsBlocked(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id, isBlocked } = req.body;
+      const user = await userService.updateUserIsBlocked(id, isBlocked);
+      return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  };
+
 };
 
 export default new UserController();

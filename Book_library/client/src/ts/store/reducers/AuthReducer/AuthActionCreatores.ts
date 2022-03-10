@@ -5,7 +5,7 @@ import AuthService from "../../../services/AuthService";
 import RoleService from "../../../services/RoleService";
 import UserService from "../../../services/UserService";
 import { IAuthResponse } from "../../../types/IAuthResponse";
-import { IUserUpdateProfileImage } from "../../../types/IUser";
+import { IUserUpdateIsBlocked, IUserUpdateProfileImage } from "../../../types/IUser";
 
 interface IUserReg {
   email: string,
@@ -97,6 +97,19 @@ export const updateUserProfileImage = createAsyncThunk(
   async (newImage: IUserUpdateProfileImage, thunkAPI) => {
     try {
       const response = await UserService.updateUserProfileImage(newImage)
+      return response.data;
+      
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Can't update user!")
+    }
+  }
+);
+
+export const updateUserIsBlocked = createAsyncThunk(
+  'AUTH/updateUserIsBlocked',
+  async (newIsBlocked: IUserUpdateIsBlocked, thunkAPI) => {
+    try {
+      const response = await UserService.updateUserIsBlocked(newIsBlocked)
       return response.data;
       
     } catch (error) {

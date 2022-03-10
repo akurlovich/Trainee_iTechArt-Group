@@ -6,6 +6,8 @@ import { Loader } from '../UI/Loader/Loader';
 import './booking.scss';
 import { BookingCard } from './BookingBooked/BookingCard';
 import { BookingSearch } from './BookingSearch/BookingSearch';
+import { FcUnlock, FcLock } from "react-icons/fc";
+import { updateUserIsBlocked } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 
 interface IProps {
   isSearch?: boolean,
@@ -13,6 +15,7 @@ interface IProps {
 }
 
 const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
+  console.log('booking');
   const { allUsersBookedsAndIssueds, bookUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
   const [bookingArray, setBookingArray] = useState<IUsersBookedsAndIssueds[]>([]);
   const dispatch = useAppDispatch();
@@ -28,12 +31,22 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
         setBookingArray(allUsersBookedsAndIssueds);
       } else {
         if (bookAdminID) {
+          console.log('object');
           await dispatch(bookUsersAndBookeds(bookAdminID));
           setBookingArray(bookUsersBookedsAndIssueds);
         }
       }
     })()
   }, []);
+
+  useEffect(() => {
+    setBookingArray(bookUsersBookedsAndIssueds);
+  }, [bookUsersBookedsAndIssueds]);
+
+
+  const isBlockedHandler = (userID: string) => {
+    dispatch(updateUserIsBlocked({id: userID, isBlocked: true}))
+  }
   
   return (
     <div className="bookings">
@@ -42,7 +55,14 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
       <div className="bookings__container">
         {bookingArray && bookingArray.map(item => (
           <div key={item.user.id} className="bookings__card">
-            <div className="bookings__card__user">{item.user.email}</div>
+            <div className="bookings__card__user">
+              <div className="bookings__card__user_email">
+                {item.user.email}
+              </div>
+              {item.user.isBlocked
+                ? <FcLock onClick={() => isBlockedHandler(item.user.id)} size={40}/>
+                : <FcUnlock size={40}/>}
+            </div>
             <div className="bookings__card__block">
               <div className="bookings__booked booked_line">
                 <div className="bookings__booked__title">Booking</div>
