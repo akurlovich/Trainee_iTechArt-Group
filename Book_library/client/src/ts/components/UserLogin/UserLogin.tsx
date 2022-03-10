@@ -21,6 +21,9 @@ const UserLoginInner: FC = () => {
   // const {from} = state;
   const navigate = useNavigate();
   const prevPage = location.state as ILocationState || '/';
+
+  console.log(prevPage)
+
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(loginUser({email, password}));
@@ -52,7 +55,7 @@ const UserLoginInner: FC = () => {
     <div className='registration'>
       <div className="registration__block">
         <div className="registration__container">
-          <div onClick={() => navigate('/')} className="registration__close">
+          <div onClick={() => navigate(prevPage ? prevPage.from : '/')} className="registration__close">
             <AiOutlineCloseCircle size={40}/>
           </div>
           <div className="registration__title">

@@ -100,8 +100,9 @@ const BookItemInner: FC = () => {
       // console.log('booked', bookedsBookID);
     } else {
 //!__________________________some not work_____________________
-      // navigate(`/login`, {state: {from: location.pathname}});
-      navigate(`/login`);
+      navigate(`/login`, {state: {from: location.pathname}});
+      console.log(location.state)
+      // navigate(`/login`);
     }
   };
 

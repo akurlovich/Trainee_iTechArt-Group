@@ -60,8 +60,7 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
         setBookingArray(bookUsersBookedsAndIssueds);
       }
     }
-    
-  }
+  };
   
   return (
     <div className="bookings">
