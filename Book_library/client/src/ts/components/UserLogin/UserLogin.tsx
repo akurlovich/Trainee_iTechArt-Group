@@ -24,14 +24,14 @@ const UserLoginInner: FC = () => {
 
   console.log(prevPage)
 
-  const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
+  const handlerChange = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(loginUser({email, password}));
-    dispatch(checkAuth());
+    await dispatch(loginUser({email, password}));
+    // await dispatch(checkAuth());
     setEmail('');
     setPassword('');
     setButtonSubmit(prev => false);
-    // navigate(prevPage.from)
+    navigate(prevPage ? prevPage.from : '/');
   };
   // const lpath = location.state.pathname
   // console.log("skjfdhjshf", prevPage.from);
@@ -55,7 +55,7 @@ const UserLoginInner: FC = () => {
     <div className='registration'>
       <div className="registration__block">
         <div className="registration__container">
-          <div onClick={() => navigate(prevPage ? prevPage.from : '/')} className="registration__close">
+          <div onClick={() => navigate('/')} className="registration__close">
             <AiOutlineCloseCircle size={40}/>
           </div>
           <div className="registration__title">
