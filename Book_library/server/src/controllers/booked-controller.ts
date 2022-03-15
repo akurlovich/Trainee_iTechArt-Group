@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import bookedService from "../service/booked-service";
 import schedule from 'node-schedule';
+import mailService from "../service/mail-service";
 
 class BookedController {
   async addBooked(req: Request, res: Response, next: NextFunction) {
@@ -52,6 +53,18 @@ class BookedController {
   async getAllBookeds(req: Request, res: Response, next: NextFunction) {
     try {
       const bookeds = await bookedService.getAllBookeds();
+      const date = new Date(Date.now() + 3000);
+
+      // const fff = true;
+
+      // const job = schedule.scheduleJob(date, function() {
+      //   if (fff) {
+      //     console.log('The world is going to end today.');
+      //   } else {
+      //     return;
+      //   }
+      // });
+      // await mailService.sendNotificationToMail('iamtutwas@gmail.com', 'Hi ALL')
       return res.json(bookeds);
     } catch (error) {
       console.log(error);
