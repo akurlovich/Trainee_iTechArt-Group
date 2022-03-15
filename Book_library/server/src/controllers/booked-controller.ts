@@ -2,17 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import bookedService from "../service/booked-service";
 import schedule from 'node-schedule';
 import mailService from "../service/mail-service";
+import Logger from "../logger/log";
 
 class BookedController {
   async addBooked(req: Request, res: Response, next: NextFunction) {
     try {
       const newBooked = await bookedService.addBooked(req.body);
-      // const date = new Date(Date.now() + 5000);
-
-      // const job = schedule.scheduleJob(date, function() {
-      //   console.log('The world is going to end today.');
-      // });
-      
       return res.json(newBooked);
     } catch (error) {
       console.log(error);
@@ -53,18 +48,8 @@ class BookedController {
   async getAllBookeds(req: Request, res: Response, next: NextFunction) {
     try {
       const bookeds = await bookedService.getAllBookeds();
-      const date = new Date(Date.now() + 3000);
+      Logger.info(`${bookeds[0].userID}`);
 
-      // const fff = true;
-
-      // const job = schedule.scheduleJob(date, function() {
-      //   if (fff) {
-      //     console.log('The world is going to end today.');
-      //   } else {
-      //     return;
-      //   }
-      // });
-      // await mailService.sendNotificationToMail('iamtutwas@gmail.com', 'Hi ALL')
       return res.json(bookeds);
     } catch (error) {
       console.log(error);
