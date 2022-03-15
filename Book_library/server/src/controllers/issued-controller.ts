@@ -12,16 +12,16 @@ class IssuedController {
       const newIssued = await issuedService.addIssued(req.body);
       const date = new Date(Date.now() + NOTIFICATION_TIME);
       
-      const job = schedule.scheduleJob(date, async function() {
-        const issued = await issuedService.getIssuedByID(newIssued.id);
-        if (issued) {
-          const book = await BookService.getBookByID(newIssued.bookID.toString())
-          const user = await UserService.getUserByID(newIssued.userID.toString())
-          await mailService.sendNotificationToMail(user.email, book.title);
-        } else {
-          return
-        }
-      });
+      // const job = schedule.scheduleJob(date, async function() {
+      //   const issued = await issuedService.getIssuedByID(newIssued.id);
+      //   if (issued) {
+      //     const book = await BookService.getBookByID(newIssued.bookID.toString())
+      //     const user = await UserService.getUserByID(newIssued.userID.toString())
+      //     await mailService.sendNotificationToMail(user.email, book.title);
+      //   } else {
+      //     return
+      //   }
+      // });
       return res.json(newIssued);
     } catch (error) {
       console.log(error);
