@@ -10,14 +10,11 @@ import { UserLogin } from './ts/components/UserLogin/UserLogin';
 import { UserProfile } from './ts/components/UserProfile/UserProfile';
 import { UserRegistration } from './ts/components/UserRegistration/UserRegistration';
 import { useAppDispatch, useAppSelector } from './ts/hooks/redux';
-import { fetchUsers } from './ts/store/reducers/UserReducer/ActionCreators';
 import { checkAuth } from './ts/store/reducers/AuthReducer/AuthActionCreatores';
-import UserService from './ts/services/UserService';
 import { LayoutRouter } from './ts/components/RouterComponents/LayoutRouter/LayoutRouter';
 import { RequireAuth } from './ts/components/RouterComponents/RequireAuth/RequireAuth';
 import { AdminAuthRouter } from './ts/components/RouterComponents/AdminAuth/AdminAuthRouter';
 import { Booking } from './ts/components/Booking/Booking';
-import { allUserBookedsAndIssueds } from './ts/services/ClientServices/UsersBookeds';
 import { AboutLibrary } from './ts/components/AboutLibrary/AboutLibrary';
 import { Loader } from './ts/components/UI/Loader/Loader';
 
@@ -26,6 +23,12 @@ const App: FC = () => {
   const { user, isAuth, isLoading } = useAppSelector(state => state.authReducer);
   // const { increment } = userSlice.actions;
   const dispatch = useAppDispatch();
+
+  const socket = new WebSocket('ws://localhost:4000/');
+  socket.onopen = () => {
+    console.log('Client socket')
+  }
+
   useEffect(() => {
     // dispatch(fetchUsers());
     (async () => {
