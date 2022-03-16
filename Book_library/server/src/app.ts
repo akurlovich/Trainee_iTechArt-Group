@@ -22,6 +22,10 @@ app.use(errorMiddleware);
 
 app.ws('/', (ws, req) => {
   console.log('WS connect')
+  ws.send('CONNECTED');
+  ws.on('message', (msg) => {
+    console.log(msg)
+  })
 });
 
 
