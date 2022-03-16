@@ -19,5 +19,5 @@ export default {
   SMTP_HOST: process.env['SMTP_HOST'] || 'smtp.gmail.com',
   SMTP_PORT: process.env['SMTP_POPT'] || 587,
   SMTP_USER: process.env['SMTP_USER'] || 'qa.a.kurlovich@gmail.com',
-  SMTP_PASSWORD: process.env['SMTP_PASSWORD'] || 'sowwos11',
+  SMTP_PASSWORD: process.env['SMTP_PASSWORD'] || '111',
 };
