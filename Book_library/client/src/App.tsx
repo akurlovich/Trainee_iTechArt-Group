@@ -24,16 +24,16 @@ const App: FC = () => {
   // const { increment } = userSlice.actions;
   const dispatch = useAppDispatch();
 
-  const socket = new WebSocket('ws://localhost:4000/');
-  socket.onopen = () => {
-    console.log('Client socket')
-  };
-  socket.onmessage = (event) => {
-    console.log('From server', event.data);
-  };
-  const socketHandler = () => {
-    socket.send('hi server')
-  }
+  // const socket = new WebSocket('ws://localhost:4000/');
+  // socket.onopen = () => {
+  //   console.log('Client socket')
+  // };
+  // socket.onmessage = (event) => {
+  //   console.log('From server', event.data);
+  // };
+  // const socketHandler = () => {
+  //   socket.send('hi server')
+  // }
 
   useEffect(() => {
     // dispatch(fetchUsers());
@@ -67,7 +67,7 @@ const App: FC = () => {
       {/* <h1 style={{fontSize: '200px'}}>{isAuth ? 'авторизован' : 'войдите'}</h1> */}
       {/* <button onClick={() => console.log(users, error)}>click</button>
       <button onClick={getUsers}>USERS</button> */}
-      <button onClick={socketHandler}>click</button>
+      {/* <button onClick={socketHandler}>click</button> */}
       <Routes>
         <Route path='/' element={<LayoutRouter/>}>
           <Route index element={<AllBooks/>}/>

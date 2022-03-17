@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { IBookResponse } from "../../../types/IBookResponse";
 
 interface IProps {
@@ -8,7 +8,13 @@ interface IProps {
   blocked: boolean;
   canselBookingHandler: () => void;
   bookingHandler: () => void;
-}
+};
+
+interface IMSGProps {
+  id: string,
+  bookTitle: string,
+  method: string,
+};
 
 const BookItemMainInner: FC<IProps> = ({
   book,
@@ -18,6 +24,41 @@ const BookItemMainInner: FC<IProps> = ({
   canselBookingHandler,
   bookingHandler,
 }) => {
+
+  const socket = new WebSocket(`ws://localhost:4000/`);
+
+  useEffect(() => {
+    socket.onopen = () => {
+      console.log('Connect to server');
+      socket.send(JSON.stringify({
+        id: book._id,
+        bookTitle: book.title,
+        method: 'connection',
+      }))
+   };
+    socket.onmessage = (event) => {
+      let msg: IMSGProps = JSON.parse(event.data);
+      switch (msg.method) {
+        case 'connection':
+          console.log(`!!!!!!!!!! ${msg.bookTitle}`)
+          break;
+      }
+
+    };
+  // const socketHandler = () => {
+  //   socket.send('hi server')
+  // }
+  }, [])
+
+  const socketHandler = () => {
+    socket.send(JSON.stringify({
+      id: book._id,
+      bookTitle: book.title,
+      method: 'connection',
+    }))
+  }
+  
+
   return (
     <div className="bookitem__main">
       <div className="bookitem__main__cover">
@@ -29,6 +70,7 @@ const BookItemMainInner: FC<IProps> = ({
       </div>
       <div className="bookitem__info">
         <div className="bookitem__title">
+          <button onClick={socketHandler}>click</button>
           {/* {commentsByBookID.length && commentsByBookID[0].comment} */}
           {book?.title}
         </div>
