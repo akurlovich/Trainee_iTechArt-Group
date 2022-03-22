@@ -33,7 +33,7 @@ app.ws('/', (ws, req) => {
   ws.on('message', (msg: string) => {
     // console.log(msg);
     const msg1: IMSGProps = JSON.parse(msg);
-    // console.log(msg1.method);
+    console.log(msg1.method);
     // aWss.clients.forEach(client => {
     //   ws.send('client');
     // })

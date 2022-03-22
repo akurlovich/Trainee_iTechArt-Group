@@ -25,38 +25,35 @@ const BookItemMainInner: FC<IProps> = ({
   bookingHandler,
 }) => {
 
-  const socket = new WebSocket(`ws://localhost:4000/`);
+  // const socket = new WebSocket(`ws://localhost:4000/comment`);
 
-  useEffect(() => {
-    socket.onopen = () => {
-      console.log('Connect to server');
-      socket.send(JSON.stringify({
-        id: book._id,
-        bookTitle: book.title,
-        method: 'connection',
-      }))
-   };
-    socket.onmessage = (event) => {
-      let msg: IMSGProps = JSON.parse(event.data);
-      switch (msg.method) {
-        case 'connection':
-          console.log(`!!!!!!!!!! ${msg.bookTitle}`)
-          break;
-      }
+  // useEffect(() => {
+  //   socket.onopen = () => {
+  //     console.log('Connect to server');
+  //     socket.send(JSON.stringify({
+  //       id: book._id,
+  //       bookTitle: book.title,
+  //       method: 'connection',
+  //     }))
+  //  };
+  //   socket.onmessage = (event) => {
+  //     let msg: IMSGProps = JSON.parse(event.data);
+  //     switch (msg.method) {
+  //       case 'connection':
+  //         console.log(`!!!!!!!!!! ${msg.bookTitle}`)
+  //         break;
+  //     }
 
-    };
+  //   };
+  // }, [])
+
   // const socketHandler = () => {
-  //   socket.send('hi server')
+  //   socket.send(JSON.stringify({
+  //     id: book._id,
+  //     bookTitle: book.title,
+  //     method: 'connection',
+  //   }))
   // }
-  }, [])
-
-  const socketHandler = () => {
-    socket.send(JSON.stringify({
-      id: book._id,
-      bookTitle: book.title,
-      method: 'connection',
-    }))
-  }
   
 
   return (
@@ -70,7 +67,7 @@ const BookItemMainInner: FC<IProps> = ({
       </div>
       <div className="bookitem__info">
         <div className="bookitem__title">
-          <button onClick={socketHandler}>click</button>
+          {/* <button onClick={socketHandler}>click</button> */}
           {/* {commentsByBookID.length && commentsByBookID[0].comment} */}
           {book?.title}
         </div>

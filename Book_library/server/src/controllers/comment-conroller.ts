@@ -4,7 +4,9 @@ import commentService from "../service/comment-service";
 class CommentController {
   async addComment(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.body)
       const newComment = await commentService.addComment(req.body);
+      console.log(newComment)
       return res.json(newComment);
     } catch (error) {
       console.log(error);
