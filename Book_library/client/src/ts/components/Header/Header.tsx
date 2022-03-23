@@ -1,9 +1,18 @@
 import React, { FC } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { logoutUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { Footer } from '../Footer/Footer';
+import logo from '../../../assets/book_logo.png';
 import './header.scss';
+import { ADMIN_ROLE, USER_AVATAR } from '../../constants/user';
 
 const HeaderInner: FC = () => {
+  const {user, role, isAuth} = useAppSelector(state => state.authReducer);
+  const dispatch = useAppDispatch();
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  }
   return (
     // <>
       <header className='header__wrapper'>
@@ -12,36 +21,58 @@ const HeaderInner: FC = () => {
             <ul className='navigation__list'>
               <li className='navigation__item'>
                 <div className='navigation__logo'>
-                  LOGO
+                  <img className='navigation__logo__image' src={logo} alt="logo" />
+                  {/* {user?.email?.length > 0 ? `${user.email}` : 'LOGO'} */}
                 </div>
               </li>
               <li className='navigation__item'>
                 <ul className='navigation__menu'>
                   <li className='navigation__menu_item'>
-                    <Link to='/'>Home</Link>
+                    <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/'>Home</NavLink>
                   </li>
+                  {(role === ADMIN_ROLE) && 
+                  <>
+                    <li className='navigation__menu_item'>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/booking'>Booking</NavLink>
+                    </li>
+                    <li className='navigation__menu_item'>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/addbook'>Add book</NavLink>
+                    </li>
+                  </>
+                  }
+                  {/* <li className='navigation__menu_item'>
+                    <Link to='/book'>Book</Link>
+                  </li> */}
                   <li className='navigation__menu_item'>
-                    <Link to='/addbook'>Add book</Link>
-                  </li>
-                  <li className='navigation__menu_item'>
-                    About
+                    <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/about'>About</NavLink>
                   </li>
                 </ul>
               </li>
               <li className='navigation__item'>
                 <ul className='navigation__user'>
-                  <li className='navigation__user_item'>
-                    <Link to='/profile'>Profile</Link>
-                  </li>
-                  <li className='navigation__user_item'>
-                    <Link to='/login'>Log in</Link>
-                  </li>
-                  <li className='navigation__user_item'>
-                    <Link to='/registration'>Sing in</Link> 
-                  </li>
-                  <li className='navigation__user_item'>
-                    Log out
-                  </li>
+                  {(isAuth && (role !== ADMIN_ROLE)) &&
+                  <>
+                    <img className="navigation__user_photo" src={user.profileImage} alt="user avatar" />
+                    <li className='navigation__user_item'>
+                      <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to={`/profile/${user.id}`}>{user?.email?.length > 0 ? `${user.email}` : ''}</NavLink>
+                    </li>
+                  </>}
+                  {!isAuth && 
+                  <>
+                    <li className='navigation__user_item'>
+                      <Link className={'navigation__link_login'} to='/login'>Log in</Link>
+                    </li>
+                    <li className='navigation__user_item'>
+                      <Link className={'navigation__link_sing-in'} to='/registration'>Sing in</Link> 
+                    </li>
+                  </>}
+                  
+                  {isAuth && 
+                  <>
+                    <li onClick={logoutHandler} className='navigation__user_item'>
+                      <Link className={'navigation__link_login'} to='/'>Log out</Link>
+                    </li>
+                  </>}
                 </ul>
               </li>
             </ul>

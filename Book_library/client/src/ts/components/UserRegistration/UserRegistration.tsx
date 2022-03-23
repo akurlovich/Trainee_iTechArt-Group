@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import { USER_AVATAR } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { registerUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
@@ -12,9 +14,10 @@ const UserRegistrationInner: FC = () => {
   const [buttonSubmit, setButtonSubmit] = useState(false);
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(state => state.authReducer);
+  const navigate = useNavigate();
   const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(registerUser({email, password}));
+    dispatch(registerUser({email, password, profileImage: USER_AVATAR}));
     // console.log(user);
   };
   const validFormData = () => {
@@ -34,6 +37,9 @@ const UserRegistrationInner: FC = () => {
     <div className='registration'>
       <div className="registration__block">
         <div className="registration__container">
+          <div onClick={() => navigate('/')} className="registration__close">
+            <AiOutlineCloseCircle size={40}/>
+          </div>
           <div className="registration__title">
             Create Account
           </div>

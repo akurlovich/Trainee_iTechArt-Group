@@ -1,8 +1,17 @@
 export interface IUser {
-  id: string,
-  email: string,
-  password: string,
-  profileImage: string,
-  moderator: boolean,
-  
-}
+  email: string;
+  id: string;
+  isBlocked: boolean;
+  profileImage: string;
+  role: string[];
+};
+
+export interface IUserUpdateProfileImage {
+  id: string;
+  profileImage: string;
+};
+
+export interface IUserUpdateIsBlocked {
+  id: string;
+  isBlocked: boolean;
+};

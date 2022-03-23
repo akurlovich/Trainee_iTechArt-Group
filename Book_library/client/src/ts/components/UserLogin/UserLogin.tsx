@@ -1,15 +1,40 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { checkAuth, loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
 import './userlogin.scss';
 
+interface ILocationState {
+  from: string
+}
+
 const UserLoginInner: FC = () => {
+  const {isAuth} = useAppSelector(state => state.authReducer);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonSubmit, setButtonSubmit] = useState(false);
-  const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  // const state = location.state as stateType;
+  // const {from} = state;
+  const navigate = useNavigate();
+  const prevPage = location.state as ILocationState || '/';
+
+  console.log(prevPage)
+
+  const handlerChange = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    await dispatch(loginUser({email, password}));
+    // await dispatch(checkAuth());
+    setEmail('');
+    setPassword('');
+    setButtonSubmit(prev => false);
+    navigate(prevPage ? prevPage.from : '/');
   };
+  // const lpath = location.state.pathname
+  // console.log("skjfdhjshf", prevPage.from);
   const validFormData = () => {
     if (email.length && password.length) {
       setButtonSubmit(prev => true)
@@ -17,12 +42,22 @@ const UserLoginInner: FC = () => {
   }
   useEffect(() => {
     validFormData();
-  }, [password, email]);
+    if (isAuth) {
+      if (prevPage.from) {
+        navigate(prevPage.from)
+      } else {
+        navigate('/')
+      }
+    }
+  }, [password, email, isAuth]);
 
   return (
     <div className='registration'>
       <div className="registration__block">
         <div className="registration__container">
+          <div onClick={() => navigate('/')} className="registration__close">
+            <AiOutlineCloseCircle size={40}/>
+          </div>
           <div className="registration__title">
             Log in
           </div>
@@ -34,6 +69,7 @@ const UserLoginInner: FC = () => {
               label='Email address'
               name='email'
               type='text'
+              value={email}
               // errorMessage='Not valid email!'
               setData={setEmail}
               required={false}
@@ -43,6 +79,7 @@ const UserLoginInner: FC = () => {
               label='Password'
               name='password'
               type='password'
+              value={password}
               // errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
               setData={setPassword}
               required={false}

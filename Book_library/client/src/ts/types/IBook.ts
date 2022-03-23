@@ -1,16 +1,14 @@
-import { Document, Schema } from "mongoose";
-
-export interface IBook extends Document {
+export interface IBook {
   title: string,
   author: string,
-  year: string,
+  year: number,
   genre: string,
   description: string,
   coverImage: string,
   amount: number,
-  usersBookingID: Array<Schema.Types.ObjectId>,
-  usersComments: Array<{
-    userID: Array<Schema.Types.ObjectId>,
-    comments: string[],
-  }>
 };
+
+export interface IBookUpdate {
+  id: string,
+  amount: number,
+}

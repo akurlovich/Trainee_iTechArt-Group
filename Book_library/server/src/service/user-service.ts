@@ -5,17 +5,24 @@ import UserDto from '../dtos/user-dto';
 import ApiError from '../exceptions/api-error';
 import tokenModel from '../models/token-model';
 import userModel from '../models/user-model';
+import roleModel from '../models/role-model';
+import { DEFAULT_USER_ROLE } from '../constants/index';
+import config from '../common/config';
+import jwt from 'jsonwebtoken';
 
 class UserService {
-  async registration(email: string, password: string) {
+  async registration(email: string, password: string, profileImage: string) {
     const applicant = await UserModel.findOne({email});
     if (applicant) {
-      throw ApiError.BadRequest(`User with ${email} already exists!`)
+      throw ApiError.BadRequest(`User with ${email} already exists!`, [''])
     }
     const hashPassword = await bcrypt.hash(password, 5);
-    const user = await UserModel.create({email, password: hashPassword});
+    const role = await roleModel.findOne({value: DEFAULT_USER_ROLE});
+    const user = await UserModel.create({email, password: hashPassword, role: [role?._id], profileImage});
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({...userDto});
+    // const tokenData = jwt.verify(tokens.refreshToken, config.JWT_REFRESH_SECRET_KEY);
+    // console.log("tokenData", tokenData);
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return {
@@ -26,11 +33,11 @@ class UserService {
   async login(email: string, password: string) {
     const user = await UserModel.findOne({email});
     if (!user) {
-      throw ApiError.BadRequest(`User with ${email} not found!`)
+      throw ApiError.BadRequest(`User with ${email} not found!`, [''])
     }
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
-      throw ApiError.BadRequest(`User password not valid!`)
+      throw ApiError.BadRequest(`User password not valid!`, [''])
     }
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({...userDto});
@@ -40,9 +47,11 @@ class UserService {
       user: userDto
     }
   };
+
   async logout(refreshToken: string) {
     return await tokenService.removeToken(refreshToken);
   };
+
   async refresh(refreshToken: string) {
     if (!refreshToken) {
       throw ApiError.UnauthorizedError();
@@ -52,12 +61,14 @@ class UserService {
     if (!userData || !tokenFromDB) {
       throw ApiError.UnauthorizedError();
     }
-    const user = await tokenModel.findOne({refreshToken});
-    const userFound = await userModel.findOne({id: user?.user});
-    if (!userFound) {
-      throw ApiError.BadRequest('User not found!')
+
+    const user = await userModel.findById(userData.id)
+    // const user = await tokenModel.findOne({refreshToken});
+    // const userFound = await userModel.findOne({id: user?.user});
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
     }
-    const userDto = new UserDto(userFound);
+    const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({...userDto});
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
     return {
@@ -65,9 +76,34 @@ class UserService {
       user: userDto
     }
   };
+
   async getAllUsers() {
     return await UserModel.find();
-  }
+  };
+
+  async getUserByID(id: string) {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
+    }
+    return new UserDto(user);
+  };
+
+  async updateUserProfileImage(id: string, profileImage: string) {
+    const user = await UserModel.findByIdAndUpdate({_id: id}, {profileImage: profileImage}, {new: true});
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
+    }
+    return new UserDto(user);
+  };
+
+  async updateUserIsBlocked(id: string, isBlocked: boolean) {
+    const user = await UserModel.findByIdAndUpdate({_id: id}, {isBlocked: isBlocked}, {new: true});
+    if (!user) {
+      throw ApiError.BadRequest('User not found!', [''])
+    }
+    return new UserDto(user);
+  };
 }
 
 export default new UserService();

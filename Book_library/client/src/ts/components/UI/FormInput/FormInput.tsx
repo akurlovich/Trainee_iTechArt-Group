@@ -2,9 +2,11 @@ import React, { FC, useState, FocusEvent } from 'react';
 import './forminput.scss';''
 
 interface IFormInput {
+  errorShow?: boolean,
   label?: string,
   name?: string,
   type?: string,
+  value?: string,
   errorMessage?: string,
   required?: boolean,
   pattern?: string,
@@ -15,9 +17,11 @@ const FormInputInner: FC<IFormInput> = ({
   label = '',
   name = '',
   type = 'text',
+  value,
   errorMessage = '',
   required = false,
   pattern,
+  errorShow = true,
   setData
 }) => {
   const [focused, setFocused] = useState(false);
@@ -26,12 +30,16 @@ const FormInputInner: FC<IFormInput> = ({
   };
   const handlerFocus = (event: FocusEvent<HTMLInputElement>) => {
     name === 'confirm' && setFocused(true)
+  };
+  const style = {
+    display: errorShow ? 'block' : 'none'
   }
   return (
     <div className="form-input">
       <input
         onChange={e => setData(e.target.value)}
         className='form-input__text'
+        value={value}
         placeholder=' '
         name={name}
         type={type}
@@ -42,7 +50,7 @@ const FormInputInner: FC<IFormInput> = ({
         datatype={focused.toString()}
       />
       <label className='form-input__label' htmlFor="">{label}</label>
-      <div className='form-input__error'>{errorMessage}</div>
+      <div className='form-input__error' style={style}>{errorMessage}</div>
     </div>
   );
 };

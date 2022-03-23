@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from '../common/config';
+import UserDto from '../dtos/user-dto';
 import TokenModel from '../models/token-model';
 
 class TokenService {
-  generateToken(payload: any) {
-    const accessToken = jwt.sign(payload, config.JWT_ACCESS_SECRET_KEY, {expiresIn: '40m'});
+  generateToken(payload: UserDto) {
+    const accessToken = jwt.sign(payload, config.JWT_ACCESS_SECRET_KEY, {expiresIn: '30m'});
     const refreshToken = jwt.sign(payload, config.JWT_REFRESH_SECRET_KEY, {expiresIn: '10d'});
     return {
       accessToken,
@@ -13,7 +14,7 @@ class TokenService {
   };
   validateAccessToken(token: string) {
     try {
-      const data = jwt.verify(token, config.JWT_ACCESS_SECRET_KEY);
+      const data = jwt.verify(token, config.JWT_ACCESS_SECRET_KEY) as UserDto;
       return data;
     } catch (error) {
       return null;
@@ -21,12 +22,13 @@ class TokenService {
   };
   validateRefreshToken(token: string) {
     try {
-      return jwt.verify(token, config.JWT_REFRESH_SECRET_KEY);
-
+      const data = jwt.verify(token, config.JWT_REFRESH_SECRET_KEY) as UserDto;
+      return data;
     } catch (error) {
       return null;
     }
   };
+
   async saveToken(userID: string, refreshToken: string) {
     const tokenData = await TokenModel.findOne({user: userID});
     if (tokenData) {
@@ -36,9 +38,11 @@ class TokenService {
     const token = await TokenModel.create({user: userID, refreshToken});
     return token;
   };
+
   async removeToken(refreshToken: string) {
     return await TokenModel.deleteOne({refreshToken});
   };
+
   async findToken(refreshToken: string) {
     return await TokenModel.findOne({refreshToken});
   }

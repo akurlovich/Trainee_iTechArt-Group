@@ -1,0 +1,32 @@
+.bookitemadmin {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+
+  &__title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__name {
+    font-size: 40px;
+  }
+
+  &__amount {
+    font-size: 24px;
+  }
+
+  &__main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+}

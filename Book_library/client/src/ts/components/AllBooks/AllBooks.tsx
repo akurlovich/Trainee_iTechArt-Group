@@ -1,25 +1,43 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getBooks } from '../../store/reducers/BookReducer/BookActionCreatores';
 import { BookBlock } from '../BookBlock/BookBlock';
-import { Checkbox } from '../UI/Checkbox/Checkbox';
-import { SearchBar } from '../UI/SearchBar/SearchBar';
+import { FindBooks } from '../FindBooks/FindBooks';
+import { SearchBlock } from '../SearchBlock/SearchBlock';
+import { Loader } from '../UI/Loader/Loader';
 import './allbooks.scss';
+import '../FindBooks/findbooks.scss';
 
 const AllBooksInner: FC = () => {
+  const {books, isLoading} = useAppSelector(state => state.bookReducer);
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getBooks());
+  // }, []);
+  
   return (
+    <>
+    {isLoading && <Loader/>}
     <div className='allbooks'>
-      <Checkbox field='Genre'/>
-      <div className="allbooks__title">
-        Most popular:
-      </div>
-      <div className="allbooks__container">
-        <BookBlock bgColor='#405F71'/>
-        <BookBlock bgColor='#563E70'/>
-        <BookBlock bgColor='#733F55'/>
-      </div>
-      <div className="allbooks__search-bar">
-        <SearchBar/>
+      {/* <div className="allbooks__title">
+        Latest books:
+      </div> */}
+      {/* {books.length && 
+        <div className="allbooks__container">
+          <BookBlock book={books[books.length - 3]}/>
+          <BookBlock book={books[books.length - 2]}/>
+          <BookBlock book={books[books.length - 1]}/>
+        </div>
+      } */}
+      {/* <div className="allbooks__search-bar">
+      </div> */}
+      <div className="findbooks">
+      <SearchBlock/>
+      {/* <ResultBlock/> */}
       </div>
     </div>
+    </>
   );
 };
 
