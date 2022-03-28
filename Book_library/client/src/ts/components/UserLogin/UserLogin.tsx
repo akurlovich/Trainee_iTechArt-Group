@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { checkAuth, loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
+import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 import './userlogin.scss';
 
 interface ILocationState {
@@ -11,9 +12,10 @@ interface ILocationState {
 }
 
 const UserLoginInner: FC = () => {
-  const {isAuth} = useAppSelector(state => state.authReducer);
+  const {isAuth, error} = useAppSelector(state => state.authReducer);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(false)
   const [buttonSubmit, setButtonSubmit] = useState(false);
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -28,6 +30,10 @@ const UserLoginInner: FC = () => {
     event.preventDefault();
     await dispatch(loginUser({email, password}));
     // await dispatch(checkAuth());
+    // if (error) {
+    //   console.log(error);
+    //   setLoginError(true);
+    // }
     setEmail('');
     setPassword('');
     setButtonSubmit(prev => false);
@@ -51,8 +57,22 @@ const UserLoginInner: FC = () => {
     }
   }, [password, email, isAuth]);
 
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      setLoginError(true);
+    }
+  
+  }, [error])
+
+  const canselHandler = () => {
+    setLoginError(false);
+  }
+  
+
   return (
     <div className='registration'>
+      {loginError && <UserErrorWarning canselHandler={canselHandler} message='User not fouund!!!'/>}
       <div className="registration__block">
         <div className="registration__container">
           <div onClick={() => navigate('/')} className="registration__close">

@@ -91,7 +91,7 @@ export const authSlice = createSlice({
     [checkAuth.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isAuth = false;
-      state.error = action.payload;
+      // state.error = action.payload;
     },
     [updateUserProfileImage.pending.type]: (state, action) => {
       state.isLoading = true;
