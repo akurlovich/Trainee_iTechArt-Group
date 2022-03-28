@@ -59,7 +59,6 @@ const UserLoginInner: FC = () => {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       setLoginError(true);
     }
   
@@ -67,7 +66,7 @@ const UserLoginInner: FC = () => {
 
   const canselHandler = () => {
     setLoginError(false);
-  }
+  };
   
 
   return (

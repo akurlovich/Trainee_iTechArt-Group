@@ -4,26 +4,33 @@ import { Link, useNavigate } from 'react-router-dom';
 import { USER_AVATAR } from '../../constants/user';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { registerUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
+import { removeRigisterUserError } from '../../store/reducers/AuthReducer/AuthSlice';
 import { FormInput } from '../UI/FormInput/FormInput';
+import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 import './userregistration.scss';
 
 const UserRegistrationInner: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirPassword, setConfirPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [buttonSubmit, setButtonSubmit] = useState(false);
+  const [registerError, setRegisterError] = useState(false)
   const dispatch = useAppDispatch();
-  const {user} = useAppSelector(state => state.authReducer);
+  const {user, error} = useAppSelector(state => state.authReducer);
   const navigate = useNavigate();
-  const handlerChange = (event: React.FormEvent<HTMLFormElement>) => {
+  const handlerChange = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(registerUser({email, password, profileImage: USER_AVATAR}));
-    // console.log(user);
+    await dispatch(registerUser({email, password, profileImage: USER_AVATAR}));
+    // setEmail('');
+    // setPassword('');
+    // setConfirPassword('');
+    // setButtonSubmit(prev => false);
+    // console.log(email);
   };
   const validFormData = () => {
     const emailValid = /^\S+@\S+\.\S+$/.test(email);
     const passValid = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,20}$/.test(password);
-    const pasConfirm = (password === confirPassword);
+    const pasConfirm = (password === confirmPassword);
     if (passValid && pasConfirm && emailValid) {
       setButtonSubmit(prev => true)
     }
@@ -31,10 +38,28 @@ const UserRegistrationInner: FC = () => {
   }
   useEffect(() => {
     validFormData();
-  }, [password, confirPassword, email]);
+  }, [password, confirmPassword, email]);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      setRegisterError(true);
+    }
+  
+  }, [error])
+
+  const canselHandler = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setButtonSubmit(prev => false);
+    setRegisterError(false);
+    dispatch(removeRigisterUserError());
+  }
 
   return (
     <div className='registration'>
+      {registerError && <UserErrorWarning canselHandler={canselHandler} message={`User with email ${email} already exist!`}/>}
       <div className="registration__block">
         <div className="registration__container">
           <div onClick={() => navigate('/')} className="registration__close">
@@ -51,6 +76,7 @@ const UserRegistrationInner: FC = () => {
               label='Email address'
               name='email'
               type='text'
+              value={email}
               errorMessage='Not valid email!'
               setData={setEmail}
               required={true}
@@ -60,6 +86,7 @@ const UserRegistrationInner: FC = () => {
               label='Password'
               name='password'
               type='password'
+              value={password}
               errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
               setData={setPassword}
               required={true}
@@ -69,8 +96,9 @@ const UserRegistrationInner: FC = () => {
               label='Confirm password'
               name='confirm'
               type='password'
+              value={confirmPassword}
               errorMessage="Password don'n match"
-              setData={setConfirPassword}
+              setData={setConfirmPassword}
               required={true}
               pattern={password}
             />
