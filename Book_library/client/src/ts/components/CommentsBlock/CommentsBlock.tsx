@@ -67,13 +67,15 @@ const CommentsBlockInner:FC = () => {
   }
 
   return (
-    <div className="comments">
+    <>
       {isLoading && <Loader/>}
-      {commentsByBookID.length > 0 &&
+      {commentsByBookID.length > 0 && 
+      
+      (<div className="comments">
+      
         <div className="comments__title">
           Comments:
         </div>
-      }
       {/* {comments.length && comments[0].comment}
       {commentsByBookID.length && commentsByBookID[0].comment} */}
       {commentsByBookID.length > 0 && 
@@ -98,7 +100,12 @@ const CommentsBlockInner:FC = () => {
         </div>
       }
       
-    </div>
+    </div>)
+      }
+    
+    
+    
+    </>
   );
 };
 
