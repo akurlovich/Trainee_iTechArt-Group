@@ -5,6 +5,7 @@ import { timeCulculate } from '../../../services/ClientServices/TimeCulculate';
 import { allUsersAndBookeds, deleteBookedAndReturnAmount, getAllBookedsByUserID } from '../../../store/reducers/BookedReducer/BookedActionCreators';
 import { addIssued, deleteIssuedAndReturnAmount, getAllIssuedsByUserID } from '../../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { IBookResponse } from '../../../types/IBookResponse';
+import { UserErrorWarning } from '../../UI/UserErrorWarning/UserErrorWarning';
 
 interface IProps {
   userBooks: IBookResponse,
@@ -15,9 +16,10 @@ interface IProps {
 const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) => {
   const dispatch = useAppDispatch();
   const { bookedsUserID } = useAppSelector(state => state.bookedReducer);
-  const { issuedsByUserID } = useAppSelector(state => state.issuedReducer);
+  const { issuedsByUserID, error } = useAppSelector(state => state.issuedReducer);
   const [timer, setTimer] = useState({hours: 0, minuts: 0});
   const [timerIssued, setTimerIssued] = useState({hours: 0, minuts: 0});
+  const [issuedError, setIssuedError] = useState(false);
 
   const findBooked = () => {
     return bookedsUserID.find(booked => booked.bookID === userBooks._id);
@@ -29,18 +31,15 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
   };
 
   const canselHandler = async () => {
-    console.log('booking')
     const findBooked = bookedsUserID.find(booked => booked.bookID === userBooks._id);
     console.log(findBooked)
     if (findBooked) {
       await dispatch(deleteBookedAndReturnAmount(findBooked._id));
       await dispatch(allUsersAndBookeds());
     };
-
   };
 
   const canselIssuedHandler = async () => {
-    console.log('issued')
     const findBooked = issuedsByUserID.find(booked => booked.bookID === userBooks._id);
     console.log(findBooked)
     if (findBooked) {
@@ -65,6 +64,16 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
   }, [bookedsUserID]);
 
   useEffect(() => {
+    if (error) {
+      setIssuedError(true);
+    }
+  }, [error]);
+
+  const closeWarning = () => {
+    setIssuedError(false);
+  };
+
+  useEffect(() => {
     const findBooked = issuedsByUserID.find(booked => booked.bookID === userBooks._id);
       if (findBooked) {
         const timeOut = timeCulculate(findBooked.createdAt);
@@ -74,6 +83,7 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
 
   return ( 
     <div className="bookings__main">
+      {issuedError && <UserErrorWarning canselHandler={closeWarning} message='Sorry, can`t issued book, try late!'/>}
       <div className="bookings__item">
         <img src={userBooks.coverImage} alt="" className="bookings__item__image" />
         <div className="bookings__item__text_block">

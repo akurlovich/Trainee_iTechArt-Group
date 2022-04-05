@@ -34,6 +34,7 @@ export const issuedSlice = createSlice({
     [addIssued.fulfilled.type]: (state, action: PayloadAction<IIssuedResponse>) => {
       state.isLoading = false;
       state.issued = action.payload;
+      state.error = '';
     },
     [addIssued.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -45,6 +46,7 @@ export const issuedSlice = createSlice({
     [getAllIssuedsByBookID.fulfilled.type]: (state, action: PayloadAction<IIssuedResponse[]>) => {
       state.isLoading = false;
       state.issuedsByBookID = action.payload;
+      state.error = '';
     },
     [getAllIssuedsByBookID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -56,6 +58,7 @@ export const issuedSlice = createSlice({
     [getAllIssuedsByUserID.fulfilled.type]: (state, action: PayloadAction<IIssuedResponse[]>) => {
       state.isLoading = false;
       state.issuedsByUserID = action.payload;
+      state.error = '';
     },
     [getAllIssuedsByUserID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -66,6 +69,7 @@ export const issuedSlice = createSlice({
     },
     [deleteIssued.fulfilled.type]: (state) => {
       state.isLoading = false;
+      state.error = '';
     },
     [deleteIssued.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -76,6 +80,7 @@ export const issuedSlice = createSlice({
     },
     [deleteIssuedAndReturnAmount.fulfilled.type]: (state) => {
       state.isLoading = false;
+      state.error = '';
     },
     [deleteIssuedAndReturnAmount.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -87,6 +92,7 @@ export const issuedSlice = createSlice({
     [getIssuedsForUser.fulfilled.type]: (state, action: PayloadAction<IBookResponse[]>) => {
       state.isLoading = false;
       state.userIssuedBooks = action.payload;
+      state.error = '';
     },
     [getIssuedsForUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
