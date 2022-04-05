@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './userbooking.scss';
 import bookOne from '../../../assets/book-1.png';
 import bookTwo from '../../../assets/book-2.png';
@@ -6,32 +6,43 @@ import bookThree from '../../../assets/book-3.png';
 import { IBookResponse } from '../../types/IBookResponse';
 import successIcon from '../../../assets/Success-Icon.png';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useDispatch } from 'react-redux';
 import { addBooked, getAllBookedsByBookID } from '../../store/reducers/BookedReducer/BookedActionCreators';
-import { updateBookAmountByID } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 
 interface IProps {
   book: IBookResponse,
   setData: (event: boolean) => void,
-}
+};
 
 const UserBookingInner: FC<IProps> = ({book, setData}) => {
   const { user } = useAppSelector(state => state.authReducer);
+  const { error } = useAppSelector(state => state.bookedReducer);
   const dispatch = useAppDispatch();
   const [success, setSuccess] = useState(false);
+  const [bookedError, setBookedError] = useState(false);
   const canselHandler = () => {
     setData(false);
   };
   const bookedHandler = async () => {
     setSuccess(true);
-    console.log('book', book?._id, 'user', user.id);
     await dispatch(addBooked({bookID: book._id, userID: user.id}));
     await dispatch(getAllBookedsByBookID(book._id));
-    // await dispatch(updateBookAmountByID({id: book._id, amount: book.amount - 1}));
+  };
+
+  useEffect(() => {
+    if (error) {
+      setSuccess(false);
+      setBookedError(true);
+    }
+  }, [error]);
+
+  const closeWarning = () => {
+    setBookedError(false);
   };
 
   return (
     <div className='registration'>
+      {bookedError && <UserErrorWarning canselHandler={closeWarning} message='Sorry, can`t booking, try late!'/>}
       <div className="registration__block">
         <div className="registration__container">
           {success ?

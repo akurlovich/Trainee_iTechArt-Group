@@ -2,20 +2,20 @@ import React, { FC, useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { checkAuth, loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
+import { loginUser } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { FormInput } from '../UI/FormInput/FormInput';
 import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 import './userlogin.scss';
 
 interface ILocationState {
   from: string
-}
+};
 
 const UserLoginInner: FC = () => {
   const {isAuth, error} = useAppSelector(state => state.authReducer);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState(false)
+  const [loginError, setLoginError] = useState(false);
   const [buttonSubmit, setButtonSubmit] = useState(false);
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -24,23 +24,15 @@ const UserLoginInner: FC = () => {
   const navigate = useNavigate();
   const prevPage = location.state as ILocationState || '/';
 
-  console.log(prevPage)
-
   const handlerChange = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await dispatch(loginUser({email, password}));
-    // await dispatch(checkAuth());
-    // if (error) {
-    //   console.log(error);
-    //   setLoginError(true);
-    // }
     setEmail('');
     setPassword('');
     setButtonSubmit(prev => false);
     navigate(prevPage ? prevPage.from : '/');
   };
-  // const lpath = location.state.pathname
-  // console.log("skjfdhjshf", prevPage.from);
+
   const validFormData = () => {
     if (email.length && password.length) {
       setButtonSubmit(prev => true)
@@ -62,13 +54,12 @@ const UserLoginInner: FC = () => {
       setLoginError(true);
     }
   
-  }, [error])
+  }, [error]);
 
   const canselHandler = () => {
     setLoginError(false);
   };
   
-
   return (
     <div className='registration'>
       {loginError && <UserErrorWarning canselHandler={canselHandler} message='User not fouund!!!'/>}
@@ -89,7 +80,6 @@ const UserLoginInner: FC = () => {
               name='email'
               type='text'
               value={email}
-              // errorMessage='Not valid email!'
               setData={setEmail}
               required={false}
               
@@ -99,7 +89,6 @@ const UserLoginInner: FC = () => {
               name='password'
               type='password'
               value={password}
-              // errorMessage='Password shoud be 8-20 characters and include 1 number and 1 letter!'
               setData={setPassword}
               required={false}
             />

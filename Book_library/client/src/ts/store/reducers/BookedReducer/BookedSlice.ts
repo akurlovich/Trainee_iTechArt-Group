@@ -39,6 +39,7 @@ export const bookedSlice = createSlice({
     [addBooked.fulfilled.type]: (state, action: PayloadAction<IBookedResponse>) => {
       state.isLoading = false;
       state.booked = action.payload;
+      state.error = '';
     },
     [addBooked.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -50,6 +51,7 @@ export const bookedSlice = createSlice({
     [getAllBookedsByBookID.fulfilled.type]: (state, action: PayloadAction<IBookedResponse[]>) => {
       state.isLoading = false;
       state.bookedsBookID = action.payload;
+      state.error = '';
     },
     [getAllBookedsByBookID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -61,6 +63,7 @@ export const bookedSlice = createSlice({
     [getAllBookedsByUserID.fulfilled.type]: (state, action: PayloadAction<IBookedResponse[]>) => {
       state.isLoading = false;
       state.bookedsUserID = action.payload;
+      state.error = '';
     },
     [getAllBookedsByUserID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -71,6 +74,7 @@ export const bookedSlice = createSlice({
     },
     [deleteBooked.fulfilled.type]: (state) => {
       state.isLoading = false;
+      state.error = '';
     },
     [deleteBooked.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -81,6 +85,7 @@ export const bookedSlice = createSlice({
     },
     [deleteBookedAndReturnAmount.fulfilled.type]: (state) => {
       state.isLoading = false;
+      state.error = '';
     },
     [deleteBookedAndReturnAmount.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -92,6 +97,7 @@ export const bookedSlice = createSlice({
     [getBookedsForUser.fulfilled.type]: (state, action: PayloadAction<IBookResponse[]>) => {
       state.isLoading = false;
       state.userBookedBooks = action.payload;
+      state.error = '';
     },
     [getBookedsForUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -103,6 +109,7 @@ export const bookedSlice = createSlice({
     [allUsersAndBookeds.fulfilled.type]: (state, action: PayloadAction<IUsersBookedsAndIssueds[]>) => {
       state.isLoading = false;
       state.allUsersBookedsAndIssueds = action.payload;
+      state.error = '';
     },
     [allUsersAndBookeds.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -114,6 +121,7 @@ export const bookedSlice = createSlice({
     [bookUsersAndBookeds.fulfilled.type]: (state, action: PayloadAction<IUsersBookedsAndIssueds[]>) => {
       state.isLoading = false;
       state.bookUsersBookedsAndIssueds = action.payload;
+      state.error = '';
     },
     [bookUsersAndBookeds.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
