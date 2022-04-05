@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import { addBook } from '../../store/reducers/BookReducer/BookActionCreatores';
@@ -36,16 +35,13 @@ const AddBookInner: FC = () => {
  
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
-
-    // const base64 = (files: File) =>
-    // new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-    //   let reader = new FileReader();
-    //   reader.readAsDataURL(files);
-    //   reader.onload = () => resolve(reader.result);
-    // });
-    const urlImage = await base64(file);
-    if (urlImage) {
-      setcoverImage(urlImage as string)
+    if (file.size > 60000) {
+      alert('File is too big! File must be less then 60kb!')
+    } else {
+      const urlImage = await base64(file);
+      if (urlImage) {
+        setcoverImage(urlImage as string)
+      }
     }
     //!!-----------ADD EMPTY IMAGE-----------
   }
@@ -53,8 +49,7 @@ const AddBookInner: FC = () => {
   const handlerAddBook = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(addBook({title, author, description, amount, year, genre, coverImage}))
-    
-  }
+  };
 
   return (
     <form onSubmit={handlerAddBook} className='addbook'>
@@ -130,7 +125,6 @@ const AddBookInner: FC = () => {
       </div>
       <div className='addbook__button'>
         <button
-          // onSubmit={handlerAddBook}
           type="submit"
           className='addbook__button_add'
         >

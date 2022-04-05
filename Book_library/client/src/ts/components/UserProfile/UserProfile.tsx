@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import { updateUserProfileImage } from '../../store/reducers/AuthReducer/AuthActionCreatores';
 import { getBookedsForUser } from '../../store/reducers/BookedReducer/BookedActionCreators';
-import { getAllIssuedsByUserID, getIssuedsForUser } from '../../store/reducers/IssuedReducer/IssuedActionCreators';
+import { getIssuedsForUser } from '../../store/reducers/IssuedReducer/IssuedActionCreators';
 import { BookCard } from '../BookCard/BookCard';
 import { Loader } from '../UI/Loader/Loader';
 import './UserProfile.scss';
@@ -16,15 +16,18 @@ const UserProfileInner: FC = () => {
   const dispatch = useAppDispatch();
   const {userID} = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const [imageSrc, setImageSrc] = useState('');
   const [isNewImage, setIsNewImage] = useState(false)
   
   const imageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target.files as FileList)[0];
-    const urlImage = await base64(file);
-    urlImage && setImageSrc(urlImage as string);
-    (urlImage !== imageSrc) && setIsNewImage(true);
+    if (file.size > 60000) {
+      alert('File is too big! File must be less then 60kb!')
+    } else {
+      const urlImage = await base64(file);
+      urlImage && setImageSrc(urlImage as string);
+      (urlImage !== imageSrc) && setIsNewImage(true);
+    }
   };
 
   const changeImageHandler = async () => {
@@ -85,9 +88,6 @@ const UserProfileInner: FC = () => {
           userBookedBooks.map(booked => <BookCard key={booked._id} book={booked}/>)
           :
           <div className="profile__title">You havn`t booked books</div>}
-          {/* <BookCard/>
-          <BookCard/>
-          <BookCard/> */}
         </div>
         <div className="profile__books">
         <div className="profile__title">Issued books:</div>
