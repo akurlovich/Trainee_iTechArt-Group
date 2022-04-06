@@ -33,6 +33,7 @@ export const bookSlice = createSlice({
     [addBook.fulfilled.type]: (state, action: PayloadAction<IBookResponse>) => {
       state.isLoading = false;
       state.book = action.payload;
+      state.error = '';
     },
     [addBook.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -44,6 +45,7 @@ export const bookSlice = createSlice({
     [getBooks.fulfilled.type]: (state, action: PayloadAction<IBookResponse[]>) => {
       state.isLoading = false;
       state.books = action.payload;
+      state.error = '';
     },
     [getBooks.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -55,6 +57,7 @@ export const bookSlice = createSlice({
     [getBookByID.fulfilled.type]: (state, action: PayloadAction<IBookResponse>) => {
       state.isLoading = false;
       state.book = action.payload;
+      state.error = '';
     },
     [getBookByID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -66,6 +69,7 @@ export const bookSlice = createSlice({
     [updateBookAmountByID.fulfilled.type]: (state, action: PayloadAction<IBookResponse>) => {
       state.isLoading = false;
       state.book = action.payload;
+      state.error = '';
     },
     [updateBookAmountByID.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -77,6 +81,7 @@ export const bookSlice = createSlice({
     [getAllGenres.fulfilled.type]: (state, action: PayloadAction<IGenreResponse[]>) => {
       state.isLoading = false;
       state.genres = action.payload;
+      state.error = '';
     },
     [getAllGenres.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;

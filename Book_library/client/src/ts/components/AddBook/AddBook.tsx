@@ -1,17 +1,21 @@
-import React, { FC, useState } from 'react';
-import { useAppDispatch } from '../../hooks/redux';
+import React, { FC, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import base64 from '../../services/ClientServices/Base64';
 import { addBook } from '../../store/reducers/BookReducer/BookActionCreatores';
+import { USER_AVATAR } from '../../constants/user';
 import './addbook.scss';
+import { UserErrorWarning } from '../UI/UserErrorWarning/UserErrorWarning';
 
 const AddBookInner: FC = () => {
+  const { error } = useAppSelector(state => state.bookReducer);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [year, setYear] = useState(1);
+  const [year, setYear] = useState(2000);
   const [amount, setAmount] = useState(1);
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
-  const [coverImage, setcoverImage] = useState('');
+  const [coverImage, setcoverImage] = useState(USER_AVATAR);
+  const [addBookError, setAddBookError] = useState(false);
   const dispatch = useAppDispatch();
 
   const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,15 +48,34 @@ const AddBookInner: FC = () => {
       }
     }
     //!!-----------ADD EMPTY IMAGE-----------
-  }
+  };
+
+  useEffect(() => {
+    if (error) {
+      setAddBookError(true);
+    }
+  
+  }, [error]);
+
+  const canselHandler = () => {
+    setAddBookError(false);
+  };
 
   const handlerAddBook = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addBook({title, author, description, amount, year, genre, coverImage}))
+    await dispatch(addBook({title, author, description, amount, year, genre, coverImage}));
+    setTitle('');
+    setAuthor('');
+    setYear(2000);
+    setAmount(1);
+    setGenre('');
+    setDescription('');
+    setcoverImage(USER_AVATAR);
   };
 
   return (
     <form onSubmit={handlerAddBook} className='addbook'>
+      {addBookError && <UserErrorWarning canselHandler={canselHandler} message='Can`t add book, try late!'/>}
       <div className="addbook__inputs">
         <div className="inputs__item">
           <input
