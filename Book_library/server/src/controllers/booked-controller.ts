@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import bookedService from "../service/booked-service";
-import schedule from 'node-schedule';
-import mailService from "../service/mail-service";
 import Logger from "../logger/log";
 import userService from "../service/user-service";
 import bookService from "../service/book-service";
@@ -15,7 +13,6 @@ class BookedController {
       Logger.info(`Booking book ${book.title} by User ${user.email}`, { action: 'booking', book: book.title, user: user.email});
       return res.json(newBooked);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -25,7 +22,6 @@ class BookedController {
       const booked = await bookedService.getAllBookedsBookID(req.params.id);
       return res.json(booked);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -35,7 +31,6 @@ class BookedController {
       const booked = await bookedService.getAllBookedsUserID(req.params.id);
       return res.json(booked);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -45,7 +40,6 @@ class BookedController {
       const booked = await bookedService.getBookedByID(req.params.id);
       return res.json(booked);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -53,14 +47,9 @@ class BookedController {
   async getAllBookeds(req: Request, res: Response, next: NextFunction) {
     try {
       const bookeds = await bookedService.getAllBookeds();
-      // logger1.info(`${bookeds[0].userID}`, {...bookeds[0], action: 'register'});
-      // logger1.info(`${bookeds[0].userID}`, { action: 'register'});
-      // Logger.info(`${bookeds[0].userID}`, { action: 'register', title: bookeds[0].bookID});
-      // Logger.info(`${bookeds[0].userID}`, {action: 'register'});
 
       return res.json(bookeds);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -73,7 +62,6 @@ class BookedController {
       Logger.info(`Cansel booking book ${book.title} by User ${user.email}`, { action: 'cansel booking', book: book.title, user: user.email});
       return res.json(booked);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

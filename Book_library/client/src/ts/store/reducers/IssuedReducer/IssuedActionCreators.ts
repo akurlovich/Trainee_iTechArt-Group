@@ -26,8 +26,7 @@ export const getIssueds = createAsyncThunk(
   'ISSUED/getIssueds',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await IssuedService.getIssueds();
-      return response.data;
+      return await (await IssuedService.getIssueds()).data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -38,8 +37,7 @@ export const getAllIssuedsByBookID = createAsyncThunk(
   'ISSUED/getAllIssuedsByBookID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await IssuedService.getAllIssuedsByBookID(id);
-      return response.data;
+      return await (await IssuedService.getAllIssuedsByBookID(id)).data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -50,8 +48,7 @@ export const getAllIssuedsByUserID = createAsyncThunk(
   'ISSUED/getAllIssuedsByUserID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await IssuedService.getAllIssuedsByUserID(id);
-      return response.data;
+      return await (await IssuedService.getAllIssuedsByUserID(id)).data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -62,8 +59,7 @@ export const deleteIssued = createAsyncThunk(
   'ISSUED/deleteIssued',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await IssuedService.deleteIssued(id);
-      return response.data;
+      return await (await IssuedService.deleteIssued(id)).data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }

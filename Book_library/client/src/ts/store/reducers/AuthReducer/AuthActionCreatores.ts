@@ -25,7 +25,6 @@ export const registerUser = createAsyncThunk(
       const { email, password, profileImage } = data;
       const response = await AuthService.registration(email, password, profileImage);
       localStorage.setItem('token', response.data.refreshToken);
-      // console.log(response.data)
       const role = await RoleService.getRoleByID(response.data.user.role[0]);
       return {
         user: response.data.user,
@@ -44,11 +43,8 @@ export const loginUser = createAsyncThunk(
     try {
       const { email, password } = data;
       const response = await AuthService.login(email, password);
-      // console.log(response)
       localStorage.setItem('token', response.data.accessToken);
       const role = await RoleService.getRoleByID(response.data.user.role[0]);
-      // console.log('role id', response.data.user.role[0]);
-      // console.log('role', role.data.value)
       return {
         user: response.data.user,
         role: role.data.value,
@@ -63,7 +59,7 @@ export const logoutUser = createAsyncThunk(
   'AUTH/logoutUser',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await AuthService.logout();
+      await AuthService.logout();
       localStorage.removeItem('token');
       return;
       
@@ -79,7 +75,6 @@ export const checkAuth = createAsyncThunk(
     try {
       const response = await axios.get<IAuthResponse>(`${API_URL}refresh`, {withCredentials: true});
       localStorage.setItem('token', response.data.accessToken);
-      // console.log('auth', response);
       const role = await RoleService.getRoleByID(response.data.user.role[0]);
       return {
         user: response.data.user,
@@ -96,8 +91,7 @@ export const updateUserProfileImage = createAsyncThunk(
   'AUTH/updateUserProfileImage',
   async (newImage: IUserUpdateProfileImage, thunkAPI) => {
     try {
-      const response = await UserService.updateUserProfileImage(newImage)
-      return response.data;
+      return await (await UserService.updateUserProfileImage(newImage)).data;
       
     } catch (error) {
       return thunkAPI.rejectWithValue("Can't update user!")
@@ -109,8 +103,7 @@ export const updateUserIsBlocked = createAsyncThunk(
   'AUTH/updateUserIsBlocked',
   async (newIsBlocked: IUserUpdateIsBlocked, thunkAPI) => {
     try {
-      const response = await UserService.updateUserIsBlocked(newIsBlocked)
-      return response.data;
+      return await (await UserService.updateUserIsBlocked(newIsBlocked)).data;
       
     } catch (error) {
       return thunkAPI.rejectWithValue("Can't update user!")

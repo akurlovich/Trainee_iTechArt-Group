@@ -20,12 +20,10 @@ const BookCardInner:FC<IProps> = ({book}) => {
     return bookedsUserID.find(booked => booked.bookID === book._id);
   };
   const canselHandler = async () => {
-    console.log('by user', bookedsUserID);
     const findBooked = bookedsUserID.find(booked => booked.bookID === book._id);
     if (findBooked) {
       await dispatch(deleteBookedAndReturnAmount(findBooked?._id));
       await dispatch(getBookedsForUser(user.id));
-      console.log('del');
     }
   };
 

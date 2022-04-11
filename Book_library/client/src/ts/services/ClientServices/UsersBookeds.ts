@@ -17,22 +17,6 @@ export const usersBookeds = async (userID: string) => {
   return userBooks;
 };
 
-// export const allUserAndBookeds = async () => {
-//   const allBookeds = await (await BookedService.getBookeds()).data;
-//   const newUserID: string[] = [];
-//   const allUserBookeds: IUsersBookedsAndIssueds[] = [];
-
-//   for (let i = 0; i < allBookeds.length; i++) {
-//     if (!newUserID.includes(allBookeds[i].userID)) {
-//       newUserID.push(allBookeds[i].userID);
-//       const user = await (await UserService.getUserByID(allBookeds[i].userID)).data;
-//       const userBooks = await usersBookeds(allBookeds[i].userID);
-//       allUserBookeds.push({user: user, userBooks: userBooks})
-//     }
-//   }
-//   return allUserBookeds;
-// };
-
 export const usersIssueds = async (userID: string) => {
   const issueds = await (await IssuedService.getAllIssuedsByUserID(userID)).data;
   const userIssueds = [] as IBookResponse[];

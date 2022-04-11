@@ -21,7 +21,6 @@ class BookService {
       genres.push(genre.value);
     };
 
-    // console.log('22222', book)
 
     const bookDTO: IBookDTO = {
       _id: book._id,
@@ -68,7 +67,6 @@ class BookService {
 
     return booksDTO;
   };
-
 }
 
 export default new BookService();

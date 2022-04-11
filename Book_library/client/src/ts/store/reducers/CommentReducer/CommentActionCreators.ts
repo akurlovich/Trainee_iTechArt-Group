@@ -6,9 +6,7 @@ export const addComment = createAsyncThunk(
   'COMMENT/addComment',
   async (comment: IComment, {rejectWithValue}) => {
     try {
-      const response = await commentService.addComment(comment);
-      console.log('addComment', response.data)
-      return response.data;
+      return await (await commentService.addComment(comment)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -20,9 +18,7 @@ export const getComments = createAsyncThunk(
   'COMMENT/getComments',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await commentService.getComments();
-      console.log('getComments', response.data)
-      return response.data;
+      return await (await commentService.getComments()).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -34,9 +30,7 @@ export const getAllCommentByBookID = createAsyncThunk(
   'COMMENT/getAllCommentByBookID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await commentService.getAllCommentsByBookID(id);
-      console.log('getAllCommentByBookID', response.data)
-      return response.data;
+      return await (await commentService.getAllCommentsByBookID(id)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -48,9 +42,7 @@ export const getAllCommentsByUserID = createAsyncThunk(
   'COMMENT/getAllCommentsByUserID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await commentService.getAllCommentsByUserID(id);
-      console.log('getAllCommentsByUserID', response.data)
-      return response.data;
+      return await (await commentService.getAllCommentsByUserID(id)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -62,9 +54,7 @@ export const deleteComment = createAsyncThunk(
   'COMMENT/deleteComment',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await commentService.deleteComment(id);
-      console.log('deleteComment', response.data)
-      return response.data;
+      return await (await commentService.deleteComment(id)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -76,9 +66,7 @@ export const updateCommentByModerator = createAsyncThunk(
   'COMMENT/updateCommentByModerator',
   async (newComment: ICommentUpdate, {rejectWithValue}) => {
     try {
-      const response = await commentService.updateCommentByModerator(newComment);
-      console.log('updateCommentByModerator', response.data)
-      return response.data;
+      return await (await commentService.updateCommentByModerator(newComment)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)

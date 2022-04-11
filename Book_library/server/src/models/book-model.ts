@@ -18,7 +18,6 @@ const BookSchema: Schema = new Schema<IBook>({
     type: Schema.Types.ObjectId,
     ref: 'Genre',
     required: true,
-    // default: [],
   }],
   description: {
     type: String,

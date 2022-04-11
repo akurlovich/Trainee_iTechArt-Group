@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import expressWS from 'express-ws';
 import router from './router/index';
 import errorMiddleware from './middlewares/error-middleware';
+import config from './common/config';
 
 interface IMSGProps {
   id: string,
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000',
+  origin: config.CLIENT_URL,
 }));
 app.use('/api', router);
 app.use(errorMiddleware);
@@ -45,7 +46,7 @@ const connectionHandler = (ws: any, msg: IMSGProps) => {
 };
 
 mongoose
-  .connect('mongodb+srv://ellibrary:ellibrary@cluster0.cm82w.mongodb.net/eLibrary?retryWrites=true&w=majority', {})
+  .connect(config.DB_CONNECT, {})
   .then(() => console.log('Connected to DB'))
   .catch((err) => console.log(err));
 

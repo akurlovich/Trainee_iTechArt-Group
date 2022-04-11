@@ -22,7 +22,6 @@ const HeaderInner: FC = () => {
               <li className='navigation__item'>
                 <div className='navigation__logo'>
                   <img className='navigation__logo__image' src={logo} alt="logo" />
-                  {/* {user?.email?.length > 0 ? `${user.email}` : 'LOGO'} */}
                 </div>
               </li>
               <li className='navigation__item'>
@@ -40,9 +39,6 @@ const HeaderInner: FC = () => {
                     </li>
                   </>
                   }
-                  {/* <li className='navigation__menu_item'>
-                    <Link to='/book'>Book</Link>
-                  </li> */}
                   <li className='navigation__menu_item'>
                     <NavLink className={({isActive}) => isActive ? 'active-link' : 'navigation__link'} to='/about'>About</NavLink>
                   </li>

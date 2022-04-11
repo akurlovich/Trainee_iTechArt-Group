@@ -16,7 +16,6 @@ import { ADMIN_ROLE } from '../../constants/user';
 import { BookItemAdmin } from './BookItemAdmin/BookItemAdmin';
 
 const BookItemInner: FC = () => {
-  console.log('BookItem');
   const { isAuth, user, role } = useAppSelector(state => state.authReducer);
   const { book, isLoading } = useAppSelector(state => state.bookReducer);
   const { bookedsBookID } = useAppSelector(state => state.bookedReducer);
@@ -67,7 +66,6 @@ const BookItemInner: FC = () => {
       setBooking(true);
     } else {
       navigate(`/login`, {state: {from: location.pathname}});
-      console.log(location.state)
     }
   };
 

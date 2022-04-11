@@ -41,7 +41,6 @@ const UserProfileInner: FC = () => {
       setImageSrc(user.profileImage)
     })()
     if (user.id !== userID) {
-      // navigate(`/login`, {state: {from: location.pathname}});
       navigate(`/login`);
     }
   }, []);
@@ -73,14 +72,6 @@ const UserProfileInner: FC = () => {
             <div className="profile__info__email_title">User email:</div>
             <div className="profile__info__email_adress">{user.email}</div>
           </div>
-          {/* <div className="profile__info__password">
-            <div className="profile__info__password__block">
-              <input className="profile__info__password_input" type="password" placeholder='Curent password'/>
-              <input className="profile__info__password_input" type="password" placeholder='New password'/>
-              <input className="profile__info__password_input" type="password" placeholder='Confirm new password'/>
-            </div>
-            <button className="profile__info__password_button">Change password</button>
-          </div> */}
         </div>
         <div className="profile__books">
           <div className="profile__title">Booked books:</div>

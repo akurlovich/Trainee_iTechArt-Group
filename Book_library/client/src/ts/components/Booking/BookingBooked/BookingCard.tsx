@@ -32,7 +32,6 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
 
   const canselHandler = async () => {
     const findBooked = bookedsUserID.find(booked => booked.bookID === userBooks._id);
-    console.log(findBooked)
     if (findBooked) {
       await dispatch(deleteBookedAndReturnAmount(findBooked._id));
       await dispatch(allUsersAndBookeds());
@@ -41,7 +40,6 @@ const BookingCardInner:FC<IProps> = ({userBooks, userID, isNotIssued = true}) =>
 
   const canselIssuedHandler = async () => {
     const findBooked = issuedsByUserID.find(booked => booked.bookID === userBooks._id);
-    console.log(findBooked)
     if (findBooked) {
       await dispatch(deleteIssuedAndReturnAmount(findBooked._id));
       await dispatch(allUsersAndBookeds());

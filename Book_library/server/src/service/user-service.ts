@@ -21,8 +21,6 @@ class UserService {
     const user = await UserModel.create({email, password: hashPassword, role: [role?._id], profileImage});
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({...userDto});
-    // const tokenData = jwt.verify(tokens.refreshToken, config.JWT_REFRESH_SECRET_KEY);
-    // console.log("tokenData", tokenData);
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     return {
@@ -63,8 +61,7 @@ class UserService {
     }
 
     const user = await userModel.findById(userData.id)
-    // const user = await tokenModel.findOne({refreshToken});
-    // const userFound = await userModel.findOne({id: user?.user});
+
     if (!user) {
       throw ApiError.BadRequest('User not found!', [''])
     }

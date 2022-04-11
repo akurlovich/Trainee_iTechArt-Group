@@ -47,7 +47,6 @@ const AddBookInner: FC = () => {
         setcoverImage(urlImage as string)
       }
     }
-    //!!-----------ADD EMPTY IMAGE-----------
   };
 
   useEffect(() => {

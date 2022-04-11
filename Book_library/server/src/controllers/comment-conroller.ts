@@ -4,12 +4,9 @@ import commentService from "../service/comment-service";
 class CommentController {
   async addComment(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log(req.body)
       const newComment = await commentService.addComment(req.body);
-      console.log(newComment)
       return res.json(newComment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -19,7 +16,6 @@ class CommentController {
       const comment = await commentService.getAllCommentsBookID(req.params.id);
       return res.json(comment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -29,7 +25,6 @@ class CommentController {
       const comment = await commentService.getAllCommentsUserID(req.params.id);
       return res.json(comment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -39,7 +34,6 @@ class CommentController {
       const comment = await commentService.getCommentByID(req.params.id);
       return res.json(comment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -49,7 +43,6 @@ class CommentController {
       const comment = await commentService.getAllComments();
       return res.json(comment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -60,7 +53,6 @@ class CommentController {
       const updateComment = await commentService.updateCommetByModerator(id, comment);
       return res.json(updateComment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -70,7 +62,6 @@ class CommentController {
       const comment = await commentService.deleteComment(req.params.id);
       return res.json(comment);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

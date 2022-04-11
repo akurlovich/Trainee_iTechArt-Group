@@ -28,7 +28,6 @@ const CommentsBlockInner:FC = () => {
       }
     })();
     socket.onopen = () => {
-      console.log('Connect to server');
       socket.send(JSON.stringify({
         id: 'id',
         bookTitle: 'title',
@@ -49,7 +48,6 @@ const CommentsBlockInner:FC = () => {
   }, [])
   
   const commentHandler = async () => {
-    console.log(commentsByBookID)
     socket.send(JSON.stringify({
       id: bookID,
       bookTitle: 'title',

@@ -34,7 +34,6 @@ export const authSlice = createSlice({
   extraReducers: {
     [registerUser.pending.type]: (state) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [registerUser.fulfilled.type]: (state, action: PayloadAction<IResponseData>) => {
       state.isLoading = false;
@@ -50,7 +49,6 @@ export const authSlice = createSlice({
     },
     [loginUser.pending.type]: (state) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [loginUser.fulfilled.type]: (state, action: PayloadAction<IResponseData>) => {
       state.isLoading = false;
@@ -67,7 +65,6 @@ export const authSlice = createSlice({
     },
     [logoutUser.pending.type]: (state) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [logoutUser.fulfilled.type]: (state, action) => {
       state.isLoading = false;
@@ -82,7 +79,6 @@ export const authSlice = createSlice({
     },
     [checkAuth.pending.type]: (state, action) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [checkAuth.fulfilled.type]: (state, action: PayloadAction<IResponseData>) => {
       state.isLoading = false;
@@ -93,11 +89,9 @@ export const authSlice = createSlice({
     [checkAuth.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isAuth = false;
-      // state.error = action.payload;
     },
     [updateUserProfileImage.pending.type]: (state, action) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [updateUserProfileImage.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.isLoading = false;
@@ -110,12 +104,10 @@ export const authSlice = createSlice({
     },
     [updateUserIsBlocked.pending.type]: (state, action) => {
       state.isLoading = true;
-      // state.isAuth = false;
     },
     [updateUserIsBlocked.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.isLoading = false;
       state.isAuth = true;
-      // state.user = action.payload;
     },
     [updateUserIsBlocked.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;

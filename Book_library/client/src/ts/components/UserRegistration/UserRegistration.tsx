@@ -16,16 +16,11 @@ const UserRegistrationInner: FC = () => {
   const [buttonSubmit, setButtonSubmit] = useState(false);
   const [registerError, setRegisterError] = useState(false)
   const dispatch = useAppDispatch();
-  const {user, error} = useAppSelector(state => state.authReducer);
+  const { error } = useAppSelector(state => state.authReducer);
   const navigate = useNavigate();
   const handlerChange = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await dispatch(registerUser({email, password, profileImage: USER_AVATAR}));
-    // setEmail('');
-    // setPassword('');
-    // setConfirPassword('');
-    // setButtonSubmit(prev => false);
-    // console.log(email);
   };
   const validFormData = () => {
     const emailValid = /^\S+@\S+\.\S+$/.test(email);
@@ -35,14 +30,13 @@ const UserRegistrationInner: FC = () => {
       setButtonSubmit(prev => true)
     }
 
-  }
+  };
   useEffect(() => {
     validFormData();
   }, [password, confirmPassword, email]);
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       setRegisterError(true);
     }
   

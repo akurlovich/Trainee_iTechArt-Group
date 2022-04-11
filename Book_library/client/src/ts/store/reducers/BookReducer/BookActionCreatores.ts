@@ -7,9 +7,7 @@ export const addBook = createAsyncThunk(
   'BOOK/addBook',
   async (book: IBook, {rejectWithValue}) => {
     try {
-      const response = await BookService.addBook(book);
-      // console.log(response.data)
-      return response.data;
+      return await (await BookService.addBook(book)).data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }
@@ -20,9 +18,7 @@ export const getBooks = createAsyncThunk(
   'BOOK/getBooks',
   async (_, {rejectWithValue}) => {
     try {
-      const response = await BookService.getBooks();
-      // console.log(response.data)
-      return response.data;
+      return await (await BookService.getBooks()).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -34,9 +30,7 @@ export const getBookByID = createAsyncThunk(
   'BOOK/getBookByID',
   async (id: string, {rejectWithValue}) => {
     try {
-      const response = await BookService.getBookByID(id);
-      // console.log('111111111111111111111111111111111111', response.data)
-      return response.data;
+      return await (await BookService.getBookByID(id)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -48,9 +42,7 @@ export const updateBookAmountByID = createAsyncThunk(
   'BOOK/updateBookAmountByID',
   async (newBook: IBookUpdate, {rejectWithValue}) => {
     try {
-      const response = await BookService.updateBookAmountByID(newBook);
-      // console.log(response.data)
-      return response.data;
+      return await (await BookService.updateBookAmountByID(newBook)).data;
       
     } catch (error: any) {
       return rejectWithValue(error.message)

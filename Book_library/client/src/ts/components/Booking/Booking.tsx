@@ -15,14 +15,9 @@ interface IProps {
 }
 
 const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
-  console.log('booking');
   const { allUsersBookedsAndIssueds, bookUsersBookedsAndIssueds, isLoading } = useAppSelector(state => state.bookedReducer);
   const [bookingArray, setBookingArray] = useState<IUsersBookedsAndIssueds[]>([]);
   const dispatch = useAppDispatch();
-
-  // const foundBooking = allUsersBookedsAndIssueds.filter(item => 
-  //   (item.userBookeds.filter(booked => booked._id === bookAdminID) & item.userIssueds.filter(issued => issued._id === bookAdminID))
-  //   )
 
   useEffect(() => {
     (async () => {
@@ -31,7 +26,6 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
         setBookingArray(allUsersBookedsAndIssueds);
       } else {
         if (bookAdminID) {
-          console.log('object');
           await dispatch(bookUsersAndBookeds(bookAdminID));
           setBookingArray(bookUsersBookedsAndIssueds);
         }
@@ -55,7 +49,6 @@ const BookingInner:FC<IProps> = ({isSearch = true, bookAdminID}) => {
       setBookingArray(allUsersBookedsAndIssueds);
     } else {
       if (bookAdminID) {
-        console.log('object');
         await dispatch(bookUsersAndBookeds(bookAdminID));
         setBookingArray(bookUsersBookedsAndIssueds);
       }

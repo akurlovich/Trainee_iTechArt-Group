@@ -9,12 +9,5 @@ export const timeCulculate = (startDate: Date) => {
     hours: ~~(value / 60),
     minuts: value % 60,
   }
-  // setTimer(count.getUTCHours().toString())
-  // setTimer(date.getHours())
-  // console.log(count.getHours());
-  // console.log(count.getMinutes());
-//   console.log(date.getUTCHours());
-//   console.log(date.getMinutes());
-//   console.log(date.getTime());
-//   console.log(now.getTime());
+  
 }

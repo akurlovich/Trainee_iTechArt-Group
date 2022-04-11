@@ -35,17 +35,6 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // [updateUserProfileImage.pending.type]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [updateUserProfileImage.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
-    //   state.isLoading = false;
-    //   state.error = '';
-    // },
-    // [updateUserProfileImage.rejected.type]: (state, action: PayloadAction<string>) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
   }
 })
 

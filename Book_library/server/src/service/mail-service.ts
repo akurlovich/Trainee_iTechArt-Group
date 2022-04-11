@@ -7,8 +7,6 @@ class MailService {
   constructor() {
     this.transport = nodemailer.createTransport({
       service: 'gmail',
-      // host: 'smpt.gamil.com',
-      // port: config.SMTP_PORT,
       secure: false,
       auth: {
         user: config.SMTP_USER,

@@ -7,7 +7,6 @@ class GenreController {
       const newGenre = await genreService.addGenre(req.body);
       return res.json(newGenre);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -18,7 +17,6 @@ class GenreController {
       const genre = await genreService.getGenre(value);
       return res.json(genre);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -28,7 +26,6 @@ class GenreController {
       const genre = await genreService.getGenreByID(req.params.id);
       return res.json(genre);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -38,7 +35,6 @@ class GenreController {
       const genres = await genreService.getAllGenres();
       return res.json(genres);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

@@ -27,7 +27,6 @@ class IssuedController {
       Logger.info(`Issued book ${book.title} by User ${user.email}`, { action: 'issued', book: book.title, user: user.email});
       return res.json(newIssued);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -37,7 +36,6 @@ class IssuedController {
       const issued = await issuedService.getAllIssuedsBookID(req.params.id);
       return res.json(issued);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -47,7 +45,6 @@ class IssuedController {
       const issued = await issuedService.getAllIssuedsUserID(req.params.id);
       return res.json(issued);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -57,7 +54,6 @@ class IssuedController {
       const issued = await issuedService.getIssuedByID(req.params.id);
       return res.json(issued);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -67,7 +63,6 @@ class IssuedController {
       const issueds = await issuedService.getAllIssueds();
       return res.json(issueds);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -77,7 +72,6 @@ class IssuedController {
       const issued = await issuedService.deleteIssued(req.params.id);
       return res.json(issued);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

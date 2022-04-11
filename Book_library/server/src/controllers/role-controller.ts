@@ -7,7 +7,6 @@ class RoleController {
       const newRole = await roleService.addRole(req.body);
       return res.json(newRole);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -18,7 +17,6 @@ class RoleController {
       const role = await roleService.getRole(value);
       return res.json(role);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -28,7 +26,6 @@ class RoleController {
       const role = await roleService.getRoleByID(req.params.id);
       return res.json(role);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -38,7 +35,6 @@ class RoleController {
       const roles = await roleService.getAllRoles();
       return res.json(roles);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
