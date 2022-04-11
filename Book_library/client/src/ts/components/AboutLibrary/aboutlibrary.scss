@@ -1,0 +1,15 @@
+.about {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 40px;
+  font-family: 'Poppins', sans-serif;
+
+  &__title {
+    font-size: 50px;
+  }
+}

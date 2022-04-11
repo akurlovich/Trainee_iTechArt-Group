@@ -5,7 +5,7 @@ const AboutLibraryInner:FC = () => {
   return (
     <div className="about">
       <div className="about__title">
-        About page
+        In our Book Library you can booking different books and issued them!
       </div>
     </div>
   )
