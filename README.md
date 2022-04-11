@@ -29,3 +29,8 @@ Trainee iTechArt-Group
 `cd client`
 
 `npm run start`
+
+## Admin login:
+
+`login: admin@tut.by`
+`password: 12345t`
