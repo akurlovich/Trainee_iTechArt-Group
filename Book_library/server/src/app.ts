@@ -6,8 +6,13 @@ import expressWS from 'express-ws';
 import router from './router/index';
 import errorMiddleware from './middlewares/error-middleware';
 
-const appBase = express();
+interface IMSGProps {
+  id: string,
+  bookTitle: string,
+  method: string,
+};
 
+const appBase = express();
 const wsInstance = expressWS(appBase);
 const { app } = wsInstance;
 const aWss = wsInstance.getWss();
@@ -21,46 +26,27 @@ app.use(cors({
 app.use('/api', router);
 app.use(errorMiddleware);
 
-interface IMSGProps {
-  id: string,
-  bookTitle: string,
-  method: string,
-}
-
 app.ws('/', (ws, req) => {
-  console.log('WS connect')
-  // ws.send('CONNECTED');
   ws.on('message', (msg: string) => {
-    // console.log(msg);
-    const msg1: IMSGProps = JSON.parse(msg);
-    console.log(msg1.method);
-    // aWss.clients.forEach(client => {
-    //   ws.send('client');
-    // })
+    const msgClient: IMSGProps = JSON.parse(msg);
 
-    switch (msg1.method) {
+    switch (msgClient.method) {
       case 'connection': 
-        connectionHandler(ws, msg1);
+        connectionHandler(ws, msgClient);
         break;
-    
     }
   })
 });
 
 const connectionHandler = (ws: any, msg: IMSGProps) => {
   aWss.clients.forEach(client => {
-    // if (client. = msg.id) 
-
-      client.send(JSON.stringify(msg))
-    
+    client.send(JSON.stringify(msg))
   })
-}
-
+};
 
 mongoose
   .connect('mongodb+srv://ellibrary:ellibrary@cluster0.cm82w.mongodb.net/eLibrary?retryWrites=true&w=majority', {})
   .then(() => console.log('Connected to DB'))
   .catch((err) => console.log(err));
-
 
 export default app;
